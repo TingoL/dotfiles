@@ -1,0 +1,55 @@
+URxvt*scrollBar:      false
+URxvt*scrollBar_right:    true    
+URxvt.font: xft:Source Code Pro:medium:pixelsize=9
+URxvt.boldFont: xft:Source Code Pro:medium:pixelsize=9
+URxvt.italicFont: xft:Source Code Pro:medium:pixelsize=9
+! URxvt.font: -*-stlarch-*-*-*-*-*-*-*-*-*-*-*-*
+! URxvt.boldFont: -*-stlarch-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt.urgentOnBell: True
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.perl-ext-common: keyboard-select,url-select,clipboard
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+URxvt.url-select.launcher:  dwb
+URxvt.clipboard.autocopy: true
+URxvt.cursorColor:       #ADD8E6
+URxvt*letterSpace: -1
+Xft.dpi: 96
+Xft.autohint: 0  
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+! ! tingol colors
+URxvt*foreground: #E6E6E6
+URxvt*background: #1c2027
+!black
+*color0:                        #1c2027
+*color8:                        #484848
+!red
+*color1:                        #FF0000
+*color9:                        #ef2929
+!green
+*color2:                        #00ff00
+*color10:                       #1aaa13
+! yellow
+*color3:  #FFAA3E
+*color11: #FADD2D
+! blue
+*color4:  #3A57D7
+*color12: #507CFF
+! magenta
+*color5:  #BE007F
+*color13: #E671D3
+! cyan
+*color6:  #258F8F
+*color14: #4DC5DC
+! light grey
+*color7:  #AEAEAE
+! white
+*color15: #DBDDE4
+!vim:ft=xdefaults

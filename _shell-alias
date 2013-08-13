@@ -1,0 +1,33 @@
+#list of aliases compatible with bash/zsh
+alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias hdvideo='mplayer -vo xv -ao alsa -lavdopts fast=1:skiploopfilter=all'
+alias mmv='noglob zmv -W'
+alias dccanime='mv ~/.weechat/xfer/* ~/Downloads'
+alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
+alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test.py && cd -'
+alias python='python2'
+alias trc='transmission-remote-cli'
+alias pip='sudo pip2'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias tardir='for i in *; do if [ -d "$i" ]; then tar czf "$i".tar.gz  "$i"; fi; done'
+alias rardir='find * -maxdepth 0 -type d -exec rar a {}.rar {} \;'
+alias gftp='lftp 91.121.220.108:21 -u install,gen2'
+alias hist='history | grep $1'
+alias xflux='xflux -l 23 -g 40'
+alias v='f -e vim'
+alias o='a -e xdg-open' # quick opening files with xdg-open
+alias pdf='f -e zathura'
+alias sega='f -e dgen'
+alias vless='/usr/share/vim/vim73/macros/less.sh'
+alias izbrisi='sudo pacman -Rs'
+alias srb='setxkbmap hr'
+alias eng='setxkbmap us'
+alias ls='ls --color=auto'
+alias off='sudo shutdown -h $1'
+alias wifi='sudo wifi-menu'
+alias gping='ping -c 3 www.google.com'
+alias monsterwmrc="cd $HOME/Source/monsterwm  && vim config.h && make clean && make && sudo make install && cd"
+alias barrc="cd $HOME/Source/bar && vim config.h && make clean && make && sudo make install && cd"
+alias pomodoro="python2 ~/Playground/Python/pomodoro.py &"

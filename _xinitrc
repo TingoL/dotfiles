@@ -1,0 +1,48 @@
+#!/bin/sh
+xsetroot -cursor_name watch
+command -v warpcursor && warpcursor 1
+
+xset +fp /usr/share/fonts/artwiz-fonts
+xset fp rehash
+xrdb -merge "${HOME}/.Xresources"
+setxkbmap -option caps:escape
+/usr/bin/urxvtd -q -o -f
+xset r rate 250 50
+xsetroot -solid black
+xsetroot -cursor_name left_ptr
+#imlibsetroot -s f ~/Downloads/wall.jpg &
+imlibsetroot -s f Dropbox/Photos/wall.jpg &
+transmission-daemon &
+#wallpaper.sh &
+dropboxd &
+#xflux -l 23 -g 40 &
+#xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
+#compton -r 12 -o 0.5 -c -b
+unclutter -idle 5 -noevents &
+#exec ~/Skripte/wmrun.sh
+#exec i3
+ff="/tmp/monsterm.fifo"
+[[ -p $ff ]] || mkfifo -m 600 "$ff"
+
+ds=('Term' 'Web' 'Chat' 'Code' 'Media' 'Music')
+ms=('[T]' '[M]' '[B]' '[G]' '[S]' '[F]' )
+
+while read -t 60 -r wmout || true; do
+                unset music
+                music=$(cmus-remote -Q | awk '$2 == "artist"{a=substr($0,12)} $2 == "title"{t=substr($0,11); exit} END{printf("%s - %s\n",a,t); exit(!t)}')
+        if [[ $wmout =~ ^(([[:digit:]]+:)+[[:digit:]]+ ?)+$ ]]; then
+                unset r
+                read -ra desktops <<< "$wmout"
+                for desktop in "${desktops[@]}"; do
+                        IFS=':' read -r d w m c u <<< "$desktop"
+                        ((c)) && fg="1" bg="0" lc="\u1 " rc=" \ur" i="${ms[$m]}" || fg="8" bg="0" lc=" " rc=" "
+                        ((w)) && ((! c)) && fg="1" bg="0" lc="\ur " rc=" \ur"
+                        ((u)) && fg="7" bg="0" lc="\u7 " rc=" \ur"
+                        r+="\f$fg\b$bg$lc${ds[$d]}$rc\fr\br"
+                done
+        fi        
+                        printf "\\\l%s\\\r%s\n"  "$r \f5\b0$i \r\f2\b0$music " "$(date "+\c\f3\b0 %I:%M") "
+done < "$ff" | bar &
+
+monsterwm > "$ff"
+rm $ff
