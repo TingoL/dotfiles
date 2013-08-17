@@ -1,30 +1,5 @@
 #!bin/bash
 #functions compatible with bash/zsh
-extract() {
-  if [ -f $1 ] ; then
-      case $1 in
-          *.tar.bz2)   tar xvjf $1    ;;
-          *.tar.gz)    tar xvzf $1    ;;
-          *.tar.xz)    tar xvJf $1    ;;
-          *.bz2)       bunzip2 $1     ;;
-          *.rar)       unrar x $1     ;;
-          *.gz)        gunzip $1      ;;
-          *.tar)       tar xvf $1     ;;
-          *.tbz2)      tar xvjf $1    ;;
-          *.tgz)       tar xvzf $1    ;;
-          *.zip)       unzip $1       ;;
-          *.Z)         uncompress $1  ;;
-          *.7z)        7za x $1       ;;
-          *.xz)        unxz $1        ;;
-          *.exe)       cabextract $1  ;;
-                  *.ace)       unace $1       ;;
-                  *.arj)       unarj $1       ;;
-          *)           echo "\`$1': unrecognized file compression" ;;
-      esac
-  else
-      echo "\`$1' is not a valid file"
-  fi
-}
 function podsetnik()
 {
     sleep $1 && notify-send "$2" &
@@ -74,15 +49,6 @@ say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
-sppcm() { #using mplayer, sopcast streamer
-        killall sp-sc &>/dev/null
-        (sp-sc "$1" 8901 9901 &>/dev/null &)
-        sleep 15
-        wait $(mplayer http://localhost:9901)
-        killall sp-sc   
-}
-
-iliveto() { rtmpdump -v -r "rtmp://edge.isearch.to/edge" -p "http://www.ilive.to/view/23516" -W "http://player.ilive.to/player_ilive.swf" -y "$1" -q | mplayer - ;}
 upl-imgur() { 
         link=$( curl -# -F image=@"$1" -F "key=1913b4ac473c692372d108209958fd15" \
                 http://api.imgur.com/2/upload.xml|grep -Eo "<original>(.)*</original>" \
@@ -94,7 +60,6 @@ upl-imgur() {
 tophist() { history | awk '{ print $2 }' | sort |  uniq -c | sort -rn | sed '1,27!d' ;}
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
-pbdump() { pastebinit -i $1 | xclip -i -selection clipboard; }
 clip() { cat $1 | xclip -selection clipboard; }
 dls () {
  # directory LS
@@ -133,14 +98,6 @@ ft() {
 t() { 
     tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
-givedef(){
-    if [[ $# -ge 2 ]] then
-        echo "givedef: too many arguments" >&2
-        return 1;
-    else
-        curl "dict://dict.org/d:$1"
-    fi
-}
-song-dl() { python2.7 /usr/share/groove-dl/groove.py "$@" ;}
+
 article() {cat "$1" | w3m -dump -T text/html > article.txt;}
 

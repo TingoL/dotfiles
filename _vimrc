@@ -17,7 +17,6 @@ set nobackup               " disable backup files (filename~)
 set relativenumber
 set number                 " show line numbers
 set lazyredraw
-set foldmethod=indent
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
 set clipboard=unnamed      " yank to X clipboard
 set pastetoggle=<F2>
@@ -144,12 +143,12 @@ function! Chomp(str)
   endfunction
 
 function! DmenuOpen(cmd)
-  let fname = Chomp(system("find | dmenu -i -l 20 -p " . a:cmd))
-  if empty(fname)
+    let fname = Chomp(system("find | dmenu -i -l 20 -p " . a:cmd))
+    if empty(fname)
       return
-	    endif
-		  execute a:cmd . " " . fname
-		  endfunction
+        endif
+          execute a:cmd . " " . fname
+          endfunction
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk

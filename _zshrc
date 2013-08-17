@@ -28,7 +28,6 @@ alias -s py=vim
 alias -s c=vim
 alias -s html=dwb
 
-. $HOME/Skripte/streams
 . $HOME/.shell-alias
 . $HOME/.shell-functions
 eval "$(fasd --init auto)"

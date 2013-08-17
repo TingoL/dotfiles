@@ -75,7 +75,5 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
 export PYTHONPATH=":/usr/lib/python2.7/site-packages:$PYTHONPATH"
 #export PYTHONPATH=":/usr/lib/python3.3/site-packages:$PYTHONPATH"
