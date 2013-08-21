@@ -1,0 +1,5 @@
+set adjust-open "width"
+set font "Droid Sans Mono 10"
+
+map <F1> set "pages-per-row 1"
+map <F2> set "pages-per-row 2"
