@@ -1,0 +1,12 @@
+ctrl-shift-x         activate url hints mode
+ctrl-shift-r         reload configuration file
+ctrl-shift-c         copy to CLIPBOARD
+ctrl-shift-v         paste from CLIPBOARD
+ctrl-shift-u         unicode input (standard GTK binding)
+ctrl-tab             start scrollback completion
+ctrl-shift-space     start command mode
+ctrl-shift-t         open terminal in the current directory [1]
+ctrl-shift-up        scroll up a line
+ctrl-shift-down      scroll down a line
+shift-pageup         scroll up a page
+shift-pagedown       scroll down a page
