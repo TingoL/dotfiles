@@ -1,0 +1,6 @@
+#!/bin/bash
+exec termite -e hnb &
+exec termite &
+exec termite -e cmus &
+exec termite -e weechat-curses --name weechat &
+exec termite -e mutt --name mutt
