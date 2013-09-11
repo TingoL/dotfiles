@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------      
+#-------------------------------------------------------------------------
 # Set colors
 #-------------------------------------------------------------------------
 ####
@@ -6,13 +6,13 @@
 ###
 
 # set default
-color normal     white        default
+color normal     default      default
 color hdrdefault cyan         default
-color indicator  magenta      default
+color indicator  black        brightcyan   
 color status     cyan         default
 
 # main colors
-color tree       brightmagenta default
+color tree       magenta       default
 color error      brightred     default
 color message    brightgreen   default
 
@@ -30,15 +30,15 @@ uncolor index "~D"
 # and recolor them appropriately
 color index      brightyellow  default "~P"
 color index      green         default "~C @.com"
-color index      red           default "~N ~u"  # new ML mail
-color index      brightred     default "~N !~u" # new non-ML mail
+color index      magenta       default "~N ~u"  # new ML mail
+color index      magenta default "~N !~u" # new non-ML mail
 color index      brightgreen   default "~T"
 color index      brightblack   default "~D"
 
 # set up the headers
-color header     brightmagenta default "^from:"
-color header     green         default "^to:"
-color header     yellow        default "^cc:"
+color header     brightgreen   default "^from:"
+color header     brightgreen   default "^to:"
+color header     brightgreen   default "^cc:"
 color header     blue          default "^date:"
 color header     brightgreen   default "^subject:"
 

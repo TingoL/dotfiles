@@ -19,7 +19,7 @@ zstyle ':prezto:*:*' color 'yes'
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
 
 # Set the Zsh functions to load (man zshcontrib).
-zstyle ':prezto:load' zfunction 'zmv'
+#zstyle ':prezto:load' zfunction 'zmv'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
@@ -32,12 +32,13 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'  \
   'git' \
+  'fasd' \
+  'pacman' \
+  'archive' \
   'syntax-highlighting' \
-  'fasd'    \
-  'pacman'  \
-  'archive'
+  'history-substring-search' \
+  'prompt'
 
 #
 # Editor
@@ -71,7 +72,7 @@ zstyle ':prezto:module:editor' keymap 'vi'
  zstyle ':prezto:module:history-substring-search:color' found 'blue'
 
 # Set the query not found color.
-# zstyle ':prezto:module:history-substring-search:color' not-found ''
+ zstyle ':prezto:module:history-substring-search:color' not-found 'red'
 
 # Set the search globbing flags.
 # zstyle ':prezto:module:history-substring-search' globbing-flags ''
@@ -116,14 +117,14 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \
   'brackets' \
   'pattern' \
-  'cursor' \
-  'root'
+  # 'cursor' \
+  # 'root'
 #
 # Set syntax highlighting styles.
-zstyle ':prezto:module:syntax-highlighting' styles \
-  'builtin' 'bg=blue' \
-  'command' 'bg=blue' \
-  'function' 'bg=blue'
+# zstyle ':prezto:module:syntax-highlighting' styles \
+#   'builtin' 'bg=blue' \
+#   'command' 'bg=blue' \
+#   'function' 'bg=blue'
 #
 
 #

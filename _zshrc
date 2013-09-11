@@ -22,6 +22,7 @@ alias -s tex=vim
 alias -s mp3=mplayer
 alias -s mkv=mplayer
 alias -s avi=mplayer
+alias -s mp4=mplayer
 alias -s jpg=sxiv
 alias -s png=sxiv
 alias -s py=vim
@@ -30,6 +31,7 @@ alias -s html=dwb
 
 . $HOME/.shell-alias
 . $HOME/.shell-functions
+# . /usr/share/zsh/site-contrib/powerline.zsh
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"
 export HISTSIZE=3000
@@ -40,3 +42,6 @@ export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=/home/tingol/.config
+export WORKON_HOME=~/Envs
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
+. /usr/bin/virtualenvwrapper.sh

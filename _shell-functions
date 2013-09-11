@@ -28,9 +28,8 @@ alarm() {
     sleep 2
   done &
 
-  play '/home/tingol/Music/House/otto_knows_-_million_voices.aac' 
+  mplayer -really-quiet '/home/tingol/Music/House/otto_knows_-_million_voices.aac'
 }
-mkcd() { mkdir "$@" && cd "${!#}"; }
 # sanitize - set file/directory owner and permissions to normal values (644/755)
 # usage: sanitize <file>
 sanitize()
@@ -41,27 +40,19 @@ sanitize()
 # usage: arhiviraj <filename | dirname>
 function arhiviraj() { tar czf "${1%%/}.tar.gz" "${1%%/}/"; }
 # make a backup before editing a file
-safeedit() {   
-        cp $1 $1.backup && vim $1 
+safeedit() {
+        cp $1 $1.backup && vim $1
 }
-say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; } 
+say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
 # send process to the background
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
-upl-imgur() { 
-        link=$( curl -# -F image=@"$1" -F "key=1913b4ac473c692372d108209958fd15" \
-                http://api.imgur.com/2/upload.xml|grep -Eo "<original>(.)*</original>" \
-                | grep -Eo "http://i.imgur.com/[^<]*")
-        # print out url and copy to clipboard
-        echo $link
-        echo $link | xclip -selection clipboard
-}
 tophist() { history | awk '{ print $2 }' | sort |  uniq -c | sort -rn | sed '1,27!d' ;}
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
-dls () {
+lsd () {
  # directory LS
  echo `ls -l | grep "^d" | awk '{ print $9 }' | tr -d "/"`
 }
@@ -82,22 +73,31 @@ psgrep() {
         echo "!! Need name to grep for"
     fi
 }
-ips () {
-    # determine local IP address
-    ifconfig | grep "inet " | awk '{ print $2 }'
-}
 zman() {
       PAGER="less -g -s '+/^       "$1"'" man zshall
 }
 #ft trazi tekst u bilo kom fajlu
 ft() {
-     
      find . -name "$2" -exec grep -il "$1" {} \;
 }
 #tail sa highlightom
-t() { 
+t() {
     tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
 
-article() {cat "$1" | w3m -dump -T text/html > article.txt;}
+article() { cat "$1" | w3m -dump -T text/html > article.txt;}
+
+ranger-cd() {
+       tempfile=$(mktemp)
+       ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
+       test -f "$tempfile" &&
+       if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+         cd -- "$(cat "$tempfile")"
+       fi
+       rm -f -- "$tempfile"
+     }
+
+# This binds Ctrl-O to ranger-cd:
+zle -N ranger-cd
+bindkey '^o' ranger-cd
 

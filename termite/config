@@ -40,22 +40,23 @@ background = #1c2027
 #cursor = #dcdccc
 
 # my colors
-color0 = #343436
-color1 = #843434
-color2 = #00ff00
+color0 = #0d1926
+color1 = #c0392b
+color2 = #3aaf75
 color3 = #ffaa3e
-color4 = #3A57D7
-color5 = #BE007F
-color6 = #258F8F
+color4 = #2980b9
+color5 = #8e44ad
+color6 = #00afff
 color7 = #b3b3b3
-color8 = #424242
-color9 = #904040
-color10 = #1aaa13
-color11 = #fadd2d
-color12 = #507CFF
-color13 = #E671D3
+color8 = #585858
+color9 = #e74c3c
+color10 = #72d5a3
+color11 = #efdd6f
+color12 = #3498db
+color13 = #9b59b6
 color14 = #4DC5DC
-color15 = #b3b3b3
+color15 = #e6e6e6
+
 
 [hints]
 #font = Monospace 12

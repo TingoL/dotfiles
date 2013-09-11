@@ -3,8 +3,8 @@
 # Originally based on code by Dieter Plaetinck.
 # Pretty much re-written by Mina Nagy (mnzaki)
 
-dmenu_cmd="dmenu -h 14 -x 205 -w 290 -nb #1c2027 -nf #ffffff -sf #5dce33 -sb #1c2027 -fn SourceCodePro-7:medium $DMENU_OPTIONS"
-terminal="urxvtc -e"
+dmenu_cmd="dmenu -h 14 -x 205 -w 290 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:medium $DMENU_OPTIONS"
+terminal="termite -e"
 max_recent=199 # Number of recent commands to track
 
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent"

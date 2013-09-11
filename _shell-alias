@@ -14,7 +14,6 @@ alias fgrep='fgrep --color=auto'
 alias tardir='for i in *; do if [ -d "$i" ]; then tar czf "$i".tar.gz  "$i"; fi; done'
 alias rardir='find * -maxdepth 0 -type d -exec rar a {}.rar {} \;'
 alias gftp='lftp 91.121.220.108:21 -u install,gen2'
-alias hist='history | grep $1'
 alias xflux='xflux -l 23 -g 40'
 alias v='f -e vim'
 alias o='a -e xdg-open' # quick opening files with xdg-open
@@ -28,6 +27,8 @@ alias ls='ls --color=auto'
 alias off='sudo shutdown -h $1'
 alias wifi='sudo wifi-menu'
 alias gping='ping -c 3 www.google.com'
-alias monsterwmrc="cd $HOME/Source/monsterwm  && vim config.h && make clean && make && sudo make install && cd"
-alias barrc="cd $HOME/Source/bar && vim config.h && make clean && make && sudo make install && cd"
+alias monsterwmrc="cd $HOME/Playground/monsterwm  && vim config.h && make clean && make && sudo make install && cd"
+alias barrc="cd $HOME/Playground/bar && vim config.h && make clean && make && sudo make install && cd"
 alias pomodoro="python2 ~/Playground/Python/pomodoro.py &"
+alias ducks='du -cks *|sort -rn|head -11'
+alias json="python -mjson.tool"

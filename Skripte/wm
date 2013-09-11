@@ -1,7 +1,10 @@
+#!/bin/sh
+#monsterm invocation script
+
 ff="/tmp/monsterm.fifo"
 [[ -p $ff ]] || mkfifo -m 600 "$ff"
 
-ds=('Home' 'Web' 'Msgs' 'Code' 'Media' )
+ds=('I' 'II' 'III' 'IV' 'V' )
 ms=('T' 'M' 'B' 'G' 'F' )
 
 while read -t 60 -r wmout || true; do
@@ -13,13 +16,13 @@ while read -t 60 -r wmout || true; do
                 read -ra desktops <<< "$wmout"
                 for desktop in "${desktops[@]}"; do
                         IFS=':' read -r d w m c u <<< "$desktop"
-                        ((c)) && fg="1" bg="2" lc="\u1 " rc=" \ur" i="${ms[$m]}" || fg="8" bg="9" lc=" " rc=" "
-                        ((w)) && ((! c)) && fg="2" lc="\ur " rc=" \ur"
+                        ((c)) && fg="1" bg="4" lc="\u1 " rc=" \ur" i="${ms[$m]}" || fg="8" bg="9" lc=" " rc=" "
+                        ((w)) && ((! c)) && fg="4" lc="\ur " rc=" \ur"
                         ((u)) && fg="3" lc="\ur " rc=" \ur"
                         r+="\f$fg\b$bg$lc${ds[$d]}$rc\fr\br"
                 done
-        fi
-                        printf "\\\l%s\\\r%s\n"  "$r \f1\b5 $i \f1\b4 $tor \r\f2\b0$music " "$(date "+\c\f2\b0 %I:%M") "
+            fi
+                        printf "\\\l%s\\\r%s\n"  "$r \f1\b5 $i \f1\b2 $tor \r\f4\b0$music " "$(date "+\c\f2\b0 %I:%M") "
 done < "$ff" | bar -f &
 
 monsterwm > "$ff"

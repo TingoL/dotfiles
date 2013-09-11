@@ -1,7 +1,0 @@
-vo=xv,directfb
-subfont-text-scale = 3
-framedrop=yes
-subcp=cp1250
-alang=jpn,japanese
-slang=eng,english
-softvol=no

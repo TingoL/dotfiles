@@ -120,11 +120,11 @@
 	
 	style menuitem       default/default reverse
 	style menutext       cyan/default    normal
-	style parentnode     green/default bold
+	style parentnode     white/default bold
 	style node           white/default normal
-	style bullet         cyan/default    normal
-	style selected       red/default      bold
-	style parentselected red/default      bold
+	style bullet         green/default    normal
+	style selected       black/cyan      reverse
+	style parentselected black/cyan    reverse
 	style background     default/default normal
 	
 ##### key-bindings

@@ -1,16 +1,17 @@
 #!/bin/bash
 
-DMENU="dmenu -h 14 -x 205 -w 290 -nb #1c2027 -nf #ffffff -sf #5dce33 -sb #1c2027 -fn SourceCodePro-7:medium"
+DMENU="dmenu -h 14 -x 205  -w 290 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:Medium"
 
-choice=$(echo -e "jdred\n jdblue\n d2l\n bts\n bts2\nsheever\ndendi\ntpl\nsingsing\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\negm\nxboct\n" | $DMENU | cut -f 1)
 
 case "$choice" in
-    jdred) livestreamer-git -p mplayer twitch.tv/jdred 480p ;;
-    jdblue) livestreamer-git -p mplayer twitch.tv/jdblue 480p ;;
-    d2l) livestreamer-git -p mplayer twitch.tv/d2l 480p ;;
-    bts) livestreamer-git -p mplayer twitch.tv/beyondthesummit 480p ;;
-    bts2) livestreamer-git -p mplayer twitch.tv/beyondthesummit2 480p ;;
-    sheever) livestreamer-git -p mplayer twitch.tv/sheevergaming 480p ;;
-    dendi) livestreamer-git -p mplayer twitch.tv/dendi 480p ;;
-    singsing) livestreamer-git -p mplayer twitch.tv/sing_sing 480p ;;
+    jdred) livestreamer -p mplayer twitch.tv/joindotared Medium ;;
+    d2l) livestreamer -p mplayer twitch.tv/d2l Medium ;;
+    bts) livestreamer -p mplayer twitch.tv/beyondthesummit Medium ;;
+    bts2) livestreamer -p mplayer twitch.tv/beyondthesummit2 Medium ;;
+    sheever) livestreamer -p mplayer twitch.tv/sheevergaming Medium ;;
+    dendi) livestreamer -p mplayer twitch.tv/dendi Medium ;;
+    singsing) livestreamer -p mplayer twitch.tv/sing_sing Medium ;;
+    egm) livestreamer -p mplayer twitch.tv/egm1 Medium ;;
+    xboct) livestreamer -p mplayer twitch.tv/xboct Medium ;;
 esac
