@@ -13,7 +13,6 @@ let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
 set directory=~/.vim/temp   " Keep temp files in ~/.vim/temp
 set hidden                  "allow scrolling between unsaved buffers
-"set nobackup               " disable backup files (filename~)
 set scrolloff=2             " 2 lines above/below cursor when scrolling
 set foldmethod=manual
 set relativenumber
@@ -31,7 +30,7 @@ set showmatch              " show matching brackets
 set incsearch              " increment search
 set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
-"set runtimepath=~/.vim,/vimfiles,
+" set runtimepath=~/.vim,/vimfiles,
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki'}]
@@ -111,7 +110,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"let g:pydiction_location = '/usr/share/pydiction/complete-dict'
+let g:pydiction_location = '/usr/share/pydiction/complete-dict'
 
 "mapping ------------------------------------------------------------------------
 
@@ -161,8 +160,8 @@ nnoremap _pd :set ft=python.django<CR>
 nnoremap _d  :set ft=diff<CR>
 " }}}
 " Quick editing ----------------------------------------------------------- {{{
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>ez :vsplit ~/.zshrc<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>ez :e ~/.zshrc<cr>
 " }}}
 " Django {{{
 
@@ -224,4 +223,3 @@ endfun
 map <Leader>x :call RangerChooser()<CR>
 " }}}
 
-"vimwiki settings

@@ -1,9 +1,9 @@
 URxvt*scrollBar:      false
 URxvt*scrollBar_right:    true    
-URxvt.font: xft:Source Code Pro:medium:pixelsize=9
-URxvt.boldFont: xft:Source Code Pro:medium:pixelsize=9
-URxvt.italicFont: xft:Source Code Pro:medium:pixelsize=9
-! URxvt.font: -*-stlarch-*-*-*-*-*-*-*-*-*-*-*-*
+! URxvt.font: xft:Source Code Pro:medium:pixelsize=9
+! URxvt.boldFont: xft:Source Code Pro:medium:pixelsize=9
+! URxvt.italicFont: xft:Source Code Pro:medium:pixelsize=9
+URxvt.font: -*-ohsnap.icons-Medium-*-*-*-*-*-*-*-*-*-*-*
 ! URxvt.boldFont: -*-stlarch-*-*-*-*-*-*-*-*-*-*-*-*
 URxvt.urgentOnBell: True
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

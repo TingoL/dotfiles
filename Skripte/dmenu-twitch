@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DMENU="dmenu -h 14 -x 205  -w 290 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:Medium"
+DMENU="dmenu -h 14 -x 155  -w 834 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:Medium"
 
-choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\negm\nxboct\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\negm\nxboct\nadmiralbulldog\n" | $DMENU | cut -f 1)
 
 case "$choice" in
     jdred) livestreamer -p mplayer twitch.tv/joindotared Medium ;;
@@ -14,4 +14,5 @@ case "$choice" in
     singsing) livestreamer -p mplayer twitch.tv/sing_sing Medium ;;
     egm) livestreamer -p mplayer twitch.tv/egm1 Medium ;;
     xboct) livestreamer -p mplayer twitch.tv/xboct Medium ;;
+    admiralbulldog) livestreamer -p mplayer twitch.tv/admiralbulldog Medium ;;
 esac

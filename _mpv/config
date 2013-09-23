@@ -8,8 +8,8 @@ geometry=25%:25%    # force starting with centered window
 
 # Audio Settings
 ao=alsa         # audio driver
-volume=100      # volume level
-softvol=no      # disable/enable softvol
+# volume=100      # volume level
+# softvol=no      # disable/enable softvol
 alang=jpn,japanese  # audio language to use
 
 # Subtitle Settings
