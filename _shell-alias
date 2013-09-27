@@ -13,7 +13,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias tardir='for i in *; do if [ -d "$i" ]; then tar czf "$i".tar.gz  "$i"; fi; done'
 alias rardir='find * -maxdepth 0 -type d -exec rar a {}.rar {} \;'
-alias gftp='lftp 91.121.220.108:21 -u install,gen2'
+alias gftp='lftp 91.121.220.108:21 -u install,gen4'
 alias xflux='xflux -l 23 -g 40'
 alias v='f -e vim'
 alias o='a -e xdg-open' # quick opening files with xdg-open
