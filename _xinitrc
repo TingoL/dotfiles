@@ -10,10 +10,10 @@ setxkbmap -option caps:escape
 xset r rate 250 50
 xsetroot -solid black
 xsetroot -cursor_name left_ptr
+dropboxd &
 imlibsetroot -s f Dropbox/Photos/ghibli.png &
 transmission-daemon &
-dropboxd &
-#xflux -l 23 -g 40 &
-compton -r 12 -o 0.5 -c -b
+xflux -l 23 -g 40 &
+#compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
 ~/Skripte/wm

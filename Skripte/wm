@@ -4,7 +4,7 @@
 ff="/tmp/monsterm.fifo"
 [[ -p $ff ]] || mkfifo -m 600 "$ff"
 
-ds=('Home' 'Web' 'Msgs' 'Code' 'Media')
+ds=('Home' 'Web' 'Chat' 'Code' 'Media' 'Msgs')
 ms=('Tiled' 'Monocle' 'Bottom' 'Grid' 'Float' )
 
 while read -t 60 -r wmout || true; do

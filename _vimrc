@@ -63,6 +63,8 @@ Bundle 'jmcantrell/vim-virtualenv'
 Bundle "dhruvasagar/vim-table-mode"
 Bundle "majutsushi/tagbar"
 Bundle "scrooloose/syntastic"
+Bundle 'junegunn/seoul256.vim'
+Bundle "vim-scripts/a.vim"
 Bundle "Shougo/neosnippet"
 Bundle "Shougo/neocomplcache.vim"
 
@@ -71,6 +73,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = "badwolf"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+"seoul colors
+let g:seoul256_background = 234
 "neocomplcache magic
 let g:acp_enableAtStartup = 0                                   " Disable AutoComplPop.
 let g:neocomplcache_enable_at_startup = 1                       " Use neocomplcache.
@@ -106,6 +110,7 @@ autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell   " width,
 autocmd FileType tex set tw=80                                          " wrap at 80 chars for LaTeX files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 " Enable omni completion.
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -131,6 +136,9 @@ map <C-h> <C-w>h
 "tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+"buffers
+nnoremap <PageUp>   :bp<CR>
+nnoremap <PageDown> :bn<CR>
 "bubbles
 nmap <C-Up> ddkP
 nmap <C-Down> ddp

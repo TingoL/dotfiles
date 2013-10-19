@@ -3,7 +3,7 @@
 # Originally based on code by Dieter Plaetinck.
 # Pretty much re-written by Mina Nagy (mnzaki)
 
-dmenu_cmd="dmenu -h 14 -x 155 -w 834 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:medium $DMENU_OPTIONS"
+dmenu_cmd="dmenu -h 14 -x 185 -w 804 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:medium $DMENU_OPTIONS"
 terminal="termite -e"
 max_recent=199 # Number of recent commands to track
 

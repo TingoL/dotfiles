@@ -42,6 +42,7 @@ export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=/home/tingol/.config
+export PROJECT_HOME=~/Dev
 export WORKON_HOME=~/Envs
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7

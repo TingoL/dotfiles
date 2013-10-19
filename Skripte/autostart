@@ -2,6 +2,6 @@
 exec termite -e hnb &
 exec termite &
 exec termite -e cmus &
-exec termite -e turses --name turses &
 exec termite -e weechat-curses --name weechat &
+exec termite -e turses --name turses &
 exec termite -e mutt --name mutt

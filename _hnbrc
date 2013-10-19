@@ -179,7 +179,7 @@
 		bind l right
 		bind npage pagedown
 		bind ppage pageup
-		bind home  "go root"
+		bind g  "go root"
 		
 		
 		bind return edit
@@ -236,9 +236,9 @@
 		bind backspace2 backspace
 		
 		bind ^A   bol
-		bind home bol
+		bind g    bol
 		bind ^E   eol
-		bind end  eol
+		bind G    eol
 		
 		bind del  delete
 		

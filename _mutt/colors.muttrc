@@ -9,7 +9,7 @@
 color normal     default      default
 color hdrdefault cyan         default
 color indicator  black        brightcyan   
-color status     brightcyan   default
+color status     brightcyan   color234
 
 # main colors
 color tree       magenta       default
