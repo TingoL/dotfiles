@@ -32,3 +32,4 @@ alias barrc="cd $HOME/Playground/bar && vim config.h && make clean && make && su
 alias pomodoro="python2 ~/Playground/Python/pomodoro.py &"
 alias ducks='du -cks *|sort -rn|head -11'
 alias json="python -mjson.tool"
+alias upg="sudo pacman -Syu"

@@ -5,7 +5,6 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-filetype plugin indent on   "new smartindent 
 colorscheme euphrasia
 
 let mapleader=" "
@@ -46,27 +45,30 @@ set encoding=utf-8
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw118
 
 " vundle bundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'chrisbra/csv.vim'
-Bundle 'tpope/vim-markdown'
-Bundle "Raimondi/delimitMate"
-Bundle "tpope/vim-fugitive"
-Bundle 'tComment'
-Bundle "godlygeek/tabular"
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle "dhruvasagar/vim-table-mode"
-Bundle "majutsushi/tagbar"
-Bundle "scrooloose/syntastic"
-Bundle 'junegunn/seoul256.vim'
-Bundle "vim-scripts/a.vim"
-Bundle "Shougo/neosnippet"
-Bundle "Shougo/neocomplcache.vim"
+Plugin 'gmarik/vundle'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'chrisbra/csv.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tComment'
+Plugin 'godlygeek/tabular'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'vim-scripts/a.vim'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neocomplcache.vim'
+
+call vundle#end()
+filetype plugin indent on   "new smartindent 
 
 "airline symbols
 let g:airline_powerline_fonts = 1

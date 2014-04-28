@@ -20,7 +20,7 @@ search_pb() {
   str="$1"
   cntr=$2
 
-  [[ -f "$tmp_dir/tpb.1.test.$cntr" ]] || curl -s "http://thepiratebay.sx/search/${str// /%20}/$cntr/7/0" > "$tmp_dir/tpb.1.test.$cntr"
+  [[ -f "$tmp_dir/tpb.1.test.$cntr" ]] || curl -s "http://thepiratebay.se/search/${str// /%20}/$cntr/7/0" > "$tmp_dir/tpb.1.test.$cntr"
   sed -n '/class="detName"/ {p;n;n;p;n;p;n;n;p;n;p;}' "$tmp_dir/tpb.1.test.$cntr" > "$tmp_dir/tpb.2.test"
   sed -n '/class="detName"/ s/.*>\(.*\)<\/a>/\1/p; n; s/^<a href="\(.*\)" title="Down.*/\1/p; n; s/.*Uploaded \(.*\)\&nbsp\;\(.*\), Size \(.*\)\&nbsp\;\(.*\),.*/\1 \2|\3\4/gp; n; s/[^0-9]//gp; n; s/[^0-9]//gp;' "$tmp_dir/tpb.2.test" > "$tmp_dir/tpb.result"
   sed -i '1,${N;N;N;N;s/\n/|/g}' "$tmp_dir/tpb.result"

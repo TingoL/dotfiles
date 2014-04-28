@@ -13,7 +13,7 @@ alias zconfig="vim ~/.zshrc"
 # Customize to your needs...
 export PATH=$PATH:/home/tingol/Skripte:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
 #
-
+set -o vi
 #file extension aliases
 
 alias -s smc=zsnes
@@ -46,4 +46,4 @@ export PROJECT_HOME=~/Dev
 export WORKON_HOME=~/Envs
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7
-. /usr/bin/virtualenvwrapper.sh
+#. /usr/bin/virtualenvwrapper.sh
