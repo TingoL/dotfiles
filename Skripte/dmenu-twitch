@@ -1,19 +1,18 @@
 #!/bin/bash
 
-DMENU="dmenu -h 14 -x 175  -w 814 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-7:Medium"
+DMENU="dmenu -h 28 -o 0.8 -dim 0.5 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-14:Medium"
 
-choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\negm\nxboct\nadmiralbulldog\nbasskip\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\nxboct\nadmiralbulldog\nkolento\n" | $DMENU | cut -f 1)
 
 case "$choice" in
-    jdred) livestreamer -p mpv twitch.tv/joindotared Medium ;;
-    d2l) livestreamer -p mpv twitch.tv/d2l Medium ;;
-    bts) livestreamer -p mpv twitch.tv/beyondthesummit Medium ;;
-    bts2) livestreamer -p mpv twitch.tv/beyondthesummit2 Medium ;;
-    sheever) livestreamer -p mpv twitch.tv/sheevergaming Medium ;;
-    dendi) livestreamer -p mpv twitch.tv/dendi Medium ;;
-    singsing) livestreamer -p mpv twitch.tv/sing_sing Medium ;;
-    egm) livestreamer -p mpv twitch.tv/egm1 Medium ;;
-    xboct) livestreamer -p mpv twitch.tv/xboct Medium ;;
-    admiralbulldog) livestreamer -p mpv twitch.tv/admiralbulldog Medium ;;
-    basskip) livestreamer -p mpv twitch.tv/basskip Medium ;;
+    jdred) livestreamer -p mplayer twitch.tv/joindotared Medium ;;
+    d2l) livestreamer -p mplayer twitch.tv/d2l Medium ;;
+    bts) livestreamer -p mplayer twitch.tv/beyondthesummit Medium ;;
+    bts2) livestreamer -p mplayer twitch.tv/beyondthesummit2 Medium ;;
+    sheever) livestreamer -p mplayer twitch.tv/sheevergaming Medium ;;
+    dendi) livestreamer -p mplayer twitch.tv/dendi Medium ;;
+    singsing) livestreamer -p mplayer twitch.tv/sing_sing Medium ;;
+    xboct) livestreamer -p mplayer twitch.tv/xboct Medium ;;
+    admiralbulldog) livestreamer -p mplayer twitch.tv/admiralbulldog Medium ;;
+    kolento) livestreamer  -p mplayer twitch.tv/kolento Medium ;;
 esac
