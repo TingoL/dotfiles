@@ -77,19 +77,19 @@
 			#mail_command "xterm -rv pine *				> /dev/null 2>&1 &"
 			#mail_command "xterm -rv +sb -e mutt *			> /dev/null 2>&1 &"
 			#mail_command "pine *"
-		mail_command "urxvtc -e mutt *"
+		mail_command "termite -e mutt *"
 		
 	##### spell checking
 		# the spell-checker used
 		#
 		## samples
-			#spell_command "aspell -c"
+			spell_command "aspell -c"
 			#spell_command "ispell -x"
 			#spell_command "ispell -x -damerican"
 			#spell_command "ispell -x -dbritish"
 			#spell_command "ispell -x -dbokmål"
 			#spell_command "ispell -x -dnynorsk"
-		spell_command "ispell -x"
+		#spell_command "ispell -x"
 		
 	
 ##### file formats
@@ -179,8 +179,7 @@
 		bind l right
 		bind npage pagedown
 		bind ppage pageup
-		bind g  "go root"
-		
+		bing g root
 		
 		bind return edit
 		bind del    remove
@@ -236,7 +235,7 @@
 		bind backspace2 backspace
 		
 		bind ^A   bol
-		bind g    bol
+		#bind g    bol
 		bind ^E   eol
 		bind G    eol
 		

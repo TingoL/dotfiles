@@ -2,9 +2,10 @@
 
 DMENU="dmenu -h 28 -o 0.8 -dim 0.5 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-14:Medium"
 
-choice=$(echo -e "jdred\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\nxboct\nadmiralbulldog\nkolento\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\nsheever\ndendi\ntpl\nsingsing\nxboct\nadmiralbulldog\nkolento\n" | $DMENU | cut -f 1)
 
 case "$choice" in
+    jddm) livestreamer -p mplayer livestreamer http://www.dailymotion.com/video/x1b1h6o 360p  ;;
     jdred) livestreamer -p mplayer twitch.tv/joindotared Medium ;;
     d2l) livestreamer -p mplayer twitch.tv/d2l Medium ;;
     bts) livestreamer -p mplayer twitch.tv/beyondthesummit Medium ;;

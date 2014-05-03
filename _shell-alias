@@ -33,3 +33,4 @@ alias pomodoro="python2 ~/Playground/Python/pomodoro.py &"
 alias ducks='du -cks *|sort -rn|head -11'
 alias json="python -mjson.tool"
 alias upg="sudo pacman -Syu"
+alias xperia="sudo dhcpcd enp0s2f3u1"

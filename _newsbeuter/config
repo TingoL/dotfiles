@@ -5,7 +5,16 @@ color listnormal_unread   color5 default
 color listfocus_unread    color16 color12   bold
 color info                color12  color234   bold
 color article             white   default
+
 auto-reload yes
+
 browser dwb
-show-read-feeds no
+show-read-feeds yes
 mark-as-read-on-hover yes
+goto-next-feed no
+reload-time  600
+
+bind-key  j down
+bind-key  k up
+bind-key  J  next-feed
+bind-key  K  prev-feed
