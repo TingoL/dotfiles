@@ -34,3 +34,4 @@ alias ducks='du -cks *|sort -rn|head -11'
 alias json="python -mjson.tool"
 alias upg="sudo pacman -Syu"
 alias xperia="sudo dhcpcd enp0s2f3u1"
+alias htpc="ssh -p 2222 tingol@192.168.1.66"

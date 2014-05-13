@@ -136,8 +136,8 @@ map <C-j> <C-w>j
 map <C-l> <C-w>l
 map <C-h> <C-w>h
 "tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+map <Leader>n <esc>:bp<CR>
+map <Leader>m <esc>:bn<CR>
 "buffers
 nnoremap <PageUp>   :bp<CR>
 nnoremap <PageDown> :bn<CR>
