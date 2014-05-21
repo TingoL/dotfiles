@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "♫" $(cmus-remote -Q | awk '$2 == "artist"{a=substr($0,12)} $2 == "title"{t=substr($0,11); exit} END{printf("%s - %s\n",a,t); exit(!t)}')
