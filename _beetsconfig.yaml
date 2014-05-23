@@ -1,0 +1,14 @@
+directory: ~/Music
+library: ~/.config/beets/library.db
+import:
+    copy: no
+    move: yes
+    log: ~/.config/beets/imlog.txt
+plugins: fetchart embedart discogs
+fetchart:
+    auto: yes
+embedart:
+    auto: yes
+paths:
+    default: $format/$albumartist - $year - $album/$track - $title
+    comp: various.artists/$year - $album/$track - $title
