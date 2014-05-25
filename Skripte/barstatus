@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+# z3bra - (c) wtfpl 2014
+# Fetch infos on your computer, and print them to stdout every second.
+
+clock() {
+    date '+%H:%M'
+}
+
+battery() {
+    acpi | cut -d ',' -f 2
+}
+
+volume() {
+    amixer get Master | sed -n 'N;s/^.*\[\([0-9]\+%\).*$/\1/p'
+}
+
+cpuload() {
+    LINE=`ps -eo pcpu |grep -vE '^\s*(0.0|%CPU)' |sed -n '1h;$!H;$g;s/\n/ +/gp'`
+    bc <<< $LINE
+}
+
+memused() {
+    read t f <<< `grep -E 'Mem(Total|Free)' /proc/meminfo |awk '{print $2}'`
+    bc <<< "scale=2; 100 - $f / $t * 100" | cut -d. -f1
+}
+
+network() {
+    read lo int1 int2 <<< `ip link | sed -n 's/^[0-9]: \(.*\):.*$/\1/p'`
+    if iwconfig $int1 >/dev/null 2>&1; then
+        wifi=$int1
+        eth0=$int2
+    else
+        wifi=$int2
+        eth0=$int1
+    fi
+    ip link show $eth0 | grep 'state UP' >/dev/null && int=$eth0 ||int=$wifi
+
+    #int=eth0
+
+    ping -c 1 8.8.8.8 >/dev/null 2>&1 && 
+        echo "$int connected" || echo "$int disconnected"
+}
+
+groups() {
+    xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'
+}
+
+
+# This loop will fill a buffer with our infos, and output it to stdout.
+while :; do
+    buf="%{l} %{B#1c2027} "
+#    buf="${buf} [$(groups)]   --  "
+    buf="${buf} %{F#8e44ad}♫ $(cmusstatus) %{c} "
+    buf="${buf} %{F#72d5a3} $(clock) %{r} "
+    # buf="${buf} NET: $(network) -"
+    buf="${buf} %{F#3498db}$(dbstatus)"
+    buf="${buf} %{F#e74c3c} ♥$(battery)%"
+
+    echo $buf
+    # use `nowplaying scroll` to get a scrolling output!
+    sleep 1 # The HUD will be updated every second
+done
+
+cmusstatus() {
+    cmus-remote -Q | awk '$2 == "artist"{a=substr($0,12)} $2 == "title"{t=substr($0,11); exit} END{printf("%s - %s\n",a,t); exit(!t)}'
+}
+
+dbstatus(){
+
+    dropbox status
+}
