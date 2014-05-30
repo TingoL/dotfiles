@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# z3bra - (c) wtfpl 2014
+# perform a search on youtube and return the best result (title + link)
+
+usage() {
+    echo "`basename $0` [-htu] [-n <num>] <query>"
+
+    test -z "$1" && return
+
+    cat <<EOF
+        -h : display this help
+        -t : output titles only (default 'title - uri')
+        -u : output uris only
+        -n : print only <num> results (default: 3)
+EOF
+}
+
+num=3
+regex='^.*title="\([^"]*\)".*href="\(/watch[^"]*\)".*$'
+output='\1 - http://youtube.com\2'
+
+while getopts "hn:tu" OPT; do
+    case  $OPT in
+        n) num=$OPTARG;;
+        t) output='\1';;
+        u) output='http://youtube.com\2';;
+        h) usage long; exit 0;;
+        *) usage; exit 1;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
+query=$(echo $@ | tr ' ' '+')
+url="http://www.youtube.com/results?search_query=${query}"
+
+curl -s "$url" | sed -n "s,$regex,$output,p" | sed ${num}q
+
