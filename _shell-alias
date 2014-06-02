@@ -35,3 +35,4 @@ alias json="python -mjson.tool"
 alias upg="sudo pacman -Syu"
 alias xperia="sudo dhcpcd enp0s2f3u1"
 alias htpc="ssh -p 2222 tingol@192.168.1.66"
+alias deskss='scrot -cd 1 current.png && imgurup current.png | xclip -selection clipboard && notify-send "image uploaded successfully, address copied to buffer"'

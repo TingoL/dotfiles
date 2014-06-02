@@ -1,7 +1,7 @@
 #!/bin/bash
 exec termite -e hnb &
 exec termite &
-exec termite -e cmus &
-exec termite -e weechat-curses --name weechat &
-exec termite -e turses --name turses &
-exec termite -e mutt --name mutt
+exec termite -e ranger &
+exec termite -e mutt --name mutt &
+exec termite -e cmus --name cmus &
+exec termite -e newsbeuter --name newsbeuter

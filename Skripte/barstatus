@@ -2,6 +2,7 @@
 #
 # z3bra - (c) wtfpl 2014
 # Fetch infos on your computer, and print them to stdout every second.
+heart=$(echo '\u2655')
 
 clock() {
     date '+%H:%M'
@@ -55,11 +56,11 @@ while :; do
     buf="${buf} %{F#72d5a3} $(clock) %{r} "
     # buf="${buf} NET: $(network) -"
     buf="${buf} %{F#3498db}$(dbstatus)"
-    buf="${buf} %{F#e74c3c} ♥$(battery)%"
+    buf="${buf} %{F#e74c3c} $heart $(battery)%"
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!
-    sleep 1 # The HUD will be updated every second
+    sleep 20 # The HUD will be updated every second
 done
 
 cmusstatus() {
@@ -70,3 +71,5 @@ dbstatus(){
 
     dropbox status
 }
+
+
