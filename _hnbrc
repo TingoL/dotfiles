@@ -123,8 +123,8 @@
 	style parentnode     white/default bold
 	style node           white/default normal
 	style bullet         green/default    normal
-	style selected       black/cyan      reverse
-	style parentselected black/cyan    reverse
+	style selected       black/cyan      normal
+	style parentselected black/cyan    normal
 	style background     default/default normal
 	
 ##### key-bindings

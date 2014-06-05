@@ -101,12 +101,4 @@ ranger-cd() {
 zle -N ranger-cd
 bindkey '^o' ranger-cd
 
-fap-xvideos() {# {{{
-        keyword="$(echo "http://www.xvideos.com/?k=$@" | sed 's/ /\+/g')"
-    pagenum=5
-    pagenum_to_url=$(for num in $(seq 1 "$pagenum"); do echo "$keyword&p=$num"; done )
-    videourl=$(echo "$pagenum_to_url" | while read line; do lynx -dump "$line" \
-    | awk '/xvideos\.com\/video/ {print $2}' | awk '!x[$0]++' ; done)
-
-    echo $videourl | sed 's/\ /\n/g' | awk '!x[$0]++' | vim -R -
-}
+doc2pdf() { curl -# -F inputDocument=@"$1" http://www.doc2pdf.net/convert/document.pdf > "${1%.*}.pdf" ;}

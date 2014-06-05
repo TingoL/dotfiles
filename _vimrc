@@ -52,7 +52,6 @@ Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'chrisbra/csv.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
@@ -62,8 +61,6 @@ Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'vim-scripts/a.vim'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 
@@ -135,12 +132,9 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-l> <C-w>l
 map <C-h> <C-w>h
-"tabs
-map <Leader>n <esc>:bp<CR>
-map <Leader>m <esc>:bn<CR>
 "buffers
-nnoremap <PageUp>   :bp<CR>
-nnoremap <PageDown> :bn<CR>
+nnoremap <silent> <Left> :bn<CR>
+nnoremap <silent> <Right> :bp<CR>
 "bubbles
 nmap <C-Up> ddkP
 nmap <C-Down> ddp
