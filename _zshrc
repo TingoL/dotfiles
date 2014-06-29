@@ -31,7 +31,6 @@ alias -s html=dwb
 
 . $HOME/.shell-alias
 . $HOME/.shell-functions
-. $HOME/dotfiles/sopcast
 
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"
