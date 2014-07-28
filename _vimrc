@@ -5,7 +5,7 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-colorscheme euphrasia
+colorscheme base16-default
 
 let mapleader=" "
 let maplocalleader="\\"
@@ -15,6 +15,7 @@ set hidden                  "allow scrolling between unsaved buffers
 set scrolloff=2             " 2 lines above/below cursor when scrolling
 set foldmethod=manual
 set relativenumber
+set background=dark
 set number                 " show line numbers
 set lazyredraw
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
@@ -63,13 +64,16 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'chriskempson/base16-vim'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 
 
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "badwolf"
+let g:airline_theme = "base16"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "seoul colors
@@ -127,14 +131,14 @@ nnoremap <F3> :NERDTreeToggle<CR>
 nmap <silent> <F4> :call NumberToggle()<CR>
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
-"cycle through windows with one key combo
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-l> <C-w>l
-map <C-h> <C-w>h
+" "cycle through windows with one key combo
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-l> <C-w>l
+" map <C-h> <C-w>h
 "buffers
-nnoremap <silent> <Left> :bn<CR>
-nnoremap <silent> <Right> :bp<CR>
+nnoremap <C-j> :bn<CR>
+nnoremap <C-k> :bp<CR>
 "bubbles
 nmap <C-Up> ddkP
 nmap <C-Down> ddp
