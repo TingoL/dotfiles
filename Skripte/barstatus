@@ -49,13 +49,13 @@ groups() {
 
 # This loop will fill a buffer with our infos, and output it to stdout.
 while :; do
-    buf="%{l} %{B#1c2027} "
+    buf="%{l} %{B#FF1c2027} "
 #    buf="${buf} [$(groups)]   --  "
-    buf="${buf} %{F#8e44ad}$(cmusstatus) %{c} "
-    buf="${buf} %{F#72d5a3} $(clock) %{r} "
-    # buf="${buf} NET: $(network) -"
-    buf="${buf} %{F#3498db}$(dbstatus)"
-    buf="${buf} %{F#e74c3c} $(battery)%"
+    buf="${buf} %{F#FF8e44ad}$(cmusstatus) %{c} "
+    buf="${buf} %{F#FF72d5a3} $(clock) %{r} "
+    buf="${buf} NET: $(network) -"
+    buf="${buf} %{F#FF3498db}$(dbstatus)"
+    buf="${buf} %{F#FFe74c3c} $(battery)%"
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!

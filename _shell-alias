@@ -35,3 +35,5 @@ alias xperia="sudo dhcpcd enp0s2f3u1"
 alias htpc="ssh -p 2222 tingol@192.168.1.66"
 alias deskss='scrot -cd 1 current.png && imgurup current.png | xclip -selection clipboard && notify-send "image uploaded successfully, address copied to buffer"'
 alias tng='play -c 2 -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +10'
+alias tudu='tudu -f ~/Dropbox/linux/.tudu.xml'
+alias magnet='aria2c --bt-metadata-only=true --bt-save-metadata=true'
