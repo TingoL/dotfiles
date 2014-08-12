@@ -46,6 +46,9 @@ groups() {
     xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'
 }
 
+mail() {
+    ls -rA1 /home/tingol/mail/INBOX/new | wc -l
+}
 
 # This loop will fill a buffer with our infos, and output it to stdout.
 while :; do
@@ -53,7 +56,8 @@ while :; do
 #    buf="${buf} [$(groups)]   --  "
     buf="${buf} %{F#FF8e44ad}$(cmusstatus) %{c} "
     buf="${buf} %{F#FF72d5a3} $(clock) %{r} "
-    buf="${buf} NET: $(network) -"
+    buf="${buf} %{F#FFffaa3e} $(mail) "
+    buf="${buf} %{F#FF3aaf75} $(cpuload) "
     buf="${buf} %{F#FF3498db}$(dbstatus)"
     buf="${buf} %{F#FFe74c3c} $(battery)%"
 

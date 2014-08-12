@@ -102,3 +102,4 @@ zle -N ranger-cd
 bindkey '^o' ranger-cd
 
 doc2pdf() { curl -# -F inputDocument=@"$1" http://www.doc2pdf.net/convert/document.pdf > "${1%.*}.pdf" ;}
+pirate() { pirate-get $1 --custom "transmission-remote -a" ; }
