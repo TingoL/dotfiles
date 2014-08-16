@@ -10,9 +10,9 @@ xset r rate 250 50
 xsetroot -solid black
 xsetroot -cursor_name left_ptr
 dropboxd &
-imlibsetroot -s f Dropbox/Photos/Walls/kitteh.jpg &
+imlibsetroot -s f Dropbox/Photos/Walls/sloth.jpg &
 transmission-daemon &
 compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
-barstatus | bar &
+barstatus | bar -f "*-lime-*-*-*-*-10-*-*-*-*-*-*-*" &
 exec ~/.i3/i3

@@ -67,6 +67,7 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vimwiki/vimwiki'
+Plugin 'junegunn/goyo.vim'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 
@@ -131,6 +132,7 @@ nnoremap <F3> :NERDTreeToggle<CR>
 nmap <silent> <F4> :call NumberToggle()<CR>
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
+nnoremap <Leader>G :Goyo<CR>
 " "cycle through windows with one key combo
 " map <C-h> <C-w>h
 " map <C-j> <C-w>j

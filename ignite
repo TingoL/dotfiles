@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ln -sf $HOME/dotfiles/_* $HOME;
+for f in _*; do mv "$f" ".${f#_}"; done

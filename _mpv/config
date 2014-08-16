@@ -1,7 +1,7 @@
 # Write your default config options here!
 
-#vo=opengl-hq        # video driver
-vo=xv
+vo=xv        # video driver
+#vo=gl
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window
@@ -14,16 +14,12 @@ alang=jpn,japanese  # audio language to use
 
 # Subtitle Settings
 #aid=1          # use ID* track for audio
-sid=0           # use ID* track for audio
+sid=1           # use ID* track for audio
 slang=eng,english   # subtitle language
 
 # Other Settings
-msgmodule=no        # show modules
-msgcolor=yes        # moar colors!!
 quiet=yes       # make mpv to report less
 framedrop=yes   # Drop frames to preserve audio/video sync.
-subcp=cp1250
-cache=8192      # use 8MB input cache by default
-cache-min=20.0      # prefill 20% of the cache before starting playback
+sub-codepage=cp1250
 screenshot-format=png   # screenshot format to use (.jpg/.png)
-# vd-lavc-threads=2   # threads to use for decoding
+vd-lavc-threads=2   # threads to use for decoding

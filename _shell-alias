@@ -2,7 +2,7 @@
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias hdvideo='mplayer -vo xv -ao alsa -lavdopts fast=1:skiploopfilter=all'
 alias mmv='noglob zmv -W'
-alias dccanime='mv ~/.weechat/xfer/* ~/Downloads'
+alias dccanime='mv ~/.weechat/xfer/* ~/Anime'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
 alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd -'
 alias python='python2'
@@ -26,12 +26,9 @@ alias ls='ls --color=auto'
 alias off='sudo shutdown -h $1'
 alias wifi='sudo wifi-menu'
 alias gping='ping -c 3 www.google.com'
-alias monsterwmrc="cd $HOME/git/monsterwm  && vim config.h && make clean && make && sudo make install && cd"
-alias barrc="cd $HOME/git/bar && vim config.h && make clean && make && sudo make install && cd"
-alias ducks='du -cks *|sort -rn|head -11'
+alias ducks='du -cksh *|sort -rh |head -11'
 alias json="python -mjson.tool"
 alias upg="sudo pacman -Syu"
-alias xperia="sudo dhcpcd enp0s2f3u1"
 alias htpc="ssh -p 2222 tingol@192.168.1.66"
 alias deskss='scrot -cd 1 current.png && imgurup current.png | xclip -selection clipboard && notify-send "image uploaded successfully, address copied to buffer"'
 alias tng='play -c 2 -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +10'
