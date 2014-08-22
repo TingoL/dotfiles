@@ -1,0 +1,3 @@
+#!/bin/bash
+DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.3 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:medium"
+vboxmanage startvm --type gui $(vboxmanage list vms | sed -e 's/"//g' | cut -f1 -d ' ' | $DMENU -i -p "VMs")

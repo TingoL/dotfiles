@@ -1,0 +1,4 @@
+#!/bin/bash
+
+DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.3 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:medium"
+xsel -o | $DMENU -p Calculate: | xargs echo | bc 2>&1 | $DMENU -p Answer: | xsel -i

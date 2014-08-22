@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#DMENU="dmenu -i"
+
+DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.5 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:medium -i"
+terminal="termite -e"
+
+
+WALLPAPER_DIR="/home/tingol/Dropbox/Photos/Walls/"
+WALLPAPER=`ls $WALLPAPER_DIR \
+	| $DMENU -p "Choose a Wallpaper :"`
+
+SET="imlibsetroot -s f"
+
+$SET $WALLPAPER_DIR/$WALLPAPER

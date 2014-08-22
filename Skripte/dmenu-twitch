@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DMENU="dmenu -h 28 -o 0.8 -dim 0.5 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-14:Medium"
+DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:Medium"
 
-choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\nsheever\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nkolento\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\nsheever\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\n" | $DMENU | cut -f 1)
 
 case "$choice" in
     jddm) livestreamer -p mpv livestreamer http://www.dailymotion.com/video/x1b1h6o 360p  ;;
@@ -16,5 +16,5 @@ case "$choice" in
     singsing) livestreamer -p mpv twitch.tv/sing_sing Medium ;;
     light) livestreamer -p mpv twitch.tv/lightofheaven Medium ;;
     admiralbulldog) livestreamer -p mpv twitch.tv/admiralbulldog Medium ;;
-    kolento) livestreamer  -p mpv twitch.tv/kolento Medium ;;
+    starladder) livestreamer  -p mpv twitch.tv/dotastarladder_en Medium ;;
 esac

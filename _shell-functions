@@ -28,7 +28,7 @@ alarm() {
     sleep 2
   done &
 
-  mplayer -really-quiet '/home/tingol/Music/House/otto_knows_-_million_voices.aac'
+  mplayer -really-quiet '/home/tingol/Music/Monstercat\ 018\ -\ Frontier\ (2014)\ \[MC018\]/12.\ PIXL\ -\ Broken\ Bones\ (feat.\ Cassandra\ Kay).mp3'
 }
 # sanitize - set file/directory owner and permissions to normal values (644/755)
 # usage: sanitize <file>
@@ -85,8 +85,6 @@ t() {
     tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
 
-article() { cat "$1" | w3m -dump -T text/html > article.txt;}
-
 ranger-cd() {
        tempfile=$(mktemp)
        ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
@@ -101,4 +99,5 @@ ranger-cd() {
 zle -N ranger-cd
 bindkey '^o' ranger-cd
 
-doc2pdf() { curl -# -F inputDocument=@"$1" http://www.doc2pdf.net/convert/document.pdf > "${1%.*}.pdf" ;}
+popcorn() { peerflix "$1" -kr; }
+

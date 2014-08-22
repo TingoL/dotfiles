@@ -3,6 +3,8 @@
 # z3bra - (c) wtfpl 2014
 # Fetch infos on your computer, and print them to stdout every second.
 
+clockico='\ue017'
+
 clock() {
     date '+%H:%M'
 }
@@ -63,7 +65,7 @@ while :; do
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!
-    sleep 20 # The HUD will be updated every second
+    sleep 10 # The HUD will be updated every second
 done
 
 cmusstatus() {
