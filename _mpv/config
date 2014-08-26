@@ -1,6 +1,6 @@
 # Write your default config options here!
 
-vo=xv        # video driver
+vo=opengl:pbo        # video driver
 #vo=gl
 
 fs=no           # use fullscreen mode by default
@@ -16,6 +16,12 @@ alang=jpn,japanese  # audio language to use
 #aid=1          # use ID* track for audio
 sid=1           # use ID* track for audio
 slang=eng,english   # subtitle language
+sub-text-color="#ffffffff"
+sub-text-border-color="#ff262626"
+sub-text-border-size=3.2
+sub-text-shadow-offset=1
+sub-text-shadow-color="#33000000"
+sub-text-spacing=0.5
 
 # Other Settings
 quiet=yes       # make mpv to report less
@@ -23,3 +29,9 @@ framedrop=yes   # Drop frames to preserve audio/video sync.
 sub-codepage=cp1250
 screenshot-format=png   # screenshot format to use (.jpg/.png)
 vd-lavc-threads=2   # threads to use for decoding
+osd-font='DejaVu Sans'
+autofit-larger=90%x90%
+stop-screensaver="yes"
+loop=inf
+screenshot-format=png
+title='${media-title}'
