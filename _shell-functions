@@ -99,5 +99,5 @@ ranger-cd() {
 zle -N ranger-cd
 bindkey '^o' ranger-cd
 
-popcorn() { peerflix "$1" -kr; }
+popcorn() { peerflix $1 -k -r; }
 

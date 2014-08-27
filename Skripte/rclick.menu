@@ -1,0 +1,26 @@
+#!/usr/bin/9menu -file
+-popup
+-geometry 8x16
+-fg white
+-bg black
+-font -*-terminus-medium-r-normal--12-87-100-100-c-60-iso8859-1
+COMMON ---- :true
+        tmnl :urxvt
+         www :dwb
+        mail :urxvt -e mutt
+ GAMES ----- :true
+       steam :steam
+      defrag :ioquake3 +set fs_game defrag
+        2048 :surf http://gabrielecirulli.github.io/2048/
+   teeworlds :teeworlds
+ sauerbraten :sauerbraten-client
+ WORK ------ :true
+       mstsc :~/bin/srv fic97302
+         vnc :vncviewer
+        fltk :fluid ~/src/cpp/cico/src/fltk.fl
+         pdf :zathura || mupdf
+ SESSION --- :true
+     restart :pkill 2bwm;2bwm
+        quit :pkill xclock
+      reboot :reboot
+   power off :poweroff

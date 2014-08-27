@@ -18,7 +18,6 @@ alias srb='setxkbmap hr'
 alias eng='setxkbmap us'
 alias ls='ls --color=auto'
 alias off='sudo shutdown -h $1'
-alias wifi='sudo wifi-menu'
 alias gping='ping -c 3 www.google.com'
 alias ducks='du -cksh *|sort -rh |head -11'
 alias json="python -mjson.tool"
