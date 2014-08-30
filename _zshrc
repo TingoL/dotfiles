@@ -11,7 +11,7 @@ zstyle ':completion:*' insert-tab false
 alias zconfig="vim ~/.zshrc"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/Skripte:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
 #
 set -o vi
 #file extension aliases
@@ -19,10 +19,10 @@ set -o vi
 alias -s smc=zsnes
 alias -s pdf=zathura
 alias -s tex=vim
-alias -s mp3=mplayer
-alias -s mkv=mplayer
-alias -s avi=mplayer
-alias -s mp4=mplayer
+alias -s mp3=mpv
+alias -s mkv=mpv
+alias -s avi=mpv
+alias -s mp4=mpv
 alias -s jpg=sxiv
 alias -s png=sxiv
 alias -s py=vim
