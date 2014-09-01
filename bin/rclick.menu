@@ -4,15 +4,15 @@
 -fg white
 -bg black
 -font -*-terminus-medium-r-normal--12-87-100-100-c-60-iso8859-1
-COMMON ---- :true
-        tmnl :urxvt
+ WEB ------- :true
+          HN :surf news.ycombinator.com
          www :dwb
         mail :urxvt -e mutt
  GAMES ----- :true
        steam :steam
-      defrag :ioquake3 +set fs_game defrag
+    canabalt :surf adamatomic.com/canabalt
         2048 :surf http://gabrielecirulli.github.io/2048/
-   teeworlds :teeworlds
+       crawl :termite -e crawl
  sauerbraten :sauerbraten-client
  WORK ------ :true
        mstsc :~/bin/srv fic97302
@@ -20,7 +20,6 @@ COMMON ---- :true
         fltk :fluid ~/src/cpp/cico/src/fltk.fl
          pdf :zathura || mupdf
  SESSION --- :true
-     restart :pkill 2bwm;2bwm
-        quit :pkill xclock
+     restart :pkill i3;i3
       reboot :reboot
    power off :poweroff

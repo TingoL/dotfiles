@@ -1,6 +1,6 @@
 #!/bin/sh
-# xsetroot -cursor_name watch
-# command -v warpcursor && warpcursor 1
+xsetroot -cursor_name watch
+command -v warpcursor && warpcursor 1
 xset +fp /usr/share/fonts/artwiz-fonts
 xset +fp /usr/share/fonts/local
 xset fp rehash
@@ -15,4 +15,5 @@ transmission-daemon &
 compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
 barstatus | bar -f "*-lime-*-*-*-*-10-*-*-*-*-*-*-*" &
-exec ~/.i3/i3
+#exec ~/.i3/i3
+exec frankenwm
