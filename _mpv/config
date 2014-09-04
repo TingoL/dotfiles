@@ -1,6 +1,6 @@
 # Write your default config options here!
 
-vo=opengl:pbo        # video driver
+vo=xv        # video driver
 #vo=gl
 
 fs=no           # use fullscreen mode by default
