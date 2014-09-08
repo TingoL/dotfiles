@@ -15,5 +15,4 @@ transmission-daemon &
 compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
 barstatus | bar -d -f "*-lime-*-*-*-*-10-*-*-*-*-*-*-*" &
-#exec ~/.i3/i3
 exec frankenwm

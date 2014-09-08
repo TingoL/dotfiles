@@ -5,7 +5,7 @@
 # and add it to MPD library (will end up with a .mp3, for tags)
 # Require :  ys (youtube search)
 
-MPD_DOWNLOAD_DIR=~/usr/msc/youtube/
+MPD_DOWNLOAD_DIR=~/Downloads
 
 usage() {
     echo "`basename $0` [-h] <query>"

@@ -44,6 +44,7 @@ export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=/home/tingol/.config
 export PROJECT_HOME=~/Dev
 export WORKON_HOME=~/Envs
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7
 #. /usr/bin/virtualenvwrapper.sh

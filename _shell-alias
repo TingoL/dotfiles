@@ -8,6 +8,7 @@ alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd 
 alias python='python2'
 alias trc='transmission-remote-cli'
 alias pip='sudo pip2'
+alias els='els --els-icons=fontawesome'
 alias v='f -e vim'
 alias o='a -e xdg-open' # quick opening files with xdg-open
 alias pdf='f -e zathura'
