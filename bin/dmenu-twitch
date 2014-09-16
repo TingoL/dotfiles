@@ -5,7 +5,7 @@ DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -s
 choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\nsheever\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\npimp\n" | $DMENU | cut -f 1)
 
 case "$choice" in
-    jddm) livestreamer -p mpv livestreamer http://www.dailymotion.com/video/x1b1h6o 360p  ;;
+    jddm) livestreamer -p mpv http://www.dailymotion.com/video/x1b1h6o 364p  ;;
     jdred) livestreamer -p mpv twitch.tv/joindotared Medium ;;
     d2l) livestreamer -p mpv twitch.tv/d2l Medium ;;
     bts) livestreamer -p mpv twitch.tv/beyondthesummit Medium ;;

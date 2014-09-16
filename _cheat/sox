@@ -1,0 +1,17 @@
+#Change the format of the file:
+sox foo.aiff foo.wav
+
+#Concatenate 2 files into one:
+sox 1.wav 2.wav 1+2.wav
+
+#Combine multiple audio files into a single file:
+soxmix file1.wav file2.wav output.wav
+
+#The syntax to extract a part of an audio file to the output file is: 
+sox file.wav output.wav trim [start time in seconds] [duration in seconds]
+
+sox mono.wav -c 3 stereo.wav
+
+sox input.wav output.wav speed 3.0
+
+sox -v 2.0 jacinazvuka.wav jacinazvukaputadva.wav

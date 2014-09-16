@@ -28,5 +28,4 @@ alias deskss='scrot -cd 1 current.png && imgurup current.png | xclip -selection 
 alias tng='play -c 2 -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +10'
 alias magnet='aria2c --bt-metadata-only=true --bt-save-metadata=true'
 alias pirate='pirate-get -t'
-alias xperiaon='mkdir android && simple-mtpfs ~/android && cd android/'
-alias xperiaoff='sudo fusermount -u ~/android && rmdir android/'
+alias xperiaon='lftp 192.168.1.33:2121 -u ftp,ftp'

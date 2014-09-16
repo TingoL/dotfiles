@@ -39,11 +39,8 @@ sanitize()
 }
 # usage: arhiviraj <filename | dirname>
 function arhiviraj() { tar czf "${1%%/}.tar.gz" "${1%%/}/"; }
-# make a backup before editing a file
-safeedit() {
-        cp $1 $1.backup && vim $1
-}
-say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
+
+say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mpv "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
 # send process to the background
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
@@ -98,8 +95,6 @@ ranger-cd() {
 # This binds Ctrl-O to ranger-cd:
 zle -N ranger-cd
 bindkey '^o' ranger-cd
-
-popcorn() { peerflix $1 -k -r; }
 
 _seteq(){
   amixer -D equal -q set '01. 31 Hz' $1
