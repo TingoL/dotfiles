@@ -62,7 +62,7 @@
 			#web_command "mozilla -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"
 			#web_command "konqueror *				> /dev/null 2>&1 &"
 			#web_command "galeon -n					> /dev/null 2>&1 &"
-			web_command "dwb *"
+			web_command "luakit *"
 			#web_command "lynx *"
 			#web_commend "rxvt -fn fixed -rv +sb -e w3m *		> /dev/null 2>&1 &"
 			#web_command "opera -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"

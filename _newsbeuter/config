@@ -8,7 +8,7 @@ color article             white   default
 
 auto-reload yes
 
-browser luakit
+browser dwb
 show-read-feeds yes
 mark-as-read-on-hover yes
 goto-next-feed no

@@ -65,7 +65,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'chriskempson/base16-vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 

@@ -11,6 +11,7 @@ xsetroot -solid black
 xsetroot -cursor_name left_ptr
 dropboxd &
 imlibsetroot -s f Dropbox/Photos/Walls/sloth.jpg &
+redshift -l 44:23 &
 transmission-daemon &
 compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
