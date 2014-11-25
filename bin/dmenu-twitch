@@ -2,7 +2,7 @@
 
 DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:Medium"
 
-choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\nsheever\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\npimp\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\ndotapit\ndreamleague\ndotacinema\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\npimp\n" | $DMENU | cut -f 1)
 
 case "$choice" in
     jddm) livestreamer -p mpv http://www.dailymotion.com/video/x1b1h6o 364p  ;;
@@ -10,7 +10,9 @@ case "$choice" in
     d2l) livestreamer -p mpv twitch.tv/d2l Medium ;;
     bts) livestreamer -p mpv twitch.tv/beyondthesummit Medium ;;
     bts2) livestreamer -p mpv twitch.tv/beyondthesummit2 Medium ;;
-    sheever) livestreamer -p mpv twitch.tv/sheevergaming Medium ;;
+    dotapit) livestreamer -p mpv twitch.tv/dotapit Medium ;;
+    dreamleague) livestreamer -p mpv twitch.tv/dreamleague Medium ;;
+    sheever) livestreamer -p mpv twitch.tv/dotacinema Medium ;;
     dendi) livestreamer -p mpv twitch.tv/dendi Medium ;;
     merlini) livestreamer -p mpv twitch.tv/merlinidota Medium ;;
     singsing) livestreamer -p mpv twitch.tv/sing_sing Medium ;;
