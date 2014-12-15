@@ -4,13 +4,13 @@ command -v warpcursor && warpcursor 1
 xset +fp /usr/share/fonts/artwiz-fonts
 xset +fp /usr/share/fonts/local
 xset fp rehash
-xrdb -merge "${HOME}/.Xresources"
+#xrdb -merge "${HOME}/.Xresources"
 setxkbmap -option caps:escape
 xset r rate 250 50
 xsetroot -solid black
 xsetroot -cursor_name left_ptr
 dropboxd &
-imlibsetroot -s f Dropbox/Photos/Walls/sloth.jpg &
+imlibsetroot -s f Dropbox/Photos/Walls/aivazovsky-wave.jpg &
 redshift -l 44:23 &
 transmission-daemon &
 compton -r 12 -o 0.5 -c -b

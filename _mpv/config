@@ -25,7 +25,6 @@ sub-text-spacing=0.5
 
 # Other Settings
 quiet=yes       # make mpv to report less
-framedrop=yes   # Drop frames to preserve audio/video sync.
 sub-codepage=cp1250
 screenshot-format=png   # screenshot format to use (.jpg/.png)
 vd-lavc-threads=2   # threads to use for decoding

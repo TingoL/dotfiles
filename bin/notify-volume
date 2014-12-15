@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /usr/bin/notify-send -t 1000 -i volume-knob "Volume $(amixer -q | grep -A5 Master | grep '%' | cut -d'[' -f2 | cut -d']' -f1)"
