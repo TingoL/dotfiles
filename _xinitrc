@@ -15,5 +15,5 @@ redshift -l 44:23 &
 transmission-daemon &
 compton -r 12 -o 0.5 -c -b
 unclutter -idle 5 -noevents &
-barstatus | bar -d -f "*-lime-*-*-*-*-10-*-*-*-*-*-*-*" &
+barstatus | bar -d -f "Droid Sans Mono-7" &
 exec frankenwm

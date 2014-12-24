@@ -58,10 +58,9 @@ while :; do
 #    buf="${buf} [$(groups)]   --  "
     buf="${buf} %{F#FF8e44ad}$(cmusstatus) %{c} "
     buf="${buf} %{F#FF72d5a3} $(clock) %{r} "
-    buf="${buf} %{F#FF3498db}$(dbstatus)"
-    buf="${buf} %{F#FF3aaf75} $(cpuload) "
-    buf="${buf} %{F#FFffaa3e} $(mail) "
-    buf="${buf} %{F#FFe74c3c} $(battery)% "
+    buf="${buf} %{F#FF3498db}⚡ $(cpuload) "
+    buf="${buf} %{F#FFffaa3e} ✉ $(mail) "
+    buf="${buf} %{F#FFe74c3c} $(batterystatus) "
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!

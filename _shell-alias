@@ -20,8 +20,6 @@ alias eng='setxkbmap us'
 alias ls='ls --color=auto'
 alias off='sudo shutdown -h $1'
 alias gping='ping -c 3 www.google.com'
-alias ducks='du -cksh *|sort -rh |head -11'
-alias json="python -mjson.tool"
 alias upg="packer -Syu"
 alias htpc="ssh -p 2222 tingol@192.168.1.66"
 alias deskss='scrot -cd 1 current.png && imgurup current.png | xclip -selection clipboard && notify-send "image uploaded successfully, address copied to buffer"'
@@ -31,3 +29,4 @@ alias pirate='pirate-get -t'
 alias xperiaon='lftp 192.168.1.33:2121 -u ftp,ftp'
 alias news='newsbeuter -q'
 alias screenoff='xset dpms force standby'
+alias clitsens='echo $1 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity'
