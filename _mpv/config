@@ -1,7 +1,8 @@
 # Write your default config options here!
 
-vo=xv        # video driver
-#vo=gl
+#vo=xv        # video driver
+hwdec=auto
+vo=opengl-hq
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window

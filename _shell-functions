@@ -1,6 +1,6 @@
 #!bin/bash
 #functions compatible with bash/zsh
-function podsetnik()
+podsetnik()
 {
     sleep $1 && notify-send "$2" &
 }
@@ -81,6 +81,18 @@ ft() {
 t() {
     tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
+function pdfpextr()
+{
+    #     $1 is the first page of the range to extract
+    #     $2 is the last page of the range to extract
+    #     $3 is the input file
+    #     output file will be named "inputfile_pXX-pYY.pdf"
+    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+       -dFirstPage=${1} \
+       -dLastPage=${2} \
+       -sOutputFile=${3%.pdf}_p${1}-p${2}.pdf \
+       ${3}
+}
 
 ranger-cd() {
        tempfile=$(mktemp)
@@ -97,16 +109,16 @@ zle -N ranger-cd
 bindkey '^o' ranger-cd
 
 _seteq(){
-  amixer -D equal -q set '01. 31 Hz' $1
-  amixer -D equal -q set '02. 63 Hz' $2
-  amixer -D equal -q set '03. 125 Hz' $3
-  amixer -D equal -q set '04. 250 Hz' $4
-  amixer -D equal -q set '05. 500 Hz' $5
-  amixer -D equal -q set '06. 1 kHz' $6
-  amixer -D equal -q set '07. 2 kHz' $7
-  amixer -D equal -q set '08. 4 kHz' $8
-  amixer -D equal -q set '09. 8 kHz' $9
-  amixer -D equal -q set '10. 16 kHz' ${10}
+  amixer -D equal -q set '00. 31 Hz' $1
+  amixer -D equal -q set '01. 63 Hz' $2
+  amixer -D equal -q set '02. 125 Hz' $3
+  amixer -D equal -q set '03. 250 Hz' $4
+  amixer -D equal -q set '04. 500 Hz' $5
+  amixer -D equal -q set '05. 1 kHz' $6
+  amixer -D equal -q set '06. 2 kHz' $7
+  amixer -D equal -q set '07. 4 kHz' $8
+  amixer -D equal -q set '08. 8 kHz' $9
+  amixer -D equal -q set '09. 16 kHz' $10
 }
 
 seteq(){
@@ -114,6 +126,7 @@ seteq(){
     speakers) _seteq 80 70 65 60 60 60 60 80 80 80;;
     notebook) _seteq 00 75 75 70 50 50 60 70 85 85;;
     headphones) _seteq 66 66 66 66 55 30 53 15 80 85;;
+    hd201) _seteq 66 66 71 77 65 62 68 73 71 68;;
     *) _seteq 66 66 66 66 66 66 66 66 66 66;;
   esac
 }
