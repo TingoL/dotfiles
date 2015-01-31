@@ -1,0 +1,65 @@
+#!/bin/bash
+# mirrup.sh
+
+# MIRRorlist UPgrade for Archlinux
+# Backup, uncomment, rank, and set
+
+# Reasign these as necessary
+PATH_BACKUP="~/.mirrup"
+PATH_SYSTEM="/etc/pacman.d"
+
+# But not this o.0
+function ekko { echo ; echo ${0##*/}": "$@ ; }
+echo "=== "$0" ==="
+echo ${0##*/}": PATH_BACKUP="$PATH_BACKUP
+echo ${0##*/}": PATH_SYSTEM="$PATH_SYSTEM
+
+# Check for paths
+for p in ${!PATH_*} ; do
+  eval $p=$(echo ${!p%/})
+  if ! [[ -d ${!p} ]] ; then
+    ekko ${!p}" does not exist" ; exit 1
+  fi
+done
+
+# Check for update
+if [[ -e $PATH_SYSTEM/mirrorlist.pacnew ]] ; then
+  NEW=$PATH_SYSTEM/mirrorlist.pacnew
+  if [[ -e $PATH_BACKUP/mirrorlist.pacnew ]] ; then
+    OLD=$PATH_BACKUP/mirrorlist.pacnew
+    if [[ $NEW -ot $OLD ]] ; then
+      ekko $PATH_SYSTEM"/mirrorlist.pacnew not updated" ; exit 1
+    fi
+  fi
+else
+    ekko $PATH_SYSTEM"/mirrorlist.pacnew does not exist" ; exit 1
+fi
+
+# Clear temp files
+ekko "Clearing temp files..."
+rm -v $PATH_BACKUP/mirrorlist*
+
+# Backup files
+ekko "Backing up files..."
+cp -v $PATH_SYSTEM/mirrorlist $PATH_BACKUP/mirrorlist.bak
+cp -v $PATH_SYSTEM/mirrorlist.pacnew $PATH_BACKUP
+
+# Uncomment servers
+ekko "Uncommenting .pacnew entries..."
+cat $PATH_SYSTEM/mirrorlist.pacnew |\
+sed 's/^#S/S/g' > $PATH_BACKUP/mirrorlist.sed
+
+# Rank servers
+ekko "Asking 'rankmirrors' to do its magic..."
+time rankmirrors $PATH_BACKUP/mirrorlist.sed > $PATH_BACKUP/mirrorlist
+
+# Might work?
+ekko "Moving files (requires 'sudo')..."
+sudo rm -v $PATH_SYSTEM/mirrorlist
+sudo cp -v $PATH_BACKUP/mirrorlist $PATH_SYSTEM
+
+# Syncing mirror database
+ekko "Finally syncing mirror database..."
+sudo pacman -Syu
+
+exit 0

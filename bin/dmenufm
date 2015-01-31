@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:Medium"
+
+file=1
+while [ "$file" ]; do
+    file=$(ls -1 --group-directories-first | $DMENU -p "FM: $(basename $(pwd))")
+    if [ -e "$file" ]; then
+        owd=$(pwd)
+        if [ -d "$file" ]; then
+            cd "$file"
+        else [ -f "$file" ]
+            if which xdg-open &> /dev/null; then
+                exec xdg-open "$owd/$file" &
+                unset file
+            fi
+        fi
+    fi
+done

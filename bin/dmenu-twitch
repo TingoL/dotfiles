@@ -2,7 +2,7 @@
 
 DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:Medium"
 
-choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\ndotapit\ndreamleague\ndotacinema\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\nforsen\nlifecoach\nrdu\namaz\npimp\n" | $DMENU | cut -f 1)
+choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\ndotapit\ndreamleague\ndotacinema\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\nforsen\nlifecoach\nrdu\namaz\nkolento\npimp\n" | $DMENU | cut -f 1)
 
 case "$choice" in
     jddm) livestreamer -p mpv http://www.dailymotion.com/video/x1b1h6o 364p  ;;
@@ -23,5 +23,6 @@ case "$choice" in
     lifecoach) livestreamer  -p mpv twitch.tv/lifecoach1981 Medium ;;
     rdu) livestreamer  -p mpv http://www.twitch.tv/radu_hs Medium ;;
     amaz) livestreamer  -p mpv http://www.twitch.tv/amazhs Medium ;;
+    kolento) livestreamer  -p mpv http://www.twitch.tv/kolento Medium ;;
     pimp) livestreamer -p mpv hitbox.tv/pimpmuckl 480p ;;
 esac

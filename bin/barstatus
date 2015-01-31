@@ -54,12 +54,12 @@ mail() {
 
 # This loop will fill a buffer with our infos, and output it to stdout.
 while :; do
-    buf="%{l} %{B#FF1c2027} "
+    buf="%{l}%{B#FF1c2027} "
 #    buf="${buf} [$(groups)]   --  "
-    buf="${buf} %{F#FF8e44ad}$(cmusstatus) %{c} "
+    buf="${buf} %{F#FF8e44ad}$(cmus2) %{c} "
     buf="${buf} %{F#FF72d5a3} $(clock) %{r} "
     buf="${buf} %{F#FF3498db}⚡ $(cpuload) "
-    buf="${buf} %{F#FFffaa3e} ✉ $(mail) "
+#    buf="${buf} %{F#FFffaa3e} ✉ $(mail) "
     buf="${buf} %{F#FFe74c3c} $(batterystatus) "
 
     echo $buf

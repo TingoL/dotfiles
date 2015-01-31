@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#count new mail for every maildir
+maildirnew="$HOME/mail/INBOX/new/"
+new="$(find $maildirnew -type f | wc -l)"
+
+#count old mail for every maildir
+maildirold="$HOME/mail/INBOX/cur/"
+old="$(find $maildirold -type f | wc -l)"
+
+if [ $new -gt 0 ] 
+then
+    export DISPLAY=:0; export XAUTHORITY=~/.Xauthority; 
+    notify-send -a "Neprocitan mail" "Novi mail!\nNovi: $new Stari: $old"
+fi
