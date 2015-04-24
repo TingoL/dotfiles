@@ -18,6 +18,7 @@ set -o vi
 
 alias -s smc=zsnes
 alias -s pdf=zathura
+alias -s epub=FBReader
 alias -s tex=vim
 alias -s mp3=mpv
 alias -s mkv=mpv

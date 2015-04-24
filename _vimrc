@@ -5,13 +5,15 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-colorscheme euphrasia
+colorscheme monokai
 
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
 set directory=~/.vim/temp   " Keep temp files in ~/.vim/temp
 set hidden                  "allow scrolling between unsaved buffers
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
 set scrolloff=2             " 2 lines above/below cursor when scrolling
 set foldmethod=manual
 set relativenumber
@@ -73,7 +75,7 @@ filetype plugin indent on   "new smartindent
 
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "badwolf"
+let g:airline_theme = "molokai"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "seoul colors

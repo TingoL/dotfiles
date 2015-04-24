@@ -1,6 +1,6 @@
 color background          white   default
 color listnormal          white   default
-color listfocus           color16   color12  bold
+color listfocus           black   color12  bold
 color listnormal_unread   color5 default
 color listfocus_unread    color16 color12   bold
 color info                color12  color234   bold

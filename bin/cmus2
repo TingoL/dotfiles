@@ -1,5 +1,5 @@
 #!/bin/bash
 
-artist=$(cmus-remote -Q | grep ' artist ' | sed 's/tag artist //g')
-title=$(cmus-remote -Q | grep ' title ' | sed 's/tag title //g')
+artist=$(cmus-remote -Q | grep ' artist ' | sed 's/tag artist //g' | head -c25)
+title=$(cmus-remote -Q | grep ' title ' | sed 's/tag title //g' | head -c35)
 echo "♫ $artist - $title" 
