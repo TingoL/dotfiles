@@ -51,7 +51,7 @@ mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
 lsd () {
  # directory LS
- echo `ls -l | grep "^d" | awk '{ print $9 }' | tr -d "/"`
+ echo `els -l | grep "^d" | awk '{ print $9"  "$10 }' | tr -d "/"`
 }
 dgrep() {
     # A recursive, case-insensitive grep that excludes binary files

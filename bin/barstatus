@@ -56,11 +56,11 @@ mail() {
 while :; do
     buf="%{l}%{B#FF1c2027} "
 #    buf="${buf} [$(groups)]   --  "
-    buf="${buf} %{F#FF8e44ad}$(cmus2) %{c} "
-    buf="${buf} %{F#FF72d5a3} $(clock) %{r} "
-    buf="${buf} %{F#FF3498db}⚡ $(cpuload) "
-#    buf="${buf} %{F#FFffaa3e} ✉ $(mail) "
-    buf="${buf} %{F#FFe74c3c} $(batterystatus) "
+    buf="${buf} %{F#FFA6E22E}$(cmus2) %{c} "
+    buf="${buf} %{F#FFA6E22E} $(clock) %{r} "
+    buf="${buf} %{F#FFA6E22E}⚡ $(cpuload) "
+    buf="${buf} %{F#FFA6E22E} ✉ $(mail) "
+    buf="${buf} %{F#FFc0392b} $(batterystatus) "
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!

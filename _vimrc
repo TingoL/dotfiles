@@ -5,7 +5,7 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-colorscheme monokai
+colorscheme molokai
 
 let mapleader=" "
 let maplocalleader="\\"
@@ -75,7 +75,7 @@ filetype plugin indent on   "new smartindent
 
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "molokai"
+let g:airline_theme = "badwolf"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "seoul colors
