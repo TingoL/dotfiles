@@ -48,7 +48,7 @@ set encoding=utf-8
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw118
 
 " vundle bundle
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 Plugin 'gmarik/vundle'
@@ -69,6 +69,7 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 

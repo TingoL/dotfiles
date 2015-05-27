@@ -1,0 +1,10 @@
+colorscheme twily
+set followhints=1
+set! browser.tabs.loadDivertedInBackground=true
+set hintchars=hjklasdfgyuiopqwertnmzxcbv
+
+noremap <S-k> gT
+noremap <S-j> gt
+noremap b     go
+noremap B     gn
+noremap <S-o> t
