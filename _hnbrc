@@ -2,6 +2,7 @@
 #
 # use a tab-spacing of 4 when editing this file, or edit it thorugh
 # hnb with "hnb -a ~/.hnbrc" to take advantage of the indentation in it
+# fa
 #
 # (please be aware that this is the configuration file for a development version,
 #  things might change drastically soon,.. or perhaps later)
@@ -17,7 +18,7 @@
 		#bullet_parent_expanded "  ·"
 		#bullet_leaf            "  *"
 		#bullet_leaf            "  -"
-	bullet_leaf            "  ·"
+	bullet_leaf            "  *"
 	bullet_parent          "  +"
 	bullet_parent_expanded "  -"
 	
@@ -58,11 +59,11 @@
 			#web_command "opera -remote 'openURL(*)'			> /dev/null 2>&1 &"
 			#web_command "netscape -remote 'openURL(*)'		> /dev/null 2>&1 &"
 			#web_command "netscape -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"
-			#web_command "mozilla -remote 'openURL(*)'		> /dev/null 2>&1 &"
+			web_command "firefox *"
 			#web_command "mozilla -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"
 			#web_command "konqueror *				> /dev/null 2>&1 &"
 			#web_command "galeon -n					> /dev/null 2>&1 &"
-			web_command "dwb *"
+			#web_command "dwb *"
 			#web_command "lynx *"
 			#web_commend "rxvt -fn fixed -rv +sb -e w3m *		> /dev/null 2>&1 &"
 			#web_command "opera -remote 'openURL(*,new-window)'	> /dev/null 2>&1 &"

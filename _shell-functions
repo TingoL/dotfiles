@@ -45,6 +45,7 @@ say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
+calc () { echo "scale=3; $*" | bc }
 tophist() { history | awk '{ print $2 }' | sort |  uniq -c | sort -rn | sed '1,27!d' ;}
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
@@ -130,3 +131,4 @@ seteq(){
     *) _seteq 66 66 66 66 66 66 66 66 66 66;;
   esac
 }
+

@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+for i in *.flac; do
+    sox "$i" -C 320 "${i/.flac/}".mp3 | parallel
+done
