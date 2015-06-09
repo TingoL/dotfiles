@@ -1,5 +1,0 @@
-#!/bin/bash
-exec termite -e hnb &
-exec termite &
-exec termite -e cmus --name cmus &
-exec termite -e weechat --name weechat

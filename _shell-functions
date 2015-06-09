@@ -1,35 +1,12 @@
 #!bin/bash
 #functions compatible with bash/zsh
-podsetnik()
-{
-    sleep $1 && notify-send "$2" &
+cpuload() {
+    LINE=`ps -eo pcpu |grep -vE '^\s*(0.0|%CPU)' |sed -n '1h;$!H;$g;s/\n/ +/gp'`
+    bc <<< $LINE
 }
-noise() {
-  case "$1" in
-    "mute"|"unmute")
-      amixer -q set Master "$1"
-      ;;
-    *"%")
-      amixer -q set PCM "$1"
-      ;;
-  esac
-}
-alarm() {
-  local n=$(date +"%s")
-  local w=$(date -d "$1" +"%s")
-  [ "$w" -gt "$n" ] || w=$(($w + 86400))
+podsetnik() { sleep $1 && notify-send "$2" & }
 
-  noise mute
-  sleep $(($w - $n))
-  noise unmute
-
-  for i in {10..42}; do
-    noise ${i}%
-    sleep 2
-  done &
-
-  mplayer -really-quiet '/home/tingol/Music/Monstercat\ 018\ -\ Frontier\ (2014)\ \[MC018\]/12.\ PIXL\ -\ Broken\ Bones\ (feat.\ Cassandra\ Kay).mp3'
-}
+yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" $@ ;}
 # sanitize - set file/directory owner and permissions to normal values (644/755)
 # usage: sanitize <file>
 sanitize()
@@ -37,8 +14,6 @@ sanitize()
   chmod -R u=rwX,go=rX "$@"
   chown -R ${USER}:users "$@"
 }
-# usage: arhiviraj <filename | dirname>
-function arhiviraj() { tar czf "${1%%/}.tar.gz" "${1%%/}/"; }
 
 say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mpv "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
 # send process to the background
@@ -46,7 +21,6 @@ background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 calc () { echo "scale=3; $*" | bc }
-tophist() { history | awk '{ print $2 }' | sort |  uniq -c | sort -rn | sed '1,27!d' ;}
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
@@ -71,17 +45,13 @@ psgrep() {
         echo "!! Need name to grep for"
     fi
 }
-zman() {
-      PAGER="less -g -s '+/^       "$1"'" man zshall
-}
+zman() { PAGER="less -g -s '+/^       "$1"'" man zshall }
 #ft trazi tekst u bilo kom fajlu
-ft() {
-     find . -name "$2" -exec grep -il "$1" {} \;
-}
+ft() { find . -name "$2" -exec grep -il "$1" {} \; }
+
 #tail sa highlightom
-t() {
-    tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
-}
+t() { tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g" }
+
 function pdfpextr()
 {
     #     $1 is the first page of the range to extract
@@ -132,3 +102,4 @@ seteq(){
   esac
 }
 
+down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}

@@ -7,10 +7,10 @@ color info                color12  color234   bold
 color article             white   default
 
 auto-reload yes
-
-browser firefox
+browser w3m
+notify-program      "/usr/bin/notify-send"
 show-read-feeds yes
-mark-as-read-on-hover yes
+mark-as-read-on-hover no
 goto-next-feed no
 reload-time  600
 
@@ -18,3 +18,11 @@ bind-key  j down
 bind-key  k up
 bind-key  J  next-feed
 bind-key  K  prev-feed
+
+highlight article "^Podcast Download URL:.*" color71 default
+feedlist-format "%-35t %?d?- %-35d&? %> %u"
+articlelist-format "%-4i %f %t"
+feedlist-title-format "%N %V %> %u feeds with new articles"
+html-renderer "w3m -dump -T text/HTML -cols 72"
+notify-format  "%d %n %f new articles (%n unread articles, %f unread feeds)"
+notify-always yes
