@@ -32,6 +32,7 @@ alias -s html=dwb
 
 . $HOME/.shell-alias
 . $HOME/.shell-functions
+. $HOME/.shell-tv
 
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"

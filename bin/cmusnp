@@ -1,0 +1,2 @@
+#!/bin/bash
+cmus2 | while read OUTPUT; do notify-send "$OUTPUT"; done

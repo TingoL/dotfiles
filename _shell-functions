@@ -5,6 +5,7 @@ cpuload() {
     bc <<< $LINE
 }
 podsetnik() { sleep $1 && notify-send "$2" & }
+score() { watch -n10 --no-title "w3m http://www.livescore.com/ |awk '/live [0-9H]+[^ ]/,/red cards/'" ; }
 
 yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" $@ ;}
 # sanitize - set file/directory owner and permissions to normal values (644/755)
@@ -101,5 +102,5 @@ seteq(){
     *) _seteq 66 66 66 66 66 66 66 66 66 66;;
   esac
 }
-
 down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
+
