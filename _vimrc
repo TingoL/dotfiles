@@ -69,18 +69,19 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
-Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'mileszs/ack.vim'
+Plugin 'chrisbra/csv.vim'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 
 
+"ag for ack.vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
 "airline symbols
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "badwolf"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-"seoul colors
-let g:seoul256_background = 234
 "neocomplcache magic
 let g:acp_enableAtStartup = 0                                   " Disable AutoComplPop.
 let g:neocomplcache_enable_at_startup = 1                       " Use neocomplcache.

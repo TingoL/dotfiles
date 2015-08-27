@@ -102,5 +102,4 @@ seteq(){
     *) _seteq 66 66 66 66 66 66 66 66 66 66;;
   esac
 }
-down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
-
+down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';} 

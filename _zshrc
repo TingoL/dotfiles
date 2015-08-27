@@ -20,7 +20,7 @@ alias -s smc=zsnes
 alias -s pdf=zathura
 alias -s epub=FBReader
 alias -s tex=vim
-alias -s mp3=mpv
+alias -s mp3=mpg123
 alias -s mkv=mpv
 alias -s avi=mpv
 alias -s mp4=mpv
@@ -28,11 +28,12 @@ alias -s jpg=sxiv
 alias -s png=sxiv
 alias -s py=vim
 alias -s c=vim
-alias -s html=dwb
+alias -s html=firefox
 
 . $HOME/.shell-alias
 . $HOME/.shell-functions
 . $HOME/.shell-tv
+. /etc/profile.d/fzf.zsh
 
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"

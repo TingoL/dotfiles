@@ -10,7 +10,7 @@ xset r rate 250 50
 xsetroot -solid black
 xsetroot -cursor_name left_ptr
 dropbox &
-compton -r 12 -o 0.5 -c -b
+compton --backend glx --paint-on-overlay --vsync opengl-mswc &
 imlibsetroot -s f Dropbox/Photos/Walls/firefly.png &
 redshift -l 44:23 &
 transmission-daemon &
