@@ -32,6 +32,8 @@ set showmatch              " show matching brackets
 set incsearch              " increment search
 set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
+"fzf
+set rtp+=~/.fzf
 " set runtimepath=~/.vim,/vimfiles,
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
@@ -54,7 +56,6 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
@@ -71,6 +72,8 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'chrisbra/csv.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/vim-github-dashboard'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 
@@ -136,11 +139,6 @@ nmap <silent> <F4> :call NumberToggle()<CR>
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <Leader>G :Goyo<CR>
-" "cycle through windows with one key combo
-" map <C-h> <C-w>h
-" map <C-j> <C-w>j
-" map <C-l> <C-w>l
-" map <C-h> <C-w>h
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
@@ -235,17 +233,33 @@ fun! RangerChooser()
 endfun
 map <Leader>x :call RangerChooser()<CR>
 " }}}
+"FZF goodies
+nnoremap <C-p> :FZF<cr>
+" fzf colorscheme selector
+nnoremap <silent> <Leader>C :call fzf#run({
+\   'source':
+\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+\   'sink':    'colo',
+\   'options': '+m',
+\   'left':    30
+\ })<CR>
 
-" CtrlP speedup {{{
-let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
+" fzf buffer selector
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
 
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
-" }}}
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>

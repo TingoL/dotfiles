@@ -11,7 +11,7 @@ zstyle ':completion:*' insert-tab false
 alias zconfig="vim ~/.zshrc"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.2.0/bin/
 #
 set -o vi
 #file extension aliases
@@ -26,7 +26,6 @@ alias -s avi=mpv
 alias -s mp4=mpv
 alias -s jpg=sxiv
 alias -s png=sxiv
-alias -s py=vim
 alias -s c=vim
 alias -s html=firefox
 
@@ -54,3 +53,7 @@ VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7
 alias grep="/usr/bin/grep $GREP_OPTIONS"
 unset GREP_OPTIONS
 #. /usr/bin/virtualenvwrapper.sh
+#
+#FZF
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
