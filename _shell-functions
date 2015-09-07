@@ -103,11 +103,14 @@ seteq(){
   esac
 }
 down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
+
 valuta() {
+#valuta shows the exchange rate for currencies. 
+# Example: "valuta 100 eur usd" shows the worth of 100 euro in dollars
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
-# fshow - git commit browser (enter for show, ctrl-d for diff, ` toggles sort)
 fshow() {
+# fshow - git commit browser (enter for show, ctrl-d for diff, ` toggles sort)
   local out shas sha q k
   while out=$(
       git log --graph --color=always \
@@ -127,8 +130,8 @@ fshow() {
     fi
   done
 }
-
 jj() {
+# jj feeds fasd results into fzf
     local dir
     dir=$(fasd -Rdl |\
         sed "s:$HOME:~:" |\
@@ -137,6 +140,7 @@ jj() {
     && pushd "$dir"
 }
 usage() {
+# usage is du+fzf, usage . 2 brings back sizes two directories deep
     du -h --max-depth="${2:-1}"\
       "${1:-.}" |\
         sort -h |\
