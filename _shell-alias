@@ -1,9 +1,7 @@
 #!/bin/bash
 #list of aliases compatible with bash/zsh
 alias .='source'
-alias fn='find ./ -name '
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias hdvideo='mplayer -vo xv -ao alsa -lavdopts fast=1:skiploopfilter=all'
 alias mmv='noglob zmv -W'
 alias dccanime='mv ~/.weechat/xfer/* ~/Downloads'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
@@ -19,8 +17,6 @@ alias vless='/usr/share/vim/vim74/macros/less.sh'
 alias izbrisi='sudo pacman -Rs'
 alias srb='setxkbmap hr'
 alias eng='setxkbmap us'
-alias ls='ls --color=auto'
-alias off='sudo shutdown -h $1'
 alias gping='ping -c 3 www.google.com'
 alias upg="packer -Syu"
 alias htpc="ssh -p 2222 tingol@192.168.1.66"
@@ -32,7 +28,6 @@ alias xperiaon='lftp 192.168.1.33:2121 -u ftp,ftp'
 alias xperiausb='mkdir xperia && jmtpfs ./xperia'
 alias news='newsbeuter -q'
 alias screenoff='xset dpms force standby'
-alias clitsens='echo $1 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity'
 alias speedtest='curl -o /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip'
 alias getsite='wget --recursive --page-requisites --convert-links --no-parent $1' 
 alias explicit='comm -23 <(comm -23 <(pacman -Qqnt | sort) <(pacman -Qqg base | sort)) <(pacman -Qgq base-devel | sort) | less'

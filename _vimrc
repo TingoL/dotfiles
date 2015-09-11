@@ -21,6 +21,7 @@ set background=dark
 set number                 " show line numbers
 set lazyredraw
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
+set regexpengine=1         " needed for jsctags
 set clipboard=unnamed      " yank to X clipboard
 set pastetoggle=<F2>
 set autoindent
@@ -37,7 +38,9 @@ set rtp+=~/.fzf
 " set runtimepath=~/.vim,/vimfiles,
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
-let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki'}]
+let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
+                       \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vim_markdown_folding_disabled=1
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
@@ -55,8 +58,6 @@ call vundle#begin()
 
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-markdown'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tComment'
@@ -69,11 +70,14 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'vimwiki/vimwiki'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/goyo.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/vim-github-dashboard'
+Plugin 'pangloss/vim-javascript'
+Plugin 'marijnh/tern_for_vim'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent 
@@ -81,8 +85,8 @@ filetype plugin indent on   "new smartindent
 "ag for ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
 "airline symbols
-let g:airline_powerline_fonts = 1
-let g:airline_theme = "badwolf"
+let g:airline_powerline_fonts = 0
+let g:airline_theme = "molokai"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "neocomplcache magic
@@ -129,12 +133,13 @@ let g:pydiction_location = '/usr/share/pydiction/complete-dict'
 
 "mapping ------------------------------------------------------------------------
 
+"mdless preview
+nmap <silent><Leader>m :!mdless %:p<CR>
 "spellcheck
 nmap <silent> <leader>s :set spell!<CR>
 " paragraph formatting
 map <Leader>p gqap
 " F-keys
-nnoremap <F3> :NERDTreeToggle<CR>
 nmap <silent> <F4> :call NumberToggle()<CR>
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
@@ -208,18 +213,6 @@ nnoremap <leader>gci :Gcommit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
-"NERDTree
-let NERDTreeHighlightCursorline = 1
-let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index',
-                    \ 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json',
-                    \ '.*\.o$', 'db.db', 'tags.bak', '.*\.pdf$', '.*\.mid$',
-                    \ '.*\.midi$']
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDChristmasTree = 1
-let NERDTreeChDirMode = 2
-let NERDTreeMapJumpFirstChild = 'gK'
 
 " Use Ranger as a file explorer {{{
 

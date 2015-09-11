@@ -25,6 +25,7 @@ calc () { echo "scale=3; $*" | bc }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
+mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less; }
 lsd () {
  # directory LS
  echo `els -l | grep "^d" | awk '{ print $9"  "$10 }' | tr -d "/"`
@@ -109,6 +110,7 @@ valuta() {
 # Example: "valuta 100 eur usd" shows the worth of 100 euro in dollars
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
+############################## FZF fuzzy finder magic #######################################
 fshow() {
 # fshow - git commit browser (enter for show, ctrl-d for diff, ` toggles sort)
   local out shas sha q k
@@ -139,6 +141,22 @@ jj() {
         sed "s:~:$HOME:")\
     && pushd "$dir"
 }
+fzf-locate() {
+    xdg-open "$(locate "*" | fzf -e -i )"
+
+    # some programs require a longer time to load
+    sleep 1
+
+    # if cancle or fail then exit
+     if [ $? -ne 0 ]
+     then
+       exit
+     fi
+}
+#fzfr usage $ fzfr program. Opens all files in directory selected through fzf with program
+fzfr() { fzf -m -x | xargs -d'\n' -r "$@" ; }
+fzf-surfraw() { surfraw "$(cat ~/.config/surfraw/bookmarks | sed '/^$/d' | sort -n | fzf -e -i )" ;}
+
 usage() {
 # usage is du+fzf, usage . 2 brings back sizes two directories deep
     du -h --max-depth="${2:-1}"\
@@ -147,3 +165,5 @@ usage() {
         sed "s:\./::" |\
         sed "s:$HOME:~:"
 }
+# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
+readwiki() { cd Dropbox/vimwiki && mdless "$(ls |fzf)" && cd -;}

@@ -27,6 +27,7 @@ alias -s mp4=mpv
 alias -s jpg=sxiv
 alias -s png=sxiv
 alias -s c=vim
+alias -s h=vim
 alias -s html=firefox
 
 . $HOME/.shell-alias
@@ -44,7 +45,7 @@ export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=/home/tingol/.config
-export PROJECT_HOME=~/Dev
+export PROJECT_HOME=~/src/
 export WORKON_HOME=~/Envs
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 export SDL_MOUSE_RELATIVE=0
@@ -55,5 +56,18 @@ unset GREP_OPTIONS
 #. /usr/bin/virtualenvwrapper.sh
 #
 #FZF
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# fun ctrl-Z (it does the usual) + replaces a command you're currently typing 
+# to let you type another command, after that gets you back where you were
+fancy-ctrl-z () {
+  emulate -LR zsh
+  if [[ $#BUFFER -eq 0 ]]; then
+    bg
+    zle redisplay
+  else
+    zle push-input
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z'          fancy-ctrl-z
