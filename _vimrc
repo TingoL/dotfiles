@@ -171,7 +171,6 @@ nnoremap _md :set ft=markdown<CR>
 nnoremap _hd :set ft=htmldjango<CR>
 nnoremap _jt :set ft=htmljinja<CR>
 nnoremap _js :set ft=javascript<CR>
-nnoremap _cw :set ft=confluencewiki<CR>
 nnoremap _pd :set ft=python.django<CR>
 nnoremap _d  :set ft=diff<CR>
 " }}}
@@ -256,3 +255,17 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'options': '+m',
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
+
+" sane word processing settings
+func! WordProcessorMode() 
+  setlocal formatoptions=1 
+  setlocal noexpandtab 
+  map j gj 
+  map k gk
+  setlocal spell spelllang=en_us 
+  set complete+=s
+  set formatprg=par
+  setlocal wrap 
+  setlocal linebreak 
+endfu 
+com! WP call WordProcessorMode()

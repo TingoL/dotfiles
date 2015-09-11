@@ -2,3 +2,5 @@ ranger/history
 ranger/tagged
 _newsbeuter/cache.db
 _newsbeuter/cache.db.lock
+_mpv/watch_later/
+_newsbeuter/queue
