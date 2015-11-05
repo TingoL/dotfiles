@@ -1,14 +1,16 @@
 color background          white   default
-color listnormal          white   default
-color listfocus           black   color12  bold
-color listnormal_unread   color5 default
-color listfocus_unread    color16 color12   bold
+color listnormal          blue   default
+color listfocus           blue   black  bold
+color listnormal_unread   green default
+color listfocus_unread    blue default   bold
 color info                color12  color234   bold
 color article             white   default
 
 auto-reload yes
 browser w3m
 notify-program      "/usr/bin/notify-send"
+download-path  "~/Audiobooks/Podcast/%h/%n"
+player mpv
 show-read-feeds yes
 mark-as-read-on-hover no
 goto-next-feed no

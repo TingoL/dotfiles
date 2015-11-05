@@ -39,7 +39,8 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'prompt'
+  'prompt' \
+  'zsh-pandoc-completion'
 
 #
 # Editor

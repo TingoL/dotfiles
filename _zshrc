@@ -11,12 +11,12 @@ zstyle ':completion:*' insert-tab false
 alias zconfig="vim ~/.zshrc"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.2.0/bin/
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.2.0/bin/:$GOPATH/bin
 #
 set -o vi
 #file extension aliases
 
-alias -s smc=zsnes
+alias -s odt=lowriter
 alias -s pdf=zathura
 alias -s epub=FBReader
 alias -s tex=vim
@@ -49,6 +49,7 @@ export PROJECT_HOME=~/src/
 export WORKON_HOME=~/Envs
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 export SDL_MOUSE_RELATIVE=0
+export GOPATH=$HOME/.go/
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
 VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7
 alias grep="/usr/bin/grep $GREP_OPTIONS"

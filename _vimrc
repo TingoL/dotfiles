@@ -5,7 +5,8 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-colorscheme molokai
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = "hard"
 
 let mapleader=" "
 let maplocalleader="\\"
@@ -17,7 +18,6 @@ let g:tex_flavor = "latex"
 set scrolloff=2             " 2 lines above/below cursor when scrolling
 set foldmethod=manual
 set relativenumber
-set background=dark
 set number                 " show line numbers
 set lazyredraw
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
@@ -33,9 +33,10 @@ set showmatch              " show matching brackets
 set incsearch              " increment search
 set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
+set gdefault               " set /g on search default
+set background=dark
 "fzf
 set rtp+=~/.fzf
-" set runtimepath=~/.vim,/vimfiles,
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
@@ -45,12 +46,10 @@ let g:vim_markdown_folding_disabled=1
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 " status bar
-set statusline=\ \%F%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\ 
+set statusline=\ \%F%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\
 set laststatus=2
 set cmdheight=1
 set encoding=utf-8
-"pdf reader
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw118
 
 " vundle bundle
 set rtp+=~/.vim/bundle/vundle
@@ -70,23 +69,24 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'vimwiki/vimwiki'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'junegunn/goyo.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'junegunn/fzf'
-Plugin 'junegunn/vim-github-dashboard'
-Plugin 'pangloss/vim-javascript'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
-filetype plugin indent on   "new smartindent 
+filetype plugin indent on   "new smartindent
 
+inoremap <C-y> <C-k>
 "ag for ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
 "airline symbols
-let g:airline_powerline_fonts = 0
-let g:airline_theme = "molokai"
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "gruvbox"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "neocomplcache magic
@@ -111,9 +111,9 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-" " Tell Neosnippet about the other snippets
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 
 " always jump to the last cursor position
@@ -121,18 +121,19 @@ autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\
 
 autocmd BufRead,BufNewFile *.txt set tw=80                                         " limit width to n cols for txt files
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell   " width, mail syntax hilight, spellcheck
-autocmd FileType tex set tw=80                                          " wrap at 80 chars for LaTeX files
+autocmd FileType markdown set tw=80                                          " wrap at 80 chars for LaTeX files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 " Enable omni completion.
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 let g:pydiction_location = '/usr/share/pydiction/complete-dict'
 
 "mapping ------------------------------------------------------------------------
-
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
 "mdless preview
 nmap <silent><Leader>m :!mdless %:p<CR>
 "spellcheck
@@ -140,20 +141,16 @@ nmap <silent> <leader>s :set spell!<CR>
 " paragraph formatting
 map <Leader>p gqap
 " F-keys
-nmap <silent> <F4> :call NumberToggle()<CR>
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <Leader>G :Goyo<CR>
+"highlight last inserted text
+nnoremap gV `[v`]`
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
-"bubbles
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
 "sorting
-vnoremap <Leader>s :sort<CR>
+vnoremap <Leader>t :sort<CR>
 "indentation
 vnoremap < <gv
 vnoremap > >gv
@@ -165,43 +162,10 @@ cmap w!! w !sudo tee % > /dev/null
 nnoremap j gj
 nnoremap k gk
 " Rebuild Ctags (mnemonic RC -> CR -> <cr>)
-nnoremap <leader><cr> :silent !myctags<cr>:redraw!<cr>)
-" Easy filetype switching {{{
-nnoremap _md :set ft=markdown<CR>
-nnoremap _hd :set ft=htmldjango<CR>
-nnoremap _jt :set ft=htmljinja<CR>
-nnoremap _js :set ft=javascript<CR>
-nnoremap _pd :set ft=python.django<CR>
-nnoremap _d  :set ft=diff<CR>
-" }}}
-" Quick editing ----------------------------------------------------------- {{{
-nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>ez :e ~/.zshrc<cr>
-" }}}
-" Django {{{
-
-augroup ft_django
-    au!
-
-    au BufNewFile,BufRead urls.py           setlocal nowrap
-    au BufNewFile,BufRead urls.py           normal! zR
-    au BufNewFile,BufRead dashboard.py      normal! zR
-    au BufNewFile,BufRead local_settings.py normal! zR
-
-    au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-    au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-    au BufNewFile,BufRead models.py    setlocal filetype=python.django
-    au BufNewFile,BufRead views.py     setlocal filetype=python.django
-    au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-    au BufNewFile,BufRead settings.py  setlocal foldmethod=marker
-    au BufNewFile,BufRead forms.py     setlocal filetype=python.django
-    au BufNewFile,BufRead common_settings.py  setlocal filetype=python.django
-    au BufNewFile,BufRead common_settings.py  setlocal foldmethod=marker
-augroup END
-
-" }}}
+nnoremap <leader><c> :silent !myctags<cr>:redraw!<cr>)
+"kill trailing whitespace
+nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
 " Fugitive {{{
-
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
@@ -213,18 +177,6 @@ nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
-" Use Ranger as a file explorer {{{
-
-fun! RangerChooser()
-    exec "silent !ranger --choosefile=/tmp/chosenfile " . expand("%:p:h")
-    if filereadable('/tmp/chosenfile')
-        exec 'edit ' . system('cat /tmp/chosenfile')
-        call system('rm /tmp/chosenfile')
-    endif
-    redraw!
-endfun
-map <Leader>x :call RangerChooser()<CR>
-" }}}
 "FZF goodies
 nnoremap <C-p> :FZF<cr>
 " fzf colorscheme selector
@@ -257,15 +209,13 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \ })<CR>
 
 " sane word processing settings
-func! WordProcessorMode() 
-  setlocal formatoptions=1 
-  setlocal noexpandtab 
-  map j gj 
-  map k gk
-  setlocal spell spelllang=en_us 
+func! WordProcessorMode()
+  setlocal formatoptions=1
+  setlocal noexpandtab
+  setlocal spell spelllang=en_us
   set complete+=s
   set formatprg=par
-  setlocal wrap 
-  setlocal linebreak 
-endfu 
+  setlocal wrap
+  setlocal linebreak
+endfu
 com! WP call WordProcessorMode()

@@ -49,7 +49,7 @@ groups() {
 }
 
 mail() {
-    ls -rA1 /home/tingol/mail/INBOX/new | wc -l
+    ls -rA1 /home/tingol/.mail/INBOX/new | wc -l
 }
 
 # This loop will fill a buffer with our infos, and output it to stdout.

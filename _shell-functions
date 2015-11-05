@@ -167,3 +167,5 @@ usage() {
 }
 # readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
 readwiki() { cd Dropbox/vimwiki && mdless "$(ls |fzf)" && cd -;}
+#copy bucket content to clipboard
+pour() { bucket $1 | xsel -b;}

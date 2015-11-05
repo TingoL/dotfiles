@@ -9,62 +9,96 @@ allow_bold = false
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Source Code Pro 7
+font = Hack Regular 7
 scrollback_lines = 1000
 search_wrap = true
 geometry = 560x400
 #icon_name = terminal
 
 # 0.0: opaque, 1.0: transparent
-transparency = 0.0
+transparency = 0.6
 pseudo_transparency = false
 
 # "system", "on" or "off"
-cursor_blink = off
+cursor_blink = on
 
 # "block", "underline" or "ibeam"
 cursor_shape = block
 
 # $BROWSER is used by default
-browser = dwb
+browser = firefox
 
 # word characters used for word selection
 # (default if unset: all graphic non-punctuation/space characters)
 word_chars = -A-Za-z,./?%&#:_=+@~
 
 [colors]
-foreground = #e6e6e6
-foreground_bold = #fedfed
+#foreground = #e6e6e6
+#foreground_bold = #fedfed
 #foreground_dim = #888888
-background = #1c2027
+#background = #1b1d1e
 #cursor = #dcdccc
 
 # my colors
-color0 = #0d1926
-color1 = #c0392b
-color2 = #3aaf75
-color3 = #ffaa3e
-color4 = #2980b9
-color5 = #8e44ad
-color6 = #00afff
-color7 = #b3b3b3
-color8 = #585858
-color9 = #e74c3c
-color10 = #72d5a3
-color11 = #efdd6f
-color12 = #3498db
-color13 = #9b59b6
-color14 = #4DC5DC
-color15 = #e6e6e6
+; color0= #262729
+; color8= #554444
+; color1= #F92671
+; color9= #F92671
+; color2= #A6E22E
+; color10= #A6E22E
+; color3= #FD971F
+; color11= #FD971F
+; color4= #66D9EF
+; color12= #66D9EF
+; color5= #9E6FFE
+; color13= #9E6FFE
+; color6= #5E7175
+; color14= #A3BABF
+; color7= #CCCCC6
+; color15= #F8F8F2
+background = #1d2021
+foreground = #ebdbb2
+foreground_bold = #ebdbb2
 
+# Black + DarkGrey
+color0 = #282828
+color8 = #928374
+
+# DarkRed + Red
+color1 = #cc241d
+color9 = #fb4934
+
+# DarkGreen + Green
+color2 = #98971a
+color10 = #b8bb26
+
+# DarkYellow + Yellow
+color3 = #d79921
+color11 = #fabd2f
+
+# DarkBlue + Blue
+color4 = #458588
+color12 = #83a598
+
+# DarkMagenta + Magenta
+color5 = #b16286
+color13 = #d3869b
+
+# DarkCyan + Cyan
+color6 = #689d6a
+color14 = #8ec07c
+
+# LightGrey + White
+color7 = #a89984
+color15 = #ebdbb2
 
 [hints]
 #font = Monospace 12
-#foreground = #dcdccc
-#background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
+foreground = #dcdccc
+background = #3f3f3f
+padding = 2
+border = #3f3f3f
+border_width = 0.5
+roundness = 2.0
 
 # vim: ft=dosini

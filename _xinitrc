@@ -10,9 +10,9 @@ xmodmap .xmodmap &
 xcape &
 dropbox &
 compton --backend glx --paint-on-overlay --vsync opengl-mswc &
-imlibsetroot -s f Dropbox/Photos/Walls/firefly.png &
+dunst &
+imlibsetroot -s f Dropbox/Photos/Walls/arch.png &
 redshift -l 44:23 &
-#transmission-daemon &
 unclutter -idle 5 -noevents &
 echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &
 #barstatus | bar -d -f "DejaVu Sans Mono-9" &
