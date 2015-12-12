@@ -30,7 +30,7 @@ fi
 OFFSET=$(echo ${DIR//\// } | wc -w )
 FORMAT="cut -f $((POS + $OFFSET + 1)) -d/"
 
-SELECT=$( [[ "$DISPLAY" != '' ]] && echo 'dmenu -i -l 20 -b -s 0 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn DroidSansMono-10:Medium' || echo 'slmenu -i -b -l 13') 
+SELECT=$( [[ "$DISPLAY" != '' ]] && echo 'dmenu -i -l 20 -b -s 0 -nb #1c2027 -nf #ffffff -sb #458588 -sf #ffffff -fn DroidSansMono-10:Medium' || echo 'slmenu -i -b -l 13') 
 [[ "$RANDOMIZE" != '' ]] && SELECT="shuf -n 1" 
 
 # Get a song or dir and send it to cmus, (yes the extra find is redundant but it should be cached on hd)

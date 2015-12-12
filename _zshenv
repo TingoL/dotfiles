@@ -48,6 +48,7 @@ path=(
 )
 
 #
+export SOCCER_CLI_API_TOKEN="d002ef46747546b5840bcfc88d3f9d0e"
 # Less
 #
 

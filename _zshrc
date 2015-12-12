@@ -55,7 +55,6 @@ VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-2.7
 alias grep="/usr/bin/grep $GREP_OPTIONS"
 unset GREP_OPTIONS
 #. /usr/bin/virtualenvwrapper.sh
-#
 #FZF
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

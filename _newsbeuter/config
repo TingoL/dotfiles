@@ -1,7 +1,7 @@
 color background          white   default
-color listnormal          blue   default
+color listnormal          green   default
 color listfocus           blue   black  bold
-color listnormal_unread   green default
+color listnormal_unread   magenta default
 color listfocus_unread    blue default   bold
 color info                color12  color234   bold
 color article             white   default

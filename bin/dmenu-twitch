@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:Medium"
+DMENU="dmenu -h 28 -o 0.8 -dim 0.3 -y 350 -nb #1c2027 -nf #ffffff -sb #458588 -sf #ffffff -fn SourceCodePro-10:Medium"
 
 choice=$(echo -e "jdred\njddm\nd2l\nbts\nbts2\ndotapit\ndreamleague\ndotacinema\ndendi\nmerlini\nsingsing\nlight\nadmiralbulldog\nstarladder\nforsen\nlifecoach\nrdu\namaz\nkolento\npimp\n" | $DMENU | cut -f 1)
 

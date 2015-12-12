@@ -2,7 +2,7 @@
 
 #DMENU="dmenu -i"
 
-DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.5 -nb #1c2027 -nf #ffffff -sb #2980b9 -sf #ffffff -fn SourceCodePro-10:medium -i"
+DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.5 -nb #1c2027 -nf #ffffff -sb #458588 -sf #ffffff -fn SourceCodePro-10:medium -i"
 terminal="termite -e"
 
 

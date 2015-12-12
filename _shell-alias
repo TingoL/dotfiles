@@ -4,7 +4,7 @@ alias .='source'
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 alias nyan='pygmentize -g'
-alias dccanime='mv ~/.weechat/xfer/* ~/Downloads'
+alias in='task add +in'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
 alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd -'
 alias trc='transmission-remote-cli'

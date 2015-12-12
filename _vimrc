@@ -5,8 +5,7 @@
 "
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = "hard"
+colorscheme euphrasia
 
 let mapleader=" "
 let maplocalleader="\\"
@@ -76,7 +75,6 @@ Plugin 'mileszs/ack.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'junegunn/fzf'
 Plugin 'sjl/gundo.vim'
-Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent
@@ -86,7 +84,7 @@ inoremap <C-y> <C-k>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "gruvbox"
+let g:airline_theme = "luna"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "neocomplcache magic
