@@ -40,7 +40,6 @@ let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
-let g:vim_markdown_folding_disabled=1
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview

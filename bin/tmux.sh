@@ -8,6 +8,5 @@ tmux split-window -v 'weechat-curses'
 tmux new-window -n 'news' 'newsbeuter -q'
 tmux new-window -n 'music' 'cmus'
 tmux new-window -n 'GTD' 'vit'
-tmux split-window -h -p 50 'mutt'
 tmux selectw -t 1
 tmux -2 attach-session -t home

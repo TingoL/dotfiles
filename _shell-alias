@@ -1,6 +1,7 @@
 #!/bin/bash
 #list of aliases compatible with bash/zsh
 alias .='source'
+alias ax="chmod a+x"
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 alias nyan='pygmentize -g'
@@ -27,3 +28,6 @@ alias speedtest='curl -o /dev/null http://speedtest.sea01.softlayer.com/download
 alias getsite='wget --recursive --page-requisites --convert-links --no-parent $1' 
 alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
+alias rmdbc="find ~/Dropbox -name *\ \(*conflicted* -exec rm {} \;" ")"
+alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
+

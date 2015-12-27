@@ -8,28 +8,15 @@ podsetnik() { sleep $1 && notify-send "$2" & }
 score() { watch -n10 --no-title "w3m http://www.livescore.com/ |awk '/live [0-9H]+[^ ]/,/red cards/'" ; }
 
 yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" $@ ;}
-# sanitize - set file/directory owner and permissions to normal values (644/755)
-# usage: sanitize <file>
-sanitize()
-{
-  chmod -R u=rwX,go=rX "$@"
-  chown -R ${USER}:users "$@"
-}
-
 say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mpv "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
 # send process to the background
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
-calc () { echo "scale=3; $*" | bc }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
 mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less; }
-lsd () {
- # directory LS
- echo `els -l | grep "^d" | awk '{ print $9"  "$10 }' | tr -d "/"`
-}
 dgrep() {
     # A recursive, case-insensitive grep that excludes binary files
     grep -iR "$@" * | grep -v "Binary"
@@ -110,62 +97,18 @@ valuta() {
 # Example: "valuta 100 eur usd" shows the worth of 100 euro in dollars
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
-############################## FZF fuzzy finder magic #######################################
-fshow() {
-# fshow - git commit browser (enter for show, ctrl-d for diff, ` toggles sort)
-  local out shas sha q k
-  while out=$(
-      git log --graph --color=always \
-          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-      fzf --ansi --multi --no-sort --reverse --query="$q" \
-          --print-query --expect=ctrl-d --toggle-sort=\`); do
-    q=$(head -1 <<< "$out")
-    k=$(head -2 <<< "$out" | tail -1)
-    shas=$(sed '1,2d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
-    [ -z "$shas" ] && continue
-    if [ "$k" = ctrl-d ]; then
-      git diff --color=always $shas | less -R
-    else
-      for sha in $shas; do
-        git show --color=always $sha | less -R
-      done
-    fi
-  done
+# Quickly get image dimensions from the command line
+function imgsize() {
+	local width height
+	if [[ -f $1 ]]; then
+		height=$(sips -g pixelHeight "$1"|tail -n 1|awk '{print $2}')
+		width=$(sips -g pixelWidth "$1"|tail -n 1|awk '{print $2}')
+		echo "${width} x ${height}"
+	else
+		echo "File not found"
+	fi
 }
-jj() {
-# jj feeds fasd results into fzf
-    local dir
-    dir=$(fasd -Rdl |\
-        sed "s:$HOME:~:" |\
-        fzf --no-sort +m -q "$*" |\
-        sed "s:~:$HOME:")\
-    && pushd "$dir"
+# batch change extension (fix from Lri, again)
+chgext() {
+	for file in *.$1 ; do mv "$file" "${file%.$1}.$2" ; done
 }
-fzf-locate() {
-    xdg-open "$(locate "*" | fzf -e -i )"
-
-    # some programs require a longer time to load
-    sleep 1
-
-    # if cancle or fail then exit
-     if [ $? -ne 0 ]
-     then
-       exit
-     fi
-}
-#fzfr usage $ fzfr program. Opens all files in directory selected through fzf with program
-fzfr() { fzf -m -x | xargs -d'\n' -r "$@" ; }
-fzf-surfraw() { surfraw "$(cat ~/.config/surfraw/bookmarks | sed '/^$/d' | sort -n | fzf -e -i )" ;}
-
-usage() {
-# usage is du+fzf, usage . 2 brings back sizes two directories deep
-    du -h --max-depth="${2:-1}"\
-      "${1:-.}" |\
-        sort -h |\
-        sed "s:\./::" |\
-        sed "s:$HOME:~:"
-}
-# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
-readwiki() { cd Dropbox/vimwiki && mdless "$(ls |fzf)" && cd -;}
-#copy bucket content to clipboard
-pour() { bucket $1 | xsel -b;}
