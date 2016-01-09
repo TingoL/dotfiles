@@ -93,7 +93,7 @@ seteq(){
 down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
 
 valuta() {
-#valuta shows the exchange rate for currencies. 
+#valuta shows the exchange rate for currencies.
 # Example: "valuta 100 eur usd" shows the worth of 100 euro in dollars
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
@@ -112,3 +112,41 @@ function imgsize() {
 chgext() {
 	for file in *.$1 ; do mv "$file" "${file%.$1}.$2" ; done
 }
+
+############FZF###############
+#fshow - commit browser
+
+jj() {
+# jj feeds fasd results into fzf
+    local dir
+    dir=$(fasd -Rdl |\
+        sed "s:$HOME:~:" |\
+        fzf --no-sort +m -q "$*" |\
+        sed "s:~:$HOME:")\
+    && pushd "$dir"
+}
+fzf-locate() {
+    xdg-open "$(locate "*" | fzf -e -i )"
+
+    # some programs require a longer time to load
+    sleep 1
+
+    # if cancle or fail then exit
+     if [ $? -ne 0 ]
+     then
+       exit
+     fi
+}
+
+usage() {
+# usage is du+fzf, usage . 2 brings back sizes two directories deep
+    du -h --max-depth="${2:-1}"\
+      "${1:-.}" |\
+        sort -h |\
+        sed "s:\./::" |\
+        sed "s:$HOME:~:"
+}
+
+# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
+readwiki() { cd Dropbox/vimwiki && mdless "$(ls |fzf)" && cd -;}
+

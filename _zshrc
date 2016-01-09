@@ -33,7 +33,6 @@ alias -s html=firefox
 . $HOME/.shell-alias
 . $HOME/.shell-functions
 . $HOME/.shell-tv
-. $HOME/dotfiles/_fzf-extra
 . /etc/profile.d/fzf.zsh
 
 eval "$(fasd --init auto)"

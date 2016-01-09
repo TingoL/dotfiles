@@ -78,3 +78,6 @@ fi
 
 #export PYTHONPATH=":/usr/lib/python2.7/site-packages:$PYTHONPATH"
 #export PYTHONPATH=":/usr/lib/python3.3/site-packages:$PYTHONPATH"
+### Added by surfraw. To remove use surfraw-update-path -remove
+	export PATH=$PATH:/usr/lib/surfraw
+### End surfraw addition.
