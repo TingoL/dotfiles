@@ -3,7 +3,7 @@
 alias .='source'
 alias ax="chmod a+x"
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
+alias vless='vim -u /usr/share/vim/vim74/macros/less.vim'
 alias nyan='pygmentize -g'
 alias in='task add +in'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
@@ -30,4 +30,4 @@ alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
 alias rmdbc="find ~/Dropbox -name *\ \(*conflicted* -exec rm {} \;" ")"
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
-
+alias vimwiki='vim +VimwikiIndex +Goyo'

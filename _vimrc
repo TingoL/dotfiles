@@ -59,7 +59,6 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tComment'
 Plugin 'godlygeek/tabular'
-Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
@@ -69,10 +68,11 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'junegunn/goyo.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'chrisbra/csv.vim'
+Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/limelight.vim'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'sjl/gundo.vim'
 
 call vundle#end()
@@ -140,7 +140,12 @@ map <Leader>p gqap
 " F-keys
 nnoremap <Space> <Leader>
 nnoremap <F6> :TagbarToggle<CR>
+" Goyo + Limelight
 nnoremap <Leader>G :Goyo<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
 "highlight last inserted text
 nnoremap gV `[v`]`
 "buffers

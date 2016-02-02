@@ -2,7 +2,7 @@
 
 #vo=xv        # video driver
 hwdec=auto
-vo=xv
+vo=opengl
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window

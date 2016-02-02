@@ -14,7 +14,7 @@ player mpv
 show-read-feeds yes
 mark-as-read-on-hover no
 goto-next-feed no
-reload-time  120
+reload-time  720
 
 bind-key  j down
 bind-key  k up

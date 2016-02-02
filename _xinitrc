@@ -9,7 +9,7 @@ xsetroot -cursor_name left_ptr
 xmodmap .xmodmap &
 xcape &
 dropbox &
-compton --backend glx --paint-on-overlay --vsync opengl-mswc &
+compton &
 dunst &
 imlibsetroot -s f Dropbox/Photos/Walls/arch.png &
 redshift -l 44:23 &
