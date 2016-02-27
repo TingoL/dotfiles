@@ -73,7 +73,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent
@@ -81,6 +81,8 @@ filetype plugin indent on   "new smartindent
 inoremap <C-y> <C-k>
 "ag for ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
+"pandoc markdwown spelling off by default
+let g:pandoc#spell#enabled = 0
 "airline symbols
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "luna"
@@ -100,9 +102,9 @@ endif
 let g:neocomplcache_force_overwrite_completefunc = 1
 let g:neocomplcache_force_omni_patterns['python'] = '[^. t].w*'
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap \<TAB>     <Plug>(neosnippet_expand_or_jump)
+smap \<TAB>     <Plug>(neosnippet_expand_or_jump)
+xmap \<TAB>     <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -129,8 +131,6 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 let g:pydiction_location = '/usr/share/pydiction/complete-dict'
 
 "mapping ------------------------------------------------------------------------
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
 "mdless preview
 nmap <silent><Leader>m :!mdless %:p<CR>
 "spellcheck
@@ -139,6 +139,7 @@ nmap <silent> <leader>s :set spell!<CR>
 map <Leader>p gqap
 " F-keys
 nnoremap <Space> <Leader>
+nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F6> :TagbarToggle<CR>
 " Goyo + Limelight
 nnoremap <Leader>G :Goyo<CR>
