@@ -6,7 +6,7 @@
 clockico='\ue017'
 
 clock() {
-    date '+%H.%M'
+    date '+%H.%M'
 }
 
 battery() {
@@ -56,11 +56,11 @@ mail() {
 while :; do
     buf="%{l}%{B#FF1c2027} "
 #    buf="${buf} [$(groups)]   --  "
-    buf="${buf} %{F#FFA6E22E}$(cmus2) %{c} "
-    buf="${buf} %{F#FFA6E22E} $(clock) %{r} "
-    buf="${buf} %{F#FFA6E22E}⚡ $(cpuload) "
-    buf="${buf} %{F#FFA6E22E} ✉ $(mail) "
-    buf="${buf} %{F#FFc0392b} $(batterystatus) "
+    buf="${buf} %{F#FF99cc99}$(cmus2) %{c} "
+    buf="${buf} %{F#FF66cccc}$(clock) %{r} "
+    # buf="${buf} %{F#FFA6E22E}⚡ $(cpuload) "
+    # buf="${buf} %{F#FFA6E22E} ✉ $(mail) "
+    buf="${buf} %{F#FFc0392b} $(batterystatus)  "
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!

@@ -20,7 +20,7 @@ ao=alsa         # audio driver
 alang=jpn,japanese  # audio language to use
 
 # Subtitle Settings
-#aid=1          # use ID* track for audio
+aid=1          # use ID* track for audio
 sid=1           # use ID* track for audio
 slang=eng,english   # subtitle language
 sub-text-color="#ffffffff"
@@ -38,6 +38,6 @@ vd-lavc-threads=2   # threads to use for decoding
 osd-font='DejaVu Sans'
 autofit-larger=90%x90%
 stop-screensaver="yes"
-loop=inf
+#loop=inf
 screenshot-format=png
 title='${media-title}'

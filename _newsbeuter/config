@@ -10,7 +10,7 @@ auto-reload yes
 browser w3m
 notify-program      "/usr/bin/notify-send"
 download-path  "~/Audiobooks/Podcast/%h/%n"
-player mpv
+player mpg123
 show-read-feeds yes
 mark-as-read-on-hover no
 goto-next-feed no

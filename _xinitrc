@@ -11,9 +11,10 @@ xcape &
 dropbox &
 compton &
 dunst &
-imlibsetroot -s f Dropbox/Photos/Walls/arch.png &
+imlibsetroot -t Dropbox/Photos/Walls/tile.jpg &
 redshift -l 44:23 &
 unclutter -idle 5 -noevents &
 echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &
 #barstatus | bar -d -f "DejaVu Sans Mono-9" &
+yabar -c ~/dotfiles/yabar.config &
 exec frankenwm

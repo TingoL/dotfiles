@@ -1,11 +1,15 @@
-http://musicforprogramming.net/rss.php
-https://www.archlinux.org/feeds/news/
-http://www.thecramped.com/feed/
-http://onethingwell.org/rss
-http://lucumr.pocoo.org/feed.atom
-https://sulami.github.io/feed/rss.xml
-http://www.drbunsen.org/feed.xml
-http://www.football365.com/aston-villa/rss
-http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=uk
-http://matt.might.net/articles/feed.rss
-https://github.com/TingoL.private.atom?token=ABaGuRIwShbnxwnKvERTObWlINl2DjmBks6z_C9qwA==
+http://musicforprogramming.net/rss.php muzika
+https://www.archlinux.org/feeds/news/ prog
+http://onethingwell.org/rss prog
+http://lucumr.pocoo.org/feed.atom prog
+http://matt.might.net/articles/feed.rss prog
+https://jeremykun.com/feed/ prog
+http://jvns.ca/atom.xml prog 
+https://sulami.github.io/feed/rss.xml prog
+http://www.howardism.org/index.xml prog
+http://feeds.feedburner.com/catonmat?format=xml prog
+http://thedarnedestthing.com/rss prog
+http://www.drbunsen.org/feed.xml prog
+http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=uk fudbal
+https://github.com/TingoL.private.atom?token=ABaGuRIwShbnxwnKvERTObWlINl2DjmBks6z_C9qwA== prog
+http://feeds.feedburner.com/Itposlovi posao

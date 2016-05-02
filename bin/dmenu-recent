@@ -3,7 +3,7 @@
 # Originally based on code by Dieter Plaetinck.
 # Pretty much re-written by Mina Nagy (mnzaki)
 
-dmenu_cmd="dmenu -h 28 -y 350 -o 0.8 -dim 0.3 -nb #1c2027 -nf #ffffff -sb #458588 -sf #ffffff -fn DroidSansMono-10:medium $DMENU_OPTIONS"
+dmenu_cmd="dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #45ADA8 -fn DroidSansMono-10:medium $DMENU_OPTIONS"
 terminal="termite -e"
 max_recent=199 # Number of recent commands to track
 

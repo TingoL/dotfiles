@@ -1,8 +1,6 @@
-"
 "  ~/.vimrc
 " author  : TingoL
 " amelxmx [at] gmail [dot] com
-"
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 colorscheme euphrasia
@@ -34,12 +32,15 @@ set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
 set gdefault               " set /g on search default
 set background=dark
+set undofile
+set undodir=~/.vim/undodir
 "fzf
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
+let base16colorspace=256
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
@@ -55,6 +56,7 @@ call vundle#begin()
 
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tComment'
@@ -71,7 +73,6 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
-Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'mbbill/undotree'
 
@@ -85,7 +86,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:pandoc#spell#enabled = 0
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "luna"
+let g:airline_theme = "base16_eighties"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "neocomplcache magic
@@ -111,7 +112,15 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
+" Undotree
+if has('persistent_undo')
+    nnoremap <silent> <Space>u :UndotreeToggle<CR>
+    let g:undotree_SetFocusWhenToggle = 1
+    set undofile
+    set undodir=~/.vim/undodir/
+    set undolevels=1000
+    set undoreload=10000
+endif
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 
@@ -129,6 +138,13 @@ autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 let g:pydiction_location = '/usr/share/pydiction/complete-dict'
+" Extra text objects!
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+    execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+    execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+    execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
 
 "mapping ------------------------------------------------------------------------
 "mdless preview
@@ -141,12 +157,8 @@ map <Leader>p gqap
 nnoremap <Space> <Leader>
 nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F6> :TagbarToggle<CR>
-" Goyo + Limelight
+" Goyo
 nnoremap <Leader>G :Goyo<CR>
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
 "highlight last inserted text
 nnoremap gV `[v`]`
 "buffers
