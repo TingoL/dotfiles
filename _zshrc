@@ -33,7 +33,7 @@ alias -s html=qutebrowser
 . $HOME/.shell-alias
 . $HOME/.shell-functions
 . $HOME/.shell-tv
-. /etc/profile.d/fzf.zsh
+. /usr/share/fzf/key-bindings.zsh
 
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"
