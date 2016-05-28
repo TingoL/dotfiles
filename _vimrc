@@ -40,7 +40,6 @@ let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
-let base16colorspace=256
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
@@ -73,13 +72,21 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
-Plugin 'junegunn/vim-easy-align'
 Plugin 'mbbill/undotree'
+Plugin 'justinmk/vim-sneak'
+Plugin 'sunaku/vim-dasht'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent
-
+"C-y for digraphs since C-k is taken by neosnippet
 inoremap <C-y> <C-k>
+"dasht integration
+"Search API docs for query you type in:
+nnoremap <Leader>k :Dasht<Space>
+" Search API docs for word under cursor:
+nnoremap <silent> <Leader>K :call Dasht(expand('<cword>'))<Return>
+" Search API docs for the selected text:
+vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
 "ag for ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
 "pandoc markdwown spelling off by default
@@ -164,6 +171,9 @@ nnoremap gV `[v`]`
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
+"splits
+nnoremap <expr><silent> \| !v:count ? "<C-W>v<C-W><Right>" : '\|'
+nnoremap <expr><silent> _  !v:count ? "<C-W>s<C-W><Down>"  : '_'
 "sorting
 vnoremap <Leader>t :sort<CR>
 "indentation

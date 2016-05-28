@@ -41,3 +41,4 @@ stop-screensaver="yes"
 #loop=inf
 screenshot-format=png
 title='${media-title}'
+ytdl-format=best[height=720]

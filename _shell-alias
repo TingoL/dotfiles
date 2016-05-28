@@ -30,5 +30,5 @@ alias replay='scriptreplay -ttiming recording'
 alias rmdbc="find ~/Dropbox -name *\ \(*conflicted* -exec rm {} \;" ")"
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 alias vimwiki='vim +VimwikiIndex +Goyo'
-alias vreme="curl wttr.in/belgrade'"
+alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'
