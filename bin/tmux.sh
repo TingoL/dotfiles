@@ -2,8 +2,9 @@
 
 tmux new-session -d
 tmux rename-session 'home'
-tmux rename-window 'work'
-tmux split-window -h -p 20 'snb'
+tmux rename-window 'shell'
+tmux split-window -h -p 20 'todo'
+tmux split-window -v -p 75 'snb'
 tmux new-window -n 'chat' 'cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd -'
 tmux split-window -v 'weechat-curses'
 tmux new-window -n 'news' 'newsbeuter -q'

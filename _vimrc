@@ -10,7 +10,8 @@ let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
 set directory=~/.vim/temp   " Keep temp files in ~/.vim/temp
 set hidden                  "allow scrolling between unsaved buffers
-set grepprg=grep\ -nH\ $*
+set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
 set scrolloff=2             " 2 lines above/below cursor when scrolling
 set foldmethod=manual
@@ -20,7 +21,6 @@ set lazyredraw
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
 set regexpengine=1         " needed for jsctags
 set clipboard=unnamed      " yank to X clipboard
-set pastetoggle=<F2>
 set autoindent
 set tabstop=4
 set shiftwidth=4
@@ -66,15 +66,16 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
 Plugin 'mbbill/undotree'
 Plugin 'justinmk/vim-sneak'
 Plugin 'sunaku/vim-dasht'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 filetype plugin indent on   "new smartindent
@@ -87,8 +88,6 @@ nnoremap <Leader>k :Dasht<Space>
 nnoremap <silent> <Leader>K :call Dasht(expand('<cword>'))<Return>
 " Search API docs for the selected text:
 vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
-"ag for ack.vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
 "pandoc markdwown spelling off by default
 let g:pandoc#spell#enabled = 0
 "airline symbols
@@ -107,8 +106,6 @@ endif
 if !exists('g:neocomplcache_force_omni_patterns')
   let g:neocomplcache_force_omni_patterns = {}
 endif
-let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache_force_omni_patterns['python'] = '[^. t].w*'
 " Plugin key-mappings.
 imap \<TAB>     <Plug>(neosnippet_expand_or_jump)
 smap \<TAB>     <Plug>(neosnippet_expand_or_jump)
@@ -130,7 +127,6 @@ if has('persistent_undo')
 endif
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
-
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 
@@ -143,8 +139,9 @@ au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-let g:pydiction_location = '/usr/share/pydiction/complete-dict'
+autocmd FileType python setlocal omnifunc=jedi#completions
+	let g:jedi#auto_vim_configuration = 0
+	let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
@@ -162,12 +159,13 @@ nmap <silent> <leader>s :set spell!<CR>
 map <Leader>p gqap
 " F-keys
 nnoremap <Space> <Leader>
-nnoremap <F5> :UndotreeToggle<CR>
+set pastetoggle=<F2>
+nnoremap <F4> :UndotreeToggle<CR>
+nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
+inoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 nnoremap <F6> :TagbarToggle<CR>
 " Goyo
 nnoremap <Leader>G :Goyo<CR>
-"highlight last inserted text
-nnoremap gV `[v`]`
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
@@ -190,7 +188,9 @@ nnoremap k gk
 nnoremap <leader><c> :silent !myctags<cr>:redraw!<cr>)
 "kill trailing whitespace
 nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
-" Fugitive {{{
+" Fugitive & GitGutter {{{ 
+let g:gitgutter_enabled = 0
+nnoremap <Leader>g :GitGutterToggle<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
@@ -244,3 +244,7 @@ func! WordProcessorMode()
   setlocal linebreak
 endfu
 com! WP call WordProcessorMode()
+"netrw as nerdtree replacement
+nnoremap - :exe 'Lexplore' expand('%:h')<CR>
+let g:netrw_winsize=25
+let g:netrw_liststyle=3

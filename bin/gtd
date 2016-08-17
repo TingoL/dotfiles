@@ -121,7 +121,7 @@ vsleep() {
 
       # Updates a temporary file for tmux to read from and refreshes the client
       if [[ -n "$DO_TMUX" ]]; then
-         (echo -ne "$hms |" > /tmp/gtd)
+         (echo -ne "$hms " > /tmp/gtd)
          (tmux refresh-client -S)
       fi
 

@@ -16,7 +16,7 @@ alias srb='setxkbmap rs latinyz'
 alias eng='setxkbmap us'
 alias gping='ping -4 -c 3 www.google.com'
 alias upg="packer -Syu"
-alias htpc="ssh -p 2222 tingol@192.168.1.6"
+alias htpc="ssh -p 2222 tingol@192.168.1.9"
 alias tng='play -c 2 -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +10'
 alias ocean='play -n -n --combine merge synth pinknoise band -n 1200 1800 tremolo 50 10 tremolo 0.14 70 tremolo 0.2 50'
 alias magnet='aria2c --bt-metadata-only=true --bt-save-metadata=true'
@@ -27,8 +27,6 @@ alias speedtest='curl -o /dev/null http://speedtest.sea01.softlayer.com/download
 alias getsite='wget --recursive --page-requisites --convert-links --no-parent $1' 
 alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
-alias rmdbc="find ~/Dropbox -name *\ \(*conflicted* -exec rm {} \;" ")"
-alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 alias vimwiki='vim +VimwikiIndex +Goyo'
 alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'

@@ -45,7 +45,7 @@ $DMENU -p "= $answer")
 
 case $action in
     "Clear") $0 ;;
-    "Copy to clipboard") echo -n "$answer" | xclip ;;
+    "Copy to clipboard") echo -n "$answer" | xclip -in -selection clipboard >/dev/null ;;
     "Close") ;;
     "") ;;
     *) $0 "$answer $action" ;;

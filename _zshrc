@@ -34,6 +34,9 @@ alias -s html=qutebrowser
 . $HOME/.shell-functions
 . $HOME/.shell-tv
 . /usr/share/fzf/key-bindings.zsh
+# dasht completion
+. $HOME/.zsh/zsh/completions.zsh
+. $HOME/dotfiles/bin/k.sh
 
 eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"
