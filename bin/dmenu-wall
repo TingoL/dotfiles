@@ -1,8 +1,5 @@
 #!/bin/sh
-
-#DMENU="dmenu -i"
-
-DMENU="dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #6699cc -fn DroidSansMono-10:medium -i"
+#DMENU="dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #6699cc -fn DroidSansMono-10:medium -i"
 terminal="termite -e"
 
 

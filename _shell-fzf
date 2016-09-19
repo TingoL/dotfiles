@@ -1,0 +1,87 @@
+#!/bin/bash
+#   ___            ___  
+# /'___\         /'___\ 
+#/\ \__/  ____  /\ \__/ 
+#\ \ ,__\/\_ ,`\\ \ ,__\
+# \ \ \_/\/_/  /_\ \ \_/
+#  \ \_\   /\____\\ \_\ 
+#   \/_/   \/____/ \/_/ 
+#                       
+#                       
+# jj feeds fasd results into fzf
+jj() {
+    local dir
+    dir=$(fasd -Rdl |\
+        sed "s:$HOME:~:" |\
+        fzf --no-sort +m -q "$*" |\
+        sed "s:~:$HOME:")\
+    && pushd "$dir"
+}
+fzf-locate() {
+    xdg-open "$(locate "*" | fzf -e -i )"
+
+    # some programs require a longer time to load
+    sleep 1
+
+    # if cancle or fail then exit
+     if [ $? -ne 0 ]
+     then
+       exit
+     fi
+}
+
+usage() {
+# usage is du+fzf, usage . 2 brings back sizes two directories deep
+    du -h --max-depth="${2:-1}"\
+      "${1:-.}" |\
+        sort -h |\
+        sed "s:\./::" |\
+        sed "s:$HOME:~:"
+}
+
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+zle -N fh
+bindkey '^r' fh
+
+#search code interactivelly
+agfzf() { ag --nobreak --nonumbers --noheading . | fzf }
+zle -N agfzf
+bindkey '^f' agfzf
+
+# ftags - search ctags
+ftags() {
+  local line
+  [ -e tags ] &&
+  line=$(
+    awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
+    cut -c1-80 | fzf --nth=1,2
+  ) && ${EDITOR:-vim} $(cut -f3 <<< "$line") -c "set nocst" \
+                                      -c "silent tag $(cut -f2 <<< "$line")"
+}
+
+# fshow - git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+# fbr - checkout git branch
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
+readwiki() { mdless "$(ls -d -1 ~/Dropbox/vimwiki/*.* |fzf)" }
+

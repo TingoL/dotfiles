@@ -11,7 +11,7 @@ xcape &
 dropbox &
 compton &
 dunst &
-imlibsetroot -t Dropbox/Photos/Walls/tile.jpg &
+imlibsetroot -s f Dropbox/Photos/Walls/whee.png &
 redshift -l 44:23 &
 unclutter -idle 5 -noevents &
 echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &

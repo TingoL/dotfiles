@@ -3,7 +3,7 @@
 # Originally based on code by Dieter Plaetinck.
 # Pretty much re-written by Mina Nagy (mnzaki)
 
-dmenu_cmd="dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #45ADA8 -fn DroidSansMono-10:medium $DMENU_OPTIONS"
+#DMENU="dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #45ADA8 -fn DroidSansMono-10:medium $DMENU_OPTIONS"
 terminal="termite -e"
 max_recent=199 # Number of recent commands to track
 
@@ -23,7 +23,7 @@ if stest -dqr -n "$rest_cache" $PATH 2>/dev/null; then
 fi
 
 IFS=" "
-cmd=$(cat "$recent_cache" "$rest_cache" | $dmenu_cmd -p Execute: "$@") || exit
+cmd=$(cat "$recent_cache" "$rest_cache" | $DMENU -p Execute: "$@") || exit
 
 if ! grep -l "$cmd" "$recent_cache" &> /dev/null; then
     grep -vx "$cmd" "$rest_cache" > "$rest_cache.$$"
@@ -40,7 +40,7 @@ word0=${cmd%% *}
 match="^$word0$"
 
 get_type () {
-    while type=$(echo $known_types | xargs -n1 | $dmenu_cmd -p Type:); do
+    while type=$(echo $known_types | xargs -n1 | $DMENU -p Type:); do
         [[ $known_types =~ " $type " ]] || continue
         echo "$word0" >> "$config_dir/$type"
         break

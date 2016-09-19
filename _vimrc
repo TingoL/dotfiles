@@ -43,6 +43,7 @@ let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
+autocmd QuickFixCmdPost *grep* cwindow
 " status bar
 set statusline=\ \%F%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\
 set laststatus=2

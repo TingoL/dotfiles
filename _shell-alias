@@ -4,8 +4,7 @@ alias .='source'
 alias ax="chmod a+x"
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias vless='vim -u /usr/share/vim/vim74/macros/less.vim'
-alias nyan='pygmentize -g'
-alias in='task add +in'
+alias cat='ccat'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
 alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd -'
 alias trc='transmission-remote-cli'
@@ -27,6 +26,5 @@ alias speedtest='curl -o /dev/null http://speedtest.sea01.softlayer.com/download
 alias getsite='wget --recursive --page-requisites --convert-links --no-parent $1' 
 alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
-alias vimwiki='vim +VimwikiIndex +Goyo'
 alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'

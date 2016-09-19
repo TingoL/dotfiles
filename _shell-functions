@@ -34,6 +34,8 @@ psgrep() {
         echo "!! Need name to grep for"
     fi
 }
+#grep git history $1 = regexp
+ggh() { git grep "$1" $(git rev-list --all) }
 zman() { PAGER="less -g -s '+/^       "$1"'" man zshall }
 #ft trazi tekst u bilo kom fajlu
 ft() { find . -name "$2" -exec grep -il "$1" {} \; }
@@ -99,59 +101,22 @@ valuta() {
 }
 # Quickly get image dimensions from the command line
 function imgsize() {
-	local width height
-	if [[ -f $1 ]]; then
-		height=$(sips -g pixelHeight "$1"|tail -n 1|awk '{print $2}')
+    local width height
+    if [[ -f $1 ]]; then
+        height=$(sips -g pixelHeight "$1"|tail -n 1|awk '{print $2}')
 		width=$(sips -g pixelWidth "$1"|tail -n 1|awk '{print $2}')
 		echo "${width} x ${height}"
 	else
 		echo "File not found"
 	fi
 }
-# batch change extension (fix from Lri, again)
 chgext() {
 	for file in *.$1 ; do mv "$file" "${file%.$1}.$2" ; done
 }
 
-############FZF###############
-#fshow - commit browser
-
-jj() {
-# jj feeds fasd results into fzf
-    local dir
-    dir=$(fasd -Rdl |\
-        sed "s:$HOME:~:" |\
-        fzf --no-sort +m -q "$*" |\
-        sed "s:~:$HOME:")\
-    && pushd "$dir"
-}
-fzf-locate() {
-    xdg-open "$(locate "*" | fzf -e -i )"
-
-    # some programs require a longer time to load
-    sleep 1
-
-    # if cancle or fail then exit
-     if [ $? -ne 0 ]
-     then
-       exit
-     fi
-}
-
-usage() {
-# usage is du+fzf, usage . 2 brings back sizes two directories deep
-    du -h --max-depth="${2:-1}"\
-      "${1:-.}" |\
-        sort -h |\
-        sed "s:\./::" |\
-        sed "s:$HOME:~:"
-}
-
-# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
-readwiki() { cd Dropbox/vimwiki && mdless "$(ls |fzf)" && cd -;}
 # clock : puts a clock in the right top corner of the terminal
 clock() { while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &}
 # shorten url
-short() { curl -F"shorten=$*" https://0x0.st }
+shorten() { curl -F"shorten=$*" https://0x0.st }
 # Read pdfs with less.
 vpdf() { pdftotext -layout "$1" - | less -r }

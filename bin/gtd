@@ -4,7 +4,7 @@ set -e
 
 # Command configuration
 CUSTOM_CMD="${CUSTOM_CMD:-"clear"}"
-MPD_CMD="${MPD_CMD:-"mpc -q toggle"}"
+CMUS_CMD="${CMUS_CMD:-"cmus-remote -u"}"
 NOTIFY_CMD="${NOTIFY_CMD:-"notify-send"}"
 SPEAK_CMD="${SPEAK_CMD:-"&>/dev/null espeak"}"
 
@@ -35,7 +35,7 @@ OPTIONS:
 
    -b : start on a break
    -c : custom command (defaults to "clear")
-   -m : toggle MPD on change
+   -m : toggle CMUS on change
    -n : notify on change
    -s : speak command
    -t : show time in tmux status bar
@@ -55,7 +55,7 @@ while getopts "bcmnste:h" opt; do
    case "$opt" in
       b) [[ -n "$DO_BREAK"  ]] && unset DO_BREAK  || DO_BREAK=true;;
       c) [[ -n "$DO_CUSTOM" ]] && unset DO_CUSTOM || DO_CUSTOM=true;;
-      m) [[ -n "$DO_MPD"    ]] && unset DO_MPD    || DO_MPD=true;;
+      m) [[ -n "$DO_CMUS"    ]] && unset DO_CMUS    || DO_CMUS=true;;
       n) [[ -n "$DO_NOTIFY" ]] && unset DO_NOTIFY || DO_NOTIFY=true;;
       s) [[ -n "$DO_SPEAK"  ]] && unset DO_SPEAK  || DO_SPEAK=true;;
       t) [[ -n "$DO_TMUX"   ]] && unset DO_TMUX   || DO_TMUX=true;;
@@ -159,7 +159,7 @@ do_options() {
       fi
    fi
 
-   [[ -n "$DO_MPD" ]] && (sleep 1 && eval "$MPD_CMD")
+   [[ -n "$DO_CMUS" ]] && (sleep 1 && eval "$CMUS_CMD")
 
    return 0
 }
@@ -172,7 +172,7 @@ ctrl_c() {
       total="$(hms $(( ($total_working_time + $work_length) * 60 - $left )))"
    fi
 
-   echo -e "\rTotal working time: $total"
+   echo -e "\rTotal working time: $total" && notify-send "Total working time: $total"
 
    # Prints total time to terminal title bar
    printf "\e]1;(tot) $total\a"

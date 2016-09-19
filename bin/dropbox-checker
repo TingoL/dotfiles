@@ -1,0 +1,8 @@
+#/usr/bin/env bash
+
+if $(dropbox-cli running)
+    then
+        echo ''
+    else
+        echo ''
+fi
