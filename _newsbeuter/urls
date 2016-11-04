@@ -1,24 +1,38 @@
-http://musicforprogramming.net/rss.php muzika
-https://www.archlinux.org/feeds/news/ prog
-http://onethingwell.org/rss prog
-http://lucumr.pocoo.org/feed.atom prog
-http://matt.might.net/articles/feed.rss prog
-https://jeremykun.com/feed/ prog
-http://jvns.ca/atom.xml prog 
-https://sulami.github.io/feed/rss.xml prog
-http://www.howardism.org/index.xml prog
-http://feeds.feedburner.com/catonmat?format=xml prog
-http://www.drbunsen.org/feed.xml prog
-http://themacro.com/feed.xml prog
-http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=uk fudbal
-http://www.football365.com/championship/feed fudbal
-https://github.com/TingoL.private.atom?token=ABaGuRIwShbnxwnKvERTObWlINl2DjmBks6z_C9qwA== prog
-http://feeds.feedburner.com/Itposlovi posao
-http://feeds.reuters.com/reuters/topNews vesti
-http://blog.echen.me/feeds/all.rss.xml datascience
-https://jakevdp.github.io/atom.xml datascience
-https://erikbern.com/atom.xml datascience
-http://fivethirtyeight.com/all/feed datascience
-http://karpathy.github.io/feed.xml datascience
-http://files.libertyfund.org/econtalk/EconTalk.xml econ
-http://www.stilldrinking.org/rss/feed.xml essay
+http://musicforprogramming.net/rss.php "muzika"
+https://www.archlinux.org/feeds/news/ "prog"
+http://onethingwell.org/rss "prog"
+http://lucumr.pocoo.org/feed.atom "prog"
+http://matt.might.net/articles/feed.rss "prog"
+https://jeremykun.com/feed/ "prog"
+http://jvns.ca/atom.xml "prog"
+https://sulami.github.io/feed/rss.xml "prog"
+http://www.howardism.org/index.xml "prog"
+http://feeds.feedburner.com/catonmat?format=xml "prog"
+http://www.drbunsen.org/feed.xml "prog"
+http://themacro.com/feed.xml "prog"
+http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=uk "fudbal"
+https://github.com/TingoL.private.atom?token=ABaGuRIwShbnxwnKvERTObWlINl2DjmBks6z_C9qwA== "prog"
+http://feeds.reuters.com/reuters/topNews "vesti"
+https://theintercept.com/feed/?lang=en "vesti"
+http://www.stilldrinking.org/rss/feed.xml "essay"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCom8YjhMzFlVc-YMbvIHMNQ "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqaay_q0YERQBEg4o5EjvZw "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCWEHue8kksIaktO8KTTN_zg "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UChmm356a5qe1luUsoatAgjA "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCno-YPZ8BiLrN0Wbl8qICFA "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUR1pFG_3XoZn3JNKjulqZg "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCzmCTHcYFM5nnAPBYE26Fng "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC5nc_ZtjKW1htCVZVRxlQAQ "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC3XTzVzaHQEd30rQbuvCtTQ "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCOWcZ6Wicl-1N34H0zZe38w "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUcyEsEjhPEDf69RRVhRh4A "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2C_jShtL725hvbm1arSV9w "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYcS5bjWGwlNsBH81khJDrg "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJ6td3C9QlPO9O_J5dF4ZzA "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCwnKziETDbHJtx78nIkfYug "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCSXm6c-n6lsjtyjvdD0bFVw "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCQ6g3SJo1oA_zpxj67r5Gcw "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCp1xCZ4ODNM2OJuKoBrghDA "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqMDNf3Pn5L7pcNkuSEeO3w "YouTube Subscriptions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkf4VIqu3Acnfzuk3kRIFwA "YouTube Subscriptions"

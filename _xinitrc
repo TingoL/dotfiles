@@ -6,12 +6,14 @@ xset fp rehash
 xset r rate 250 50
 xsetroot -solid black
 xsetroot -cursor_name left_ptr
-xmodmap .xmodmap &
-xcape &
+#xmodmap .xmodmap &
+#xcape & 
+#sudo caps2esc &
 dropbox &
 compton &
 dunst &
-imlibsetroot -s f Dropbox/Photos/Walls/whee.png &
+imlibsetroot -s f Dropbox/Photos/Walls/tokyo.jpg &
+dtach -n /tmp/cmus cmus &
 redshift -l 44:23 &
 unclutter -idle 5 -noevents &
 echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &

@@ -1,4 +1,11 @@
 #tingol.theme
+#   ___    ___ ___   __  __    ____  
+#  /'___\/' __` __`\/\ \/\ \  /',__\ 
+# /\ \__//\ \/\ \/\ \ \ \_\ \/\__, `\
+# \ \____\ \_\ \_\ \_\ \____/\/\____/
+#  \/____/\/_/\/_/\/_/\/___/  \/___/ 
+#                                    
+                                   
 set color_cmdline_bg=default
 set color_cmdline_fg=lightblue
 set color_error=lightblue
@@ -22,3 +29,5 @@ set color_win_sel_bg=lightblue
 set color_win_sel_fg=black
 set color_win_title_bg=black
 set color_win_title_fg=lightyellow
+                                   
+                                   

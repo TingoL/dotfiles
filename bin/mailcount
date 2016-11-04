@@ -1,0 +1,12 @@
+#!/bin/env python3
+import os, os.path
+
+count = 0
+
+folders = ['INBOX','Faks','Work']
+
+for i in folders:
+    count += len([name for name in os.listdir('//home//tingol//.mail//' + i + '//new') if os.path.isfile(os.path.join('//home//tingol//.mail//' + i + '//new', name))])
+
+print(count)
+

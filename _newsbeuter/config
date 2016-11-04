@@ -8,6 +8,7 @@ color article             white   default
 
 auto-reload yes
 browser w3m
+macro y set browser "mpv %u"; open-in-browser ; set browser "w3m %u"
 notify-program      "/usr/bin/notify-send"
 download-path  "~/Audiobooks/Podcast/%h/%n"
 player mpg123

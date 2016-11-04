@@ -1,7 +1,7 @@
 # Write your default config options here!
 
 hwdec=auto
-vo=opengl:deband
+profile=opengl-hq:deband
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window
@@ -22,12 +22,12 @@ alang=jpn,japanese  # audio language to use
 aid=1          # use ID* track for audio
 sid=1           # use ID* track for audio
 slang=eng,english   # subtitle language
-sub-text-color="#ffffffff"
-sub-text-border-color="#ff262626"
-sub-text-border-size=3.2
-sub-text-shadow-offset=1
-sub-text-shadow-color="#33000000"
-sub-text-spacing=0.5
+sub-color="#ffffffff"
+sub-border-color="#ff262626"
+sub-border-size=3.2
+sub-shadow-offset=1
+sub-shadow-color="#33000000"
+sub-spacing=0.5
 
 # Other Settings
 quiet=yes       # make mpv to report less

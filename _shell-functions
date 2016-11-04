@@ -8,7 +8,6 @@ podsetnik() { sleep $1 && notify-send "$2" & }
 score() { watch -n10 --no-title "w3m http://www.livescore.com/ |awk '/live [0-9H]+[^ ]/,/red cards/'" ; }
 
 yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" $@ ;}
-say() { if [[ "${1}" =~ -[a-z]{2} ]]; then local lang=${1#-}; local text="${*#$1}"; else local lang=${LANG%_*}; local text="$*";fi; mpv "http://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&q=${text}" &> /dev/null ; }
 # send process to the background
 background() { $1 $2 >/dev/null 2>&1 &! ;}
 # quickly cd out of directories using numbers
@@ -16,7 +15,7 @@ up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
-mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less; }
+#mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less; }
 dgrep() {
     # A recursive, case-insensitive grep that excludes binary files
     grep -iR "$@" * | grep -v "Binary"
@@ -25,14 +24,6 @@ dfgrep() {
     # A recursive, case-insensitive grep that excludes binary files
     # and returns only unique filenames
     grep -iR "$@" * | grep -v "Binary" | sed 's/:/ /g' | awk '{ print $1 }' | sort | uniq
-}
-psgrep() {
-    if [ ! -z $1 ] ; then
-        echo "Grepping for processes matching $1..."
-        ps aux | grep $1 | grep -v grep
-    else
-        echo "!! Need name to grep for"
-    fi
 }
 #grep git history $1 = regexp
 ggh() { git grep "$1" $(git rev-list --all) }
@@ -99,17 +90,6 @@ valuta() {
 # Example: "valuta 100 eur usd" shows the worth of 100 euro in dollars
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
-# Quickly get image dimensions from the command line
-function imgsize() {
-    local width height
-    if [[ -f $1 ]]; then
-        height=$(sips -g pixelHeight "$1"|tail -n 1|awk '{print $2}')
-		width=$(sips -g pixelWidth "$1"|tail -n 1|awk '{print $2}')
-		echo "${width} x ${height}"
-	else
-		echo "File not found"
-	fi
-}
 chgext() {
 	for file in *.$1 ; do mv "$file" "${file%.$1}.$2" ; done
 }
@@ -120,3 +100,5 @@ clock() { while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;
 shorten() { curl -F"shorten=$*" https://0x0.st }
 # Read pdfs with less.
 vpdf() { pdftotext -layout "$1" - | less -r }
+gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+transfer() { basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile"|xclip -selection clipboard;xclip -selection clipboard ; }

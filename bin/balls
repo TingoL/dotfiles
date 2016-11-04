@@ -1,0 +1,3 @@
+#!/bin/zsh
+echo '[\033[95m'"$(date +%H:%M)"'\033[0m]\033[92mtingol:\033[0m' "$1" >> ~/Dropbox/Stuff/Dropballs/test_log
+

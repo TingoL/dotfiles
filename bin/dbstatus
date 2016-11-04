@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo $(dropbox-cli status | tail -c 15)

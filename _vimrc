@@ -44,6 +44,7 @@ let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 autocmd QuickFixCmdPost *grep* cwindow
+
 " status bar
 set statusline=\ \%F%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\
 set laststatus=2
@@ -68,6 +69,7 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'nvie/vim-flake8'
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -131,9 +133,8 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 
-autocmd BufRead,BufNewFile *.txt set tw=80                                         " limit width to n cols for txt files
-autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell   " width, mail syntax hilight, spellcheck
-autocmd FileType markdown set tw=80                                          " wrap at 80 chars for LaTeX files
+autocmd BufRead,BufNewFile,BufWrite *.txt,*.md,*.mkd set tw=80 ft=pandoc  " limit width to n cols for txt files
+autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 " Enable omni completion.
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
@@ -141,8 +142,8 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#completions
-	let g:jedi#auto_vim_configuration = 0
-	let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+    let g:jedi#auto_vim_configuration = 0
+    let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
@@ -163,7 +164,6 @@ nnoremap <Space> <Leader>
 set pastetoggle=<F2>
 nnoremap <F4> :UndotreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
-inoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 nnoremap <F6> :TagbarToggle<CR>
 " Goyo
 nnoremap <Leader>G :Goyo<CR>
@@ -189,7 +189,7 @@ nnoremap k gk
 nnoremap <leader><c> :silent !myctags<cr>:redraw!<cr>)
 "kill trailing whitespace
 nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
-" Fugitive & GitGutter {{{ 
+" Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 0
 nnoremap <Leader>g :GitGutterToggle<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -234,17 +234,6 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
-" sane word processing settings
-func! WordProcessorMode()
-  setlocal formatoptions=1
-  setlocal noexpandtab
-  setlocal spell spelllang=en_us
-  set complete+=s
-  set formatprg=par
-  setlocal wrap
-  setlocal linebreak
-endfu
-com! WP call WordProcessorMode()
 "netrw as nerdtree replacement
 nnoremap - :exe 'Lexplore' expand('%:h')<CR>
 let g:netrw_winsize=25

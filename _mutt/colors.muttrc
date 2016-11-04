@@ -77,3 +77,5 @@ color quoted7    brightcyan    default
 color body      brightgreen    default "^gpg: Good signature .*"
 color body      yellow         default "^gpg: "
 color body      brightred      default "^gpg: BAD signature from. *"
+# Sidebar
+color sidebar_new color221 color233

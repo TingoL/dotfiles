@@ -6,7 +6,6 @@ alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cres
 alias vless='vim -u /usr/share/vim/vim74/macros/less.vim'
 alias cat='ccat'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
-alias balls='cd $HOME/Dropbox/Stuff/Dropballs/ && python2 test1.py tingol && cd -'
 alias trc='transmission-remote-cli'
 alias els='els --els-icons=fontawesome'
 alias v='f -e vim'
@@ -28,3 +27,5 @@ alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
 alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'
+alias cmus='dtach -a /tmp/cmus'
+alias chat='dtach -a /tmp/weechat'

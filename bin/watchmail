@@ -1,0 +1,5 @@
+#!/bin/sh
+while true; do
+  mb=`inotifywait -e create -e moved_to ~/.mail/**/new 2> /dev/null  | cut -f 1 -d " " | cut -d "/" -f 5-6`
+  notify-send -i '/usr/share/icons/Adwaita/32x32/emblems/emblem-mail' "New mail in $mb" "  "
+done

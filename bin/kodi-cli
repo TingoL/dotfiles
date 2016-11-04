@@ -15,7 +15,7 @@
 ## Configure your KODI RPC details here
 #set -x
  
-KODI_HOST=192.168.1.6
+KODI_HOST=192.168.1.9
 KODI_PORT=8080
 KODI_USER=kodi
 KODI_PASS=kodi

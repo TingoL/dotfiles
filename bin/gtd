@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash 
+# NOTE: Modified to be independent of tmux, just pipe /tmp/gtd for current time
 
 set -e
 
@@ -122,7 +123,7 @@ vsleep() {
       # Updates a temporary file for tmux to read from and refreshes the client
       if [[ -n "$DO_TMUX" ]]; then
          (echo -ne "$hms " > /tmp/gtd)
-         (tmux refresh-client -S)
+#         (tmux refresh-client -S)
       fi
 
       # Prints time information to terminal title bar
@@ -145,7 +146,7 @@ do_options() {
 
    if [[ -n "$DO_NOTIFY" ]]; then
       if [[ -n "$in_break" ]]; then
-         eval "$NOTIFY_CMD $NOTIFY_BREAK"
+          eval "$NOTIFY_CMD $NOTIFY_BREAK"
       else
          eval "$NOTIFY_CMD $NOTIFY_WORK"
       fi
@@ -182,7 +183,7 @@ ctrl_c() {
 
 cleanup() {
    # Clear the temporary file and refresh tmux when interrupted/terminated
-   [[ -n "$DO_TMUX" ]] && (tmux refresh-client -S && rm /tmp/gtd)
+   [[ -n "$DO_TMUX" ]] && (rm /tmp/gtd)
 
    exit 0
 }

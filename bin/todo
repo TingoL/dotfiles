@@ -9,7 +9,8 @@
 # ░▓▓▓▓▓▓▓▓▓▓
 # ░░░░░░░░░░
 
-file="$HOME/.todo"
+#change file from $HOME/.todo so it works per project!
+file="$PWD/.todo"
 ( [ -e "$file" ] || touch "$file" ) && [ ! -w "$file" ] && echo cannot write to $file && exit 1
 if [[ -z $1 || $1 == "--help" || $1 == "-h" || $1 == "help" ]]; then
 	echo "┌──────[ todo ]──[ version 0.0.1 ]─────── ─ ─"

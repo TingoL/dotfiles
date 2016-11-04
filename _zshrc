@@ -18,7 +18,7 @@ set -o vi
 
 alias -s odt=lowriter
 alias -s pdf=zathura
-alias -s epub=ppub
+alias -s epub=FBReader
 alias -s tex=vim
 alias -s mp3=mpg123
 alias -s mkv=mpv
@@ -28,7 +28,7 @@ alias -s jpg=sxiv
 alias -s png=sxiv
 alias -s c=vim
 alias -s h=vim
-alias -s html=qutebrowser
+alias -s html=chromium
 
 . $HOME/.shell-alias
 . $HOME/.shell-functions
@@ -42,13 +42,14 @@ eval "$(fasd --init auto)"
 HIST_IGNORE_ALL_DUPS="true"
 export HISTSIZE=3000
 export SAVEHIST=3000
+export HISTORY_IGNORE="(balls|ls|peerflix|aria2c|todo)"
 export KEYTIMEOUT=1
-export BROWSER=/usr/bin/qutebrowser
+export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=/home/tingol/.config
-export DMENU="dmenu -h 28 -y 350 -o 0.8 -dim 0.3 -nb #1c2027 -nf #ffffff -sb #458588 -sf #ffffff -fn SourceCodePro-10:medium"
+export DMENU="dmenu -i -w 1008 -h 16 -y 4 -x 8 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #99cc99 -fn SourceCodePro-7:medium"
 export PROJECT_HOME=~/src/
 export WORKON_HOME=~/Envs
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-icon="$HOME/Dropbox/icon.png"
+icon="$HOME/Dropbox/lock.png"
 tmpbg='/tmp/screen.png'
 
 (( $# )) && { icon=$1; }
 
 maim --format=jpg "$tmpbg"
-convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
-convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
+gm convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
+gm composite "$icon" "$tmpbg" -gravity Center -matte "$tmpbg"
 i3lock -u -i "$tmpbg" 
