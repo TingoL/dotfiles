@@ -34,13 +34,12 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'git' \
   'fasd' \
-  'rsync' \
   'pacman' \
   'archive' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt' \
-  'zsh-pandoc-completion'
+  'autosuggestions'
 
 #
 # Editor

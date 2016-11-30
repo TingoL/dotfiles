@@ -34,8 +34,7 @@ alias -s html=chromium
 . $HOME/.shell-functions
 . $HOME/.shell-fzf
 . /usr/share/fzf/key-bindings.zsh
-# dasht completion
-. $HOME/.zsh/zsh/completions.zsh
+. /usr/share/fzf/completion.zsh
 . $HOME/dotfiles/bin/k.sh
 
 eval "$(fasd --init auto)"

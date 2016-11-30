@@ -3,6 +3,7 @@
 " amelxmx [at] gmail [dot] com
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
+filetype plugin indent on   "new smartindent
 colorscheme euphrasia
 
 let mapleader=" "
@@ -58,6 +59,7 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'morhetz/gruvbox'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tComment'
@@ -79,9 +81,9 @@ Plugin 'mbbill/undotree'
 Plugin 'justinmk/vim-sneak'
 Plugin 'sunaku/vim-dasht'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'chrisbra/vim-autosave'
 
 call vundle#end()
-filetype plugin indent on   "new smartindent
 "C-y for digraphs since C-k is taken by neosnippet
 inoremap <C-y> <C-k>
 "dasht integration
@@ -110,14 +112,14 @@ if !exists('g:neocomplcache_force_omni_patterns')
   let g:neocomplcache_force_omni_patterns = {}
 endif
 " Plugin key-mappings.
-imap \<TAB>     <Plug>(neosnippet_expand_or_jump)
-smap \<TAB>     <Plug>(neosnippet_expand_or_jump)
-xmap \<TAB>     <Plug>(neosnippet_expand_target)
+imap <C-l>     <Plug>(neosnippet_expand_or_jump)
+smap <C-l>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>     <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ imap <expr><TAB> neosnippet#expandable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)"
+ \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 " Undotree
 if has('persistent_undo')
@@ -133,6 +135,15 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 
+
+au BufNewFile,BufRead *.py
+    \ set textwidth=79 |
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
 autocmd BufRead,BufNewFile,BufWrite *.txt,*.md,*.mkd set tw=80 ft=pandoc  " limit width to n cols for txt files
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
@@ -162,6 +173,7 @@ map <Leader>p gqap
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
+nnoremap <F3> :Lexplore<CR>
 nnoremap <F4> :UndotreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 nnoremap <F6> :TagbarToggle<CR>

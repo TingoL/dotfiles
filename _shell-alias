@@ -28,4 +28,4 @@ alias replay='scriptreplay -ttiming recording'
 alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'
 alias cmus='dtach -a /tmp/cmus'
-alias chat='dtach -a /tmp/weechat'
+alias chat='dtach -a /tmp/chat'

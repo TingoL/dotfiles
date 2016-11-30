@@ -7,6 +7,6 @@ WALLPAPER_DIR="/home/tingol/Dropbox/Photos/Walls/"
 WALLPAPER=`ls $WALLPAPER_DIR \
 	| $DMENU -p "Choose a Wallpaper :"`
 
-SET="imlibsetroot -s f"
+SET="setroot -s"
 
 $SET $WALLPAPER_DIR/$WALLPAPER
