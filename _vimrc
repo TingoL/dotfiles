@@ -35,6 +35,7 @@ set gdefault               " set /g on search default
 set background=dark
 set undofile
 set undodir=~/.vim/undodir
+set noesckeys              "fixes delay after O
 "fzf
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
@@ -59,12 +60,9 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tComment'
-Plugin 'godlygeek/tabular'
-Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/neosnippet'
@@ -75,13 +73,17 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vimwiki/vimwiki'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/fzf'
 Plugin 'mbbill/undotree'
 Plugin 'justinmk/vim-sneak'
 Plugin 'sunaku/vim-dasht'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'chrisbra/vim-autosave'
+Plugin 'gregsexton/MatchTag'
+Plugin 'skammer/vim-css-color'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 "C-y for digraphs since C-k is taken by neosnippet
@@ -95,6 +97,8 @@ nnoremap <silent> <Leader>K :call Dasht(expand('<cword>'))<Return>
 vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
 "pandoc markdwown spelling off by default
 let g:pandoc#spell#enabled = 0
+"js-libs-syntax
+let g:used_javascript_libs = 'jquery,angularjs'
 "airline symbols
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "base16_eighties"
@@ -146,7 +150,7 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set shiftwidth=2
 autocmd BufRead,BufNewFile,BufWrite *.txt,*.md,*.mkd set tw=80 ft=pandoc  " limit width to n cols for txt files
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+"
 " Enable omni completion.
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -177,8 +181,6 @@ nnoremap <F3> :Lexplore<CR>
 nnoremap <F4> :UndotreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 nnoremap <F6> :TagbarToggle<CR>
-" Goyo
-nnoremap <Leader>G :Goyo<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>

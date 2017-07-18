@@ -7,9 +7,9 @@
 
 # set default
 color normal     default      default
-color hdrdefault cyan         default
-color indicator  black        brightcyan   
-color status     brightcyan   color234
+color hdrdefault blue         default
+color indicator  black        brightblue   
+color status     brightblue   color234
 
 # main colors
 color tree       magenta       default
@@ -45,7 +45,7 @@ color header     brightgreen   default "^subject:"
 # message bodies
 color attachment brightblack   default
 color search     red           brightblack
-color signature  cyan          default
+color signature  blue          default
 color tilde      brightblack   default
 color hdrdefault yellow        default
 color bold       brightyellow  default
@@ -59,19 +59,19 @@ color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$
 color body       brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
 
 # *bold*, _underline_, and /italic/
-color body       brightcyan    default "(^| )\\*[^ ]+\\*( |$)"
-color body       brightcyan    default "(^| )_[^ ]+_( |$)"
-color body       brightcyan    default "(^| )/[^ ]+/( |$)"
+color body       brightblue    default "(^| )\\*[^ ]+\\*( |$)"
+color body       brightblue    default "(^| )_[^ ]+_( |$)"
+color body       brightblue    default "(^| )/[^ ]+/( |$)"
 
 # quote blocks
 color quoted     magenta       default
-color quoted1    cyan          default
+color quoted1    blue          default
 color quoted2    green         default
 color quoted3    yellow        default
 color quoted4    brightmagenta default
 color quoted5    brightgreen   default
 color quoted6    brightyellow  default
-color quoted7    brightcyan    default
+color quoted7    brightblue    default
      
 # PGP messages
 color body      brightgreen    default "^gpg: Good signature .*"

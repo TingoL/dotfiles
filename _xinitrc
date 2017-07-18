@@ -2,21 +2,19 @@
 xsetroot -cursor_name watch
 command -v warpcursor && warpcursor 1
 #xset +fp /usr/share/fonts/local
-xset r rate 250 50
-xsetroot -solid black
-xsetroot -cursor_name left_ptr
-xmodmap .xmodmap &
-xcape & 
-#sudo caps2esc &
-dropbox &
-compton &
-dunst &
-setroot -s Dropbox/Photos/Walls/tokyo.jpg &
-dtach -n /tmp/cmus cmus &
-dtach -n /tmp/chat weechat &
-redshift -l 44:23 &
-unclutter -idle 5 -noevents &
-echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &
-#barstatus | bar -d -f "DejaVu Sans Mono-9" &
-yabar -c ~/dotfiles/yabar.config &
+# xset r rate 250 50
+# xsetroot -solid black
+# xsetroot -cursor_name left_ptr
+# xmodmap .xmodmap &
+# xcape & 
+# #sudo caps2esc &
+# dropbox &
+# compton &
+# dunst &
+# setroot -s Dropbox/Photos/Walls/tokyo.jpg &
+# redshift -l 44:23 &
+# unclutter -idle 5 -noevents &
+# echo 240 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity &
+# #barstatus | bar -d -f "DejaVu Sans Mono-9" &
+# yabar -c ~/dotfiles/yabar.config &
 exec frankenwm

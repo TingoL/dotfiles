@@ -10,5 +10,5 @@ fetchart:
 embedart:
     auto: yes
 paths:
-    default: $format/$albumartist - $year - $album/$track - $title
+    default: $albumartist/$year - $album/$track - $title
     comp: various.artists/$year - $album/$track - $title
