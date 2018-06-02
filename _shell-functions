@@ -101,3 +101,4 @@ shorten() { curl -F"shorten=$*" https://0x0.st }
 vpdf() { pdftotext -layout "$1" - | less -r }
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 transfer() { basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile"|xclip -selection clipboard;xclip -selection clipboard ; }
+tldr() { curl -s https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/common/$1.md  | less ; }

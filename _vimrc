@@ -57,33 +57,31 @@ set encoding=utf-8
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tComment'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'vimwiki/vimwiki'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'junegunn/fzf'
-Plugin 'mbbill/undotree'
-Plugin 'justinmk/vim-sneak'
-Plugin 'sunaku/vim-dasht'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'chrisbra/vim-autosave'
+Plugin 'bling/vim-airline'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'gmarik/vundle'
 Plugin 'gregsexton/MatchTag'
-Plugin 'skammer/vim-css-color'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'pangloss/vim-javascript'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/goyo.vim'
+Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mbbill/undotree'
+Plugin 'nvie/vim-flake8'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'quramy/tsuquyomi'
+Plugin 'raimondi/delimitMate'
+Plugin 'reedes/vim-pencil'
+Plugin 'scrooloose/syntastic'
+Plugin 'shougo/neocomplcache.vim'
+Plugin 'shougo/neosnippet'
+Plugin 'shougo/neosnippet-snippets'
+Plugin 'sunaku/vim-dasht'
+Plugin 'tComment'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 "C-y for digraphs since C-k is taken by neosnippet
@@ -95,13 +93,11 @@ nnoremap <Leader>k :Dasht<Space>
 nnoremap <silent> <Leader>K :call Dasht(expand('<cword>'))<Return>
 " Search API docs for the selected text:
 vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
-"pandoc markdwown spelling off by default
-let g:pandoc#spell#enabled = 0
 "js-libs-syntax
 let g:used_javascript_libs = 'jquery,angularjs'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "base16_eighties"
+let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "neocomplcache magic
@@ -138,19 +134,31 @@ endif
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
+"Pencil
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+augroup pencil
+autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType vimwiki      call pencil#init()
+  autocmd FileType text         call pencil#init({'wrap': 'hard'})
+augroup END"
 
 
 au BufNewFile,BufRead *.py
     \ set textwidth=79 |
     \ set fileformat=unix
 
-au BufNewFile,BufRead *.js, *.html, *.css
+au BufNewFile,BufRead *.js, *.html, *.css,
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
-autocmd BufRead,BufNewFile,BufWrite *.txt,*.md,*.mkd set tw=80 ft=pandoc  " limit width to n cols for txt files
+autocmd FileType typescript
+    \ setlocal tabstop=2 |
+    \ setlocal softtabstop=2 |
+    \ setlocal shiftwidth=2
+autocmd BufRead,BufNewFile,BufWrite *.ts set ft=typescript
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
-"
+
 " Enable omni completion.
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -167,6 +175,10 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
     execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 
+"Tsuquyomi config
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
 "mapping ------------------------------------------------------------------------
 "mdless preview
 nmap <silent><Leader>m :!mdless %:p<CR>
@@ -178,7 +190,6 @@ map <Leader>p gqap
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
 nnoremap <F3> :Lexplore<CR>
-nnoremap <F4> :UndotreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 nnoremap <F6> :TagbarToggle<CR>
 "buffers
@@ -195,7 +206,8 @@ vnoremap > >gv
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
 " Allows writing to files with root priviledges
 cmap w!! w !sudo tee % > /dev/null
-
+"Goyo
+nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk
@@ -206,6 +218,9 @@ nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 0
 nnoremap <Leader>g :GitGutterToggle<cr>
+nnoremap <C-n> :GitGutterNextHunk<CR>
+nnoremap <C-p> :GitGutterPrevHunk<CR>
+nnoremap <C-u> :GitGutterUndoHunk<CR>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
@@ -216,7 +231,6 @@ nnoremap <leader>gci :Gcommit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
-
 "FZF goodies
 nnoremap <C-p> :FZF<cr>
 " fzf colorscheme selector

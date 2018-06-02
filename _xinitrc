@@ -18,3 +18,4 @@ command -v warpcursor && warpcursor 1
 # #barstatus | bar -d -f "DejaVu Sans Mono-9" &
 # yabar -c ~/dotfiles/yabar.config &
 exec frankenwm
+bash ./start &

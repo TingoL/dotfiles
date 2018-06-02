@@ -1,8 +1,8 @@
 # Write your default config options here!
 
-vo=opengl
+#vo=opengl
 hwdec=auto
-profile=opengl-hq:deband
+#profile=opengl-hq:deband
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window
