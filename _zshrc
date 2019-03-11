@@ -11,7 +11,7 @@ zstyle ':completion:*' insert-tab false
 alias zconfig="vim ~/.zshrc"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.2.0/bin/:$GOPATH/bin
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$GOPATH/bin
 #
 set -o vi
 #file extension aliases

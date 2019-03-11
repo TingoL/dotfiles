@@ -2,7 +2,7 @@
 
 # applies filters to cmus based on your music directory's structure 
 # requires argh and dmenu
-
+sour ~/.zshrc
 eval "$(argh.sh $@)" 
 
 RANDOMIZE="${RANDOMIZE:-}"                         #- Randomize selection instead of using a dmenu
@@ -30,7 +30,7 @@ fi
 OFFSET=$(echo ${DIR//\// } | wc -w )
 FORMAT="cut -f $((POS + $OFFSET + 1)) -d/"
 
-SELECT=$( [[ "$DISPLAY" != '' ]] && echo 'dmenu -l 26 -y 18 -h 28 -o 0.7 -dim 0.6 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #45ADA8 -fn DroidSansMono-10:medium -i ' || echo 'slmenu -i -b -l 13') 
+SELECT=$( [[ "$DISPLAY" != '' ]] && echo "$DMENU" || echo 'slmenu -i -b -l 13') 
 [[ "$RANDOMIZE" != '' ]] && SELECT="shuf -n 1" 
 
 # Get a song or dir and send it to cmus, (yes the extra find is redundant but it should be cached on hd)

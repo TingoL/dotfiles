@@ -23,9 +23,9 @@ set wildmenu               " enhanced tab-completion shows all matching cmds in 
 set regexpengine=1         " needed for jsctags
 set clipboard=unnamed      " yank to X clipboard
 set autoindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set showmatch              " show matching brackets
 set incsearch              " increment search
@@ -61,66 +61,50 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'gmarik/vundle'
-Plugin 'gregsexton/MatchTag'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'mbbill/undotree'
 Plugin 'nvie/vim-flake8'
-Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'elzr/vim-json'
+Plugin 'mattn/emmet-vim'
 Plugin 'quramy/tsuquyomi'
+Plugin 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
 Plugin 'raimondi/delimitMate'
 Plugin 'reedes/vim-pencil'
 Plugin 'scrooloose/syntastic'
-Plugin 'shougo/neocomplcache.vim'
-Plugin 'shougo/neosnippet'
-Plugin 'shougo/neosnippet-snippets'
-Plugin 'sunaku/vim-dasht'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
-"C-y for digraphs since C-k is taken by neosnippet
-inoremap <C-y> <C-k>
-"dasht integration
-"Search API docs for query you type in:
-nnoremap <Leader>k :Dasht<Space>
-" Search API docs for word under cursor:
-nnoremap <silent> <Leader>K :call Dasht(expand('<cword>'))<Return>
-" Search API docs for the selected text:
-vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
-"js-libs-syntax
-let g:used_javascript_libs = 'jquery,angularjs'
+
+let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-"neocomplcache magic
-let g:acp_enableAtStartup = 0                                   " Disable AutoComplPop.
-let g:neocomplcache_enable_at_startup = 1                       " Use neocomplcache.
-let g:neocomplcache_enable_smart_case = 1                       " Use smartcase.
-let g:neocomplcache_min_syntax_length = 3                       " Set minimum syntax keyword length.
-if !exists('g:neocomplcache_omni_functions')
-  let g:neocomplcache_omni_functions = {}
-endif
-if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
-endif
+"YouCompleteMe
+let g:ycm_server_python_interpreter="/usr/bin/python3.7"
+let g:ycm_semantic_triggers = {
+    \   'css': [ 're!^', 're!^\s+', ': ' ],
+    \   'scss': [ 're!^', 're!^\s+', ': ' ],
+    \ }
 " Plugin key-mappings.
-imap <C-l>     <Plug>(neosnippet_expand_or_jump)
-smap <C-l>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-l>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
- imap <expr><TAB> neosnippet#expandable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)"
- \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 " Undotree
 if has('persistent_undo')
     nnoremap <silent> <Space>u :UndotreeToggle<CR>
@@ -130,8 +114,6 @@ if has('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 "Pencil
@@ -146,9 +128,12 @@ augroup END"
 
 au BufNewFile,BufRead *.py
     \ set textwidth=79 |
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
     \ set fileformat=unix
 
-au BufNewFile,BufRead *.js, *.html, *.css,
+au BufNewFile,BufRead,BufWrite *.js
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
@@ -156,17 +141,24 @@ autocmd FileType typescript
     \ setlocal tabstop=2 |
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
+
+augroup typescript_key_mapping
+  autocmd FileType typescript nmap <buffer> <Leader>r  <Plug>(TsuquyomiRenameSymbol)
+  autocmd FileType typescript nmap <buffer> <Leader>E  <Plug>(TsuquyomiRenameSymbolC)
+  autocmd FileType typescript nmap <buffer> <Leader>ii <Plug>(TsuquyomiImport)
+  autocmd FileType typescript nmap <buffer> <Leader>qf <Plug>(TsuquyomiQuickFix)
+  autocmd FileType typescript nmap <buffer> <Leader>t :<C-u>echo tsuquyomi#hint()<CR>
+augroup END
 autocmd BufRead,BufNewFile,BufWrite *.ts set ft=typescript
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
 
 " Enable omni completion.
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#completions
-    let g:jedi#auto_vim_configuration = 0
-    let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+let g:jedi#auto_vim_configuration = 0
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
@@ -185,13 +177,12 @@ nmap <silent><Leader>m :!mdless %:p<CR>
 "spellcheck
 nmap <silent> <leader>s :set spell!<CR>
 " paragraph formatting
-map <Leader>p gqap
+map <Leader>P gqap
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
 nnoremap <F3> :Lexplore<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
-nnoremap <F6> :TagbarToggle<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
@@ -211,8 +202,6 @@ nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk
-" Rebuild Ctags (mnemonic RC -> CR -> <cr>)
-nnoremap <leader><c> :silent !myctags<cr>:redraw!<cr>)
 "kill trailing whitespace
 nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
 " Fugitive & GitGutter {{{

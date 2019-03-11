@@ -4,7 +4,7 @@ import:
     copy: no
     move: yes
     log: ~/.config/beets/imlog.txt
-plugins: fetchart embedart discogs
+plugins: fetchart embedart lastgenre discogs convert
 fetchart:
     auto: yes
 embedart:
@@ -12,3 +12,7 @@ embedart:
 paths:
     default: $albumartist/$year - $album/$track - $title
     comp: various.artists/$year - $album/$track - $title
+convert:
+    auto: yes
+    command: ffmpeg -i $source -y -vn -aq 2 $dest
+    extension: mp3
