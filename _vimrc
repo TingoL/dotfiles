@@ -1,11 +1,16 @@
 "  ~/.vimrc
 " author  : TingoL
 " amelxmx [at] gmail [dot] com
+
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme euphrasia
-
+colorscheme hybrid_material
+if has("termguicolors")     " set true colors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
@@ -19,9 +24,10 @@ set foldmethod=manual
 set relativenumber
 set number                 " show line numbers
 set lazyredraw
+set termguicolors
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
 set regexpengine=1         " needed for jsctags
-set clipboard=unnamed      " yank to X clipboard
+set clipboard+=unnamed      " yank to X clipboard
 set autoindent
 set tabstop=2
 set shiftwidth=2
@@ -43,8 +49,6 @@ let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
 
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
 autocmd QuickFixCmdPost *grep* cwindow
 
 " status bar
@@ -57,10 +61,11 @@ set encoding=utf-8
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
+Plugin 'gmarik/vundle'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'gmarik/vundle'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
@@ -82,19 +87,20 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vimwiki/vimwiki'
+Plugin 'thaerkh/vim-workspace'
 
 call vundle#end()
 
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "onedark"
+let g:airline_theme = "hybrid"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "YouCompleteMe
 let g:ycm_server_python_interpreter="/usr/bin/python3.7"
+let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_semantic_triggers = {
     \   'css': [ 're!^', 're!^\s+', ': ' ],
     \   'scss': [ 're!^', 're!^\s+', ': ' ],
@@ -141,6 +147,7 @@ autocmd FileType typescript
     \ setlocal tabstop=2 |
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
+autocmd BufWritePost *.py call Flake8()
 
 augroup typescript_key_mapping
   autocmd FileType typescript nmap <buffer> <Leader>r  <Plug>(TsuquyomiRenameSymbol)
@@ -172,10 +179,10 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 "mapping ------------------------------------------------------------------------
-"mdless preview
-nmap <silent><Leader>m :!mdless %:p<CR>
-"spellcheck
-nmap <silent> <leader>s :set spell!<CR>
+nmap <silent><Leader>m :!mdless %:p<CR>   " markdown preview
+nmap <silent> <leader>s :set spell!<CR> 	" spell check
+nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
+
 " paragraph formatting
 map <Leader>P gqap
 " F-keys
@@ -183,12 +190,10 @@ nnoremap <Space> <Leader>
 set pastetoggle=<F2>
 nnoremap <F3> :Lexplore<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
+nnoremap <F6> :YcmCompleter FixIt<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
-"splits
-nnoremap <expr><silent> \| !v:count ? "<C-W>v<C-W><Right>" : '\|'
-nnoremap <expr><silent> _  !v:count ? "<C-W>s<C-W><Down>"  : '_'
 "sorting
 vnoremap <Leader>t :sort<CR>
 "indentation
@@ -202,8 +207,8 @@ nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk
-"kill trailing whitespace
-nnoremap <silent> <Leader>dw :keeppatterns %s/\s\+$//<CR>
+" Rebuild Ctags
+nnoremap <leader>ct :silent !ctags -R --exclude=@.ctagsignore .<cr>:redraw!<cr>
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 0
 nnoremap <Leader>g :GitGutterToggle<cr>
