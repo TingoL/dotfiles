@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+DESKTOP=$(wmctrl -d | grep '*' | cut -d ' ' -f1)
+
+case $DESKTOP in
+   0)
+     echo "      "
+    ;;
+   1)
+     echo "      "
+    ;;
+   2)
+     echo "      "
+    ;;
+   3)
+     echo "      "
+    ;;
+   4)
+     echo "      "
+    ;;
+   5)
+     echo "      "
+    ;;
+esac
+

@@ -1,6 +1,6 @@
 # Write your default config options here!
 
-vo=opengl
+vo=gpu
 opengl-es=yes
 hwdec=auto
 #profile=opengl-hq:deband

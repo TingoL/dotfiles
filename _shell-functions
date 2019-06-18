@@ -14,7 +14,7 @@ up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
-#mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less; }
+mdless(){ mdv $1 | less; }
 dgrep() {
     # A recursive, case-insensitive grep that excludes binary files
     grep -iR "$@" * | grep -v "Binary"

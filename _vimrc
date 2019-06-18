@@ -5,7 +5,7 @@
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme hybrid_material
+colorscheme one
 if has("termguicolors")     " set true colors
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -72,7 +72,6 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
-Plugin 'nvie/vim-flake8'
 Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
 Plugin 'quramy/tsuquyomi'
@@ -95,7 +94,7 @@ call vundle#end()
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "hybrid"
+let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "YouCompleteMe
@@ -143,11 +142,11 @@ au BufNewFile,BufRead,BufWrite *.js
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
+
 autocmd FileType typescript
     \ setlocal tabstop=2 |
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
-autocmd BufWritePost *.py call Flake8()
 
 augroup typescript_key_mapping
   autocmd FileType typescript nmap <buffer> <Leader>r  <Plug>(TsuquyomiRenameSymbol)

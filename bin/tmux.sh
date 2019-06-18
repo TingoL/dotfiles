@@ -8,7 +8,7 @@ tmux rename-window 'shell'
 tmux new-window -n 'music' 'cmus'
 tmux split-window -v -p 50 'mpsyt'
 tmux new-window -n 'chat' 'weechat-curses'
-tmux new-window -n 'wiki' 'vim +VimwikiIndex +Goyo'
+tmux new-window -n 'news' 'news'
 tmux new-window -n 'mail' 'mutt'
 tmux selectw -t 1
 tmux -2 attach-session -t home

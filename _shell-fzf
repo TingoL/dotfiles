@@ -18,7 +18,7 @@ jj() {
     && pushd "$dir"
 }
 fzf-locate() {
-    xdg-open "$(locate "*" | fzf -e -i )"
+    print -z \'$(locate "*" | fzf -e -i )\'
 
     # some programs require a longer time to load
     sleep 1
@@ -52,7 +52,7 @@ zle -N agfzf
 bindkey '^f' agfzf
 
 # ftags - search ctags
-ftags() {
+fztags() {
   local line
   [ -e tags ] &&
   line=$(
@@ -63,7 +63,7 @@ ftags() {
 }
 
 # fshow - git commit browser
-fshow() {
+fzshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
@@ -75,7 +75,7 @@ FZF-EOF"
 }
 
 # fbr - checkout git branch
-fbr() {
+fzbr() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
