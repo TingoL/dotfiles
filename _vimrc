@@ -5,7 +5,7 @@
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme one
+colorscheme lunaterm
 if has("termguicolors")     " set true colors
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -47,7 +47,8 @@ set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
-                       \ 'syntax': 'markdown', 'ext': '.md'}]
+                       \ 'syntax': 'markdown', 'ext': '.md',
+                       \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -58,10 +59,10 @@ set cmdheight=1
 set encoding=utf-8
 
 " vundle bundle
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -88,6 +89,8 @@ Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
+Plugin 'neoclide/coc.nvim'
+
 
 call vundle#end()
 
@@ -98,7 +101,7 @@ let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "YouCompleteMe
-let g:ycm_server_python_interpreter="/usr/bin/python3.7"
+let g:ycm_server_python_interpreter="/usr/bin/python3.6"
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_semantic_triggers = {
     \   'css': [ 're!^', 're!^\s+', ': ' ],

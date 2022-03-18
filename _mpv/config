@@ -1,13 +1,13 @@
 # Write your default config options here!
 
-vo=gpu
+vo=opengl
 opengl-es=yes
-hwdec=auto
+hwdec=vaapi
 #profile=opengl-hq:deband
 
 fs=no           # use fullscreen mode by default
 geometry=25%:25%    # force starting with centered window
-ontop=yes
+##ontop=no
 osd-bar-align-y=0.85
 osd-color='#F6F6C9'
 osd-border-size=0

@@ -4,7 +4,7 @@ alias .='source'
 alias ax="chmod a+x"
 alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias vless='vim -u /usr/share/vim/vim81/macros/less.vim'
-alias cat='ccat'
+alias cat='bat'
 alias ramdir='mount -t tmpfs tmpfs /mnt -o size=1024m'
 alias trc='transmission-remote-cli'
 alias els='els --els-icons=fontawesome'

@@ -16,6 +16,11 @@ fi
 #
 # Editors
 #
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+
 
 export EDITOR='vim'
 export VISUAL='vim'

@@ -9,10 +9,22 @@ fi
 zstyle ':completion:*' insert-tab false
 
 alias zconfig="vim ~/.zshrc"
+M2_HOME='/opt/apache-maven-3.6.3/bin'
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$GOPATH/bin:$HOME/.local/bin
-#
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$GOPATH/bin:$HOME/.local/bin:$M2_HOME
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+
+
+export GITLAB_ACCESS_TOKEN=BUvGPx5Gu4QBHMyd7uw4
+export XDEBUG_REMOTE_HOST=172.17.0.1
+export FONTAWESOME_NPM_AUTH_TOKEN=E13E0128-87AA-469D-B317-0C49CEE18E35
+
 set -o vi
 #file extension aliases
 
@@ -34,8 +46,8 @@ alias -s html=chromium
 . $HOME/.shell-alias
 . $HOME/.shell-functions
 . $HOME/.shell-fzf
-. /usr/share/fzf/key-bindings.zsh
-. /usr/share/fzf/completion.zsh
+#. /usr/share/fzf/key-bindings.zsh
+#. /usr/share/fzf/completion.zsh
 . $HOME/dotfiles/bin/k.sh
 
 eval "$(fasd --init auto)"
@@ -77,3 +89,7 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z'          fancy-ctrl-z
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

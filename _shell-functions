@@ -14,7 +14,6 @@ up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
-mdless(){ mdv $1 | less; }
 dgrep() {
     # A recursive, case-insensitive grep that excludes binary files
     grep -iR "$@" * | grep -v "Binary"
@@ -102,3 +101,4 @@ vpdf() { pdftotext -layout "$1" - | less -r }
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 transfer() { basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile"|xclip -selection clipboard;xclip -selection clipboard ; }
 tldr() { curl -s https://raw.githubusercontent.com/tldr-pages/tldr/master/pages/common/$1.md  | less ; }
+web2text() { curl -X GET "https://txtpaper.com/api/v1/?url=$1&format=$2&email=$3" }
