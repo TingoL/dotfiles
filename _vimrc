@@ -1,16 +1,12 @@
-"  ~/.vimrc
+"  ~/.vimr
 " author  : TingoL
 " amelxmx [at] gmail [dot] com
+"
 
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
 colorscheme lunaterm
-if has("termguicolors")     " set true colors
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
@@ -19,7 +15,7 @@ set hidden                  "allow scrolling between unsaved buffers
 set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
 set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
-set scrolloff=2             " 2 lines above/below cursor when scrolling
+set  
 set foldmethod=manual
 set relativenumber
 set number                 " show line numbers
@@ -41,7 +37,6 @@ set gdefault               " set /g on search default
 set background=dark
 set undofile
 set undodir=~/.vim/undodir
-set noesckeys              "fixes delay after O
 "fzf
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
@@ -66,8 +61,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Valloric/MatchTagAlways'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
@@ -76,23 +69,64 @@ Plugin 'mbbill/undotree'
 Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
 Plugin 'quramy/tsuquyomi'
-Plugin 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
 Plugin 'raimondi/delimitMate'
 Plugin 'reedes/vim-pencil'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plugin 'neoclide/coc.nvim'
 
 
 call vundle#end()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+EOF
+
+"Coc settings
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+nnoremap <silent> K :call CocAction('doHover')<CR>
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>sy :<C-u>CocList -I symbols<cr>
+nmap <leader>do <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
 
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
@@ -100,13 +134,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-"YouCompleteMe
-let g:ycm_server_python_interpreter="/usr/bin/python3.6"
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_semantic_triggers = {
-    \   'css': [ 're!^', 're!^\s+', ': ' ],
-    \   'scss': [ 're!^', 're!^\s+', ': ' ],
-    \ }
 " Plugin key-mappings.
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<c-l>"
@@ -152,7 +179,7 @@ autocmd FileType typescript
     \ setlocal shiftwidth=2
 
 augroup typescript_key_mapping
-  autocmd FileType typescript nmap <buffer> <Leader>r  <Plug>(TsuquyomiRenameSymbol)
+  autocmd FileType typescript nmap <buffer> <eader>r  <Plug>(TsuquyomiRenameSymbol)
   autocmd FileType typescript nmap <buffer> <Leader>E  <Plug>(TsuquyomiRenameSymbolC)
   autocmd FileType typescript nmap <buffer> <Leader>ii <Plug>(TsuquyomiImport)
   autocmd FileType typescript nmap <buffer> <Leader>qf <Plug>(TsuquyomiQuickFix)
@@ -183,7 +210,11 @@ let g:syntastic_typescript_checkers = ['tsuquyomi']
 "mapping ------------------------------------------------------------------------
 nmap <silent><Leader>m :!mdless %:p<CR>   " markdown preview
 nmap <silent> <leader>s :set spell!<CR> 	" spell check
+
+"workspace
 nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
+let g:workspace_autosave_always = 1
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 " paragraph formatting
 map <Leader>P gqap
@@ -192,7 +223,6 @@ nnoremap <Space> <Leader>
 set pastetoggle=<F2>
 nnoremap <F3> :Lexplore<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
-nnoremap <F6> :YcmCompleter FixIt<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
