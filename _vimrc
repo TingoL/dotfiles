@@ -6,7 +6,7 @@
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme lunaterm
+colorscheme one
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
@@ -15,7 +15,7 @@ set hidden                  "allow scrolling between unsaved buffers
 set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
 set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
-set  
+set
 set foldmethod=manual
 set relativenumber
 set number                 " show line numbers
@@ -25,6 +25,7 @@ set wildmenu               " enhanced tab-completion shows all matching cmds in 
 set regexpengine=1         " needed for jsctags
 set clipboard+=unnamed      " yank to X clipboard
 set autoindent
+set smartindent
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -44,6 +45,7 @@ let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
+let g:markdown_fenced_languages = ['python', 'bash', 'javascript', 'js=javascript', 'json=javascript', 'sass', 'scss=sass', 'html', 'css']
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -66,13 +68,9 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
-Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
-Plugin 'quramy/tsuquyomi'
 Plugin 'raimondi/delimitMate'
 Plugin 'reedes/vim-pencil'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
@@ -80,6 +78,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plugin 'neoclide/coc.nvim'
+Plugin 'lukas-reineke/indent-blankline.nvim'
 
 
 call vundle#end()
@@ -91,11 +90,23 @@ require'nvim-treesitter.configs'.setup {
     -- disable = { "c", "rust" },  -- list of language that will be disabled
   },
 }
+
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
+}
 EOF
 
 "Coc settings
 let g:coc_global_extensions = [
-  \ 'coc-tsserver'
+  \ 'coc-tsserver',
+  \  'coc-explorer',
+  \  'coc-snippets',
+  \  'coc-json'
   \ ]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
@@ -106,18 +117,6 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
 nnoremap <silent> K :call CocAction('doHover')<CR>
-function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-    silent call CocActionAsync('doHover')
-  endif
-endfunction
-
-function! s:show_hover_doc()
-  call timer_start(500, 'ShowDocIfNoDiagnostic')
-endfunction
-
-autocmd CursorHoldI * :call <SID>show_hover_doc()
-autocmd CursorHold * :call <SID>show_hover_doc()
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
@@ -128,6 +127,19 @@ nnoremap <silent> <space>sy :<C-u>CocList -I symbols<cr>
 nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
@@ -135,11 +147,6 @@ let g:airline_theme = "onedark"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 " Plugin key-mappings.
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 " Undotree
 if has('persistent_undo')
     nnoremap <silent> <Space>u :UndotreeToggle<CR>
@@ -178,13 +185,6 @@ autocmd FileType typescript
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
 
-augroup typescript_key_mapping
-  autocmd FileType typescript nmap <buffer> <eader>r  <Plug>(TsuquyomiRenameSymbol)
-  autocmd FileType typescript nmap <buffer> <Leader>E  <Plug>(TsuquyomiRenameSymbolC)
-  autocmd FileType typescript nmap <buffer> <Leader>ii <Plug>(TsuquyomiImport)
-  autocmd FileType typescript nmap <buffer> <Leader>qf <Plug>(TsuquyomiQuickFix)
-  autocmd FileType typescript nmap <buffer> <Leader>t :<C-u>echo tsuquyomi#hint()<CR>
-augroup END
 autocmd BufRead,BufNewFile,BufWrite *.ts set ft=typescript
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
 
@@ -193,8 +193,6 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#auto_vim_configuration = 0
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
@@ -202,10 +200,6 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
     execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
     execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
-
-"Tsuquyomi config
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 "mapping ------------------------------------------------------------------------
 nmap <silent><Leader>m :!mdless %:p<CR>   " markdown preview
@@ -290,5 +284,6 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 
 "netrw as nerdtree replacement
 nnoremap - :exe 'Lexplore' expand('%:h')<CR>
-let g:netrw_winsize=25
+let g:netrw_browse_split=4
+let g:netrw_winsize=20
 let g:netrw_liststyle=3

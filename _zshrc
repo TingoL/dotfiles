@@ -8,6 +8,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 zstyle ':completion:*' insert-tab false
 
+alias vim="nvim"
 alias zconfig="vim ~/.zshrc"
 M2_HOME='/opt/apache-maven-3.6.3/bin'
 
