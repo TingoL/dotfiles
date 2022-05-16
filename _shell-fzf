@@ -83,5 +83,5 @@ fzbr() {
 }
 
 # readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
-readwiki() { mdless "$(ls -d -1 ~/Dropbox/vimwiki/*.* |fzf)" }
+readwiki() { glow -p "$(ls -d -1 ~/Dropbox/vimwiki/*.* |fzf)" }
 

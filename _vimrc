@@ -45,7 +45,6 @@ let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
-let g:markdown_fenced_languages = ['python', 'bash', 'javascript', 'js=javascript', 'json=javascript', 'sass', 'scss=sass', 'html', 'css']
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -77,14 +76,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plugin 'neoclide/coc.nvim'
 Plugin 'lukas-reineke/indent-blankline.nvim'
+Plugin 'ryanoasis/vim-devicons'
 
 
 call vundle#end()
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintaned",
   highlight = {
     enable = true,              -- false will disable the whole extension
     -- disable = { "c", "rust" },  -- list of language that will be disabled
@@ -104,7 +106,6 @@ EOF
 "Coc settings
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
-  \  'coc-explorer',
   \  'coc-snippets',
   \  'coc-json'
   \ ]
@@ -202,7 +203,7 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
 endfor
 
 "mapping ------------------------------------------------------------------------
-nmap <silent><Leader>m :!mdless %:p<CR>   " markdown preview
+nmap <silent><Leader>m :!glow -p %<CR>   " markdown preview
 nmap <silent> <leader>s :set spell!<CR> 	" spell check
 
 "workspace
@@ -215,7 +216,7 @@ map <Leader>P gqap
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
-nnoremap <F3> :Lexplore<CR>
+nnoremap <leader>f <cmd>CHADopen<cr>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
@@ -236,21 +237,20 @@ nnoremap k gk
 " Rebuild Ctags
 nnoremap <leader>ct :silent !ctags -R --exclude=@.ctagsignore .<cr>:redraw!<cr>
 " Fugitive & GitGutter {{{
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 1
 nnoremap <Leader>g :GitGutterToggle<cr>
 nnoremap <C-n> :GitGutterNextHunk<CR>
 nnoremap <C-p> :GitGutterPrevHunk<CR>
 nnoremap <C-u> :GitGutterUndoHunk<CR>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>ga :Gadd<cr>
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>ga :Git add<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gco :Gcheckout<cr>
-nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gci :Git commit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
-nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 "FZF goodies
 nnoremap <C-p> :FZF<cr>
 " fzf colorscheme selector
@@ -282,8 +282,3 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
-"netrw as nerdtree replacement
-nnoremap - :exe 'Lexplore' expand('%:h')<CR>
-let g:netrw_browse_split=4
-let g:netrw_winsize=20
-let g:netrw_liststyle=3
