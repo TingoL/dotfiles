@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CHOICE=$(ls ~/src | rofi -dmenu)
+
+cd ~/src/"$CHOICE"
+
+tmux new-session -d -s "$CHOICE" -x "$(tput cols)" -y "$(tput lines)" nvim +CHADopen
+tmux split-window -v -p 20
+tmux -2 attach-session -t "$CHOICE"

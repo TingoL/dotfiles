@@ -68,9 +68,9 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'raimondi/delimitMate'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'reedes/vim-pencil'
+Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
@@ -204,7 +204,6 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
 endfor
 
 "mapping ------------------------------------------------------------------------
-nmap <silent><Leader>m :!glow -p %<CR>   " markdown preview
 nmap <silent> <leader>s :set spell!<CR> 	" spell check
 
 "workspace
