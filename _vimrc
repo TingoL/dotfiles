@@ -16,7 +16,8 @@ set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
 set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
 set
-set foldmethod=manual
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set relativenumber
 set number                 " show line numbers
 set lazyredraw
@@ -47,6 +48,7 @@ let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
 
 autocmd QuickFixCmdPost *grep* cwindow
+autocmd BufReadPost,FileReadPost * normal zR
 
 " status bar
 set statusline=\ \%F%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\
@@ -62,7 +64,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
@@ -252,7 +255,7 @@ nnoremap <leader>gci :Git commit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 "FZF goodies
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :Files<cr>
 " fzf colorscheme selector
 nnoremap <silent> <Leader>C :call fzf#run({
 \   'source':
@@ -262,23 +265,5 @@ nnoremap <silent> <Leader>C :call fzf#run({
 \   'options': '+m',
 \   'left':    30
 \ })<CR>
-
-" fzf buffer selector
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> <Leader><Enter> :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2
-\ })<CR>
-
+nnoremap <silent> <Leader><Enter> :Buffers<cr>
+nnoremap <silent> <Leader>l :Lines<cr>

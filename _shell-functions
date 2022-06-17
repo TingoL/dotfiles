@@ -1,12 +1,6 @@
 #!bin/bash
 #functions compatible with bash/zsh
-cpuload() {
-    LINE=`ps -eo pcpu |grep -vE '^\s*(0.0|%CPU)' |sed -n '1h;$!H;$g;s/\n/ +/gp'`
-    bc <<< $LINE
-}
 podsetnik() { sleep $1 && notify-send "$2" & }
-score() { watch -n10 --no-title "w3m http://www.livescore.com/ |awk '/live [0-9H]+[^ ]/,/red cards/'" ; }
-
 yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" $@ ;}
 wav2mp3() { for f in *.wav; do lame --vbr-new -V 0 "$f" "${f%.wav}.mp3"; done}
 # quickly cd out of directories using numbers
@@ -14,24 +8,8 @@ up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
-dgrep() {
-    # A recursive, case-insensitive grep that excludes binary files
-    grep -iR "$@" * | grep -v "Binary"
-}
-dfgrep() {
-    # A recursive, case-insensitive grep that excludes binary files
-    # and returns only unique filenames
-    grep -iR "$@" * | grep -v "Binary" | sed 's/:/ /g' | awk '{ print $1 }' | sort | uniq
-}
 #grep git history $1 = regexp
 ggh() { git grep "$1" $(git rev-list --all) }
-zman() { PAGER="less -g -s '+/^       "$1"'" man zshall }
-#ft trazi tekst u bilo kom fajlu
-ft() { find . -name "$2" -exec grep -il "$1" {} \; }
-
-#tail sa highlightom
-t() { tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g" }
-
 function pdfpextr()
 {
     #     $1 is the first page of the range to extract
