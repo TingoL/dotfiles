@@ -43,9 +43,8 @@ set undodir=~/.vim/undodir
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
-let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
-                       \ 'syntax': 'markdown', 'ext': '.md',
-                       \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
+let g:wiki_root = '~/Dropbox/vimwiki'
+let g:wiki_filetypes = ['md', 'wiki']
 
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd BufReadPost,FileReadPost * normal zR
@@ -77,7 +76,7 @@ Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vimwiki/vimwiki'
+Plugin 'lervag/wiki.vim'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
@@ -167,8 +166,7 @@ autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 augroup pencil
 autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType vimwiki      call pencil#init()
+  autocmd FileType markdown,mkd,md call pencil#init()
   autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END"
 
