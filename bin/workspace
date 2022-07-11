@@ -1,9 +1,21 @@
 #!/bin/bash -v
 
-CHOICE=$(ls ~/src | rofi -dmenu)
+CHOICE=$(ls ~/src | fzf)
 
 cd ~/src/"$CHOICE"
 
-tmux new-session -d -s "$CHOICE" -x "$(tput cols)" -y "$(tput lines)" nvim +CHADopen
-tmux split-window -v -p 20
+lines="$(tput lines)"
+columns="$(tput cols)"
+
+tmux -2 new-session -d -x "$columns" -y "$lines" -s "$CHOICE"
+
+tmux rename-window -t "$CHOICE":1 "Workspace"
+tmux send-keys -t "$CHOICE":1.1 'nvim +CHADopen' Enter
+
+tmux split-window -t "$CHOICE:1" -v -p 20
+tmux select-pane -t 1
+tmux split-window -t "$CHOICE:1" -h -p 20
+tmux send-keys -t 2 'hnb' Enter
+
 tmux -2 attach-session -t "$CHOICE"
+
