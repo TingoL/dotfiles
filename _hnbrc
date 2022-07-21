@@ -181,7 +181,7 @@
 		bind npage pagedown
 		bind ppage pageup
 		bing g root
-		
+
 		bind return edit
 		bind del    remove
 		

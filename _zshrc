@@ -11,9 +11,10 @@ zstyle ':completion:*' insert-tab false
 alias vim="nvim"
 alias zconfig="vim ~/.zshrc"
 M2_HOME='/opt/apache-maven-3.6.3/bin'
+CARGO_PATH="/home/tingol/.cargo"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$GOPATH/bin:$HOME/.local/bin:$M2_HOME
+export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$CARGO_PATH/bin:$GOPATH/bin:$HOME/.local/bin:$M2_HOME
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
