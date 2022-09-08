@@ -1,4 +1,4 @@
-"  ~/.vimr
+"  ~/.vimrc
 " author  : TingoL
 " amelxmx [at] gmail [dot] com
 "
@@ -71,7 +71,7 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'Raimondi/delimitMate'
 Plugin 'reedes/vim-pencil'
 Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
@@ -80,7 +80,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plugin 'neoclide/coc.nvim'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
@@ -105,6 +104,8 @@ require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = true,
 }
+
+require("nvim-autopairs").setup {}
 EOF
 
 "Coc settings
@@ -121,6 +122,7 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 nnoremap <silent> K :call CocAction('doHover')<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -167,7 +169,7 @@ autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 augroup pencil
 autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType markdown,mkd,md call pencil#init()
   autocmd FileType vimwiki      call pencil#init()
   autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END"
@@ -211,15 +213,15 @@ nmap <silent> <leader>s :set spell!<CR> 	" spell check
 
 "workspace
 nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
-let g:workspace_autosave_always = 1
+let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 " paragraph formatting
 map <Leader>P gqap
+nnoremap <Leader>tt :Prettier
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
-nnoremap <leader>f <cmd>CHADopen<cr>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
@@ -237,33 +239,20 @@ nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk
-" Rebuild Ctags
-nnoremap <leader>ct :silent !ctags -R --exclude=@.ctagsignore .<cr>:redraw!<cr>
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 1
 nnoremap <Leader>g :GitGutterToggle<cr>
-nnoremap <C-n> :GitGutterNextHunk<CR>
-nnoremap <C-p> :GitGutterPrevHunk<CR>
-nnoremap <C-u> :GitGutterUndoHunk<CR>
-nnoremap <leader>gd :Git diff<cr>
-nnoremap <leader>gs :Git<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>ga :Git add<cr>
-nnoremap <leader>gb :Git blame<cr>
-nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gb :Git branch<space>
+nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gci :Git commit<cr>
-nnoremap <leader>gm :Gmove<cr>
-nnoremap <leader>gr :Gremove<cr>
+nnoremap <leader>gm :Gmove<space>
+nnoremap <leader>gr :Gremove<space>
 "FZF goodies
 nnoremap <C-p> :Files<cr>
-" fzf colorscheme selector
-nnoremap <silent> <Leader>C :call fzf#run({
-\   'source':
-\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
-\   'sink':    'colo',
-\   'options': '+m',
-\   'left':    30
-\ })<CR>
 nnoremap <silent> <Leader><Enter> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<cr>
+
