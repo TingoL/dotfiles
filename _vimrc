@@ -43,6 +43,7 @@ set undodir=~/.vim/undodir
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
+let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
@@ -145,6 +146,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'css', 'js=javascript']
 let g:coc_snippet_next = '<tab>'
 
 let g:user_emmet_leader_key='<C-Z>'
@@ -192,8 +194,9 @@ autocmd FileType typescript
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
 
-autocmd BufRead,BufNewFile,BufWrite *.ts set ft=typescript
-autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
+autocmd BufEnter,BufRead,BufNewFile,BufWrite *.ts set ft=typescript
+autocmd BufEnter,BufRead,BufNewFile,BufWrite *.md set tw=80
+autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax highlight, spellcheck
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

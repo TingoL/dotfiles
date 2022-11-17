@@ -20,7 +20,8 @@ export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-
+export GOPATH=$HOME/.go/bin
+export LIBBY_OUTPUT_DIR=$HOME/books
 
 export EDITOR='vim'
 export VISUAL='vim'
@@ -49,6 +50,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  $GOPATH
   $path
   $(ruby -r rubygems -e "puts Gem.user_dir")/bin
 )

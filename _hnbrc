@@ -97,7 +97,7 @@
 	##### Default Format
 		# hnb, opml, xml, ascii  are amongst the available formats
 		format "hnb"
-		
+
 	##### Remember current position in tree
 		# wheter hnb remembers the current position in a file, (currently
 		# supported by the hnb DTD only, but might easily be extended since
@@ -146,7 +146,7 @@
 		
 		bind esc menu
 		bind ^Q 'context quitsave'
-		
+
 		bind f5 'commandline'
 		bind .. 'status --clear'
 		
@@ -187,7 +187,7 @@
 		
 		bind i    insert_below
 		bind .. edit
-		
+
 		bind tab complete
 		bind ^T  toggle_todo
 		bind ^D  toggle_done
@@ -262,7 +262,7 @@
 		bind home bol
 		bind ^E   eol
 		bind end  eol
-		
+
 	context confirm
 		helptext " y | | j | |return| confirm || |any key| cancel"
 		
@@ -300,7 +300,7 @@
 		
 		bind down "go recurse"
 		bind ..   spell
-		
+
 		bind up   "go backrecurse"
 		bind ..   spell
 		
@@ -440,7 +440,7 @@
 		helptext "Language for ispell: | |F1| Br.english  |F2| Am.english  |F3| Norwegian bokmål  |F4| Norwegian nynorsk"
 		bind f1  'spell_command "ispell -x -damerican"'
 		bind ..  'context main'
-		
+
 		bind f2  'spell_command "ispell -x -dbritish"'
 		bind ..  'context main'
 		
@@ -455,7 +455,7 @@
 		
 	context user_browser
 		helptext "Browser action: | |F1| w3m replace hnb  |F2| w3m in rxvt  |F3| Opera, new tab  |F4| Mozilla new window"
-		bind f1 'browser_command "w3m *"'
+		bind f1 'browser_command "firefox *"'
 		bind .. 'context main'
 		
 		bind f2 'web_commend "xterm -T \"w3m spawned from hnb\" -fn fixed -rv +sb -e w3m * > /dev/null 2>&1 &"'

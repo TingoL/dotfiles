@@ -82,6 +82,3 @@ fzbr() {
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-# readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
-readwiki() { glow -p "$(ls -d -1 ~/Dropbox/vimwiki/*.* |fzf)" }
-

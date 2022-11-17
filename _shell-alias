@@ -26,3 +26,4 @@ alias record='script -ttiming recording'
 alias replay='scriptreplay -ttiming recording'
 alias vreme="curl wttr.in/belgrade"
 alias brokensymlinks='find -L . -type l'
+

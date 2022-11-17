@@ -1,0 +1,24 @@
+#!/bin/bash
+
+QUERY=$(sed 's/ /%20/g' <<< $1)
+
+QUALITY="720p"
+
+if [ "$2" ]
+  then
+    QUALITY=$2
+fi
+
+
+SELECTION=$(curl -s -X GET https://yts.mx/browse-movies/${QUERY}/all/all/0/latest/0/all | pup -c 'a.browse-movie-link attr{href}' | fzf)
+
+MOVIE_PAGE=$(curl -s -X GET ${SELECTION})
+
+
+# LINKS=$(echo ${MOVIE_PAGE}| pup -c '.download-torrent attr{href}')
+# TITLES=$(echo ${MOVIE_PAGE}| pup -c '.download-torrent attr{title}')
+
+MAGNET=$(curl -s -X GET ${SELECTION} | pup -c '.download-torrent attr{href}' | grep ${QUALITY} | head -1)
+
+peerflix -k -r ${MAGNET}
+
