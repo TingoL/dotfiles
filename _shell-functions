@@ -5,7 +5,6 @@ yt2mp3() { youtube-dl -c --restrict-filenames --extract-audio --audio-format mp3
 wav2mp3() { for f in *.wav; do lame --vbr-new -V 0 "$f" "${f%.wav}.mp3"; done}
 # quickly cd out of directories using numbers
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
-burniso() { cdrecord -v -eject "$1" ;}
 mkiso() { dd if=$1 of=$2.iso ; }
 clip() { cat $1 | xclip -selection clipboard; }
 #grep git history $1 = regexp
@@ -34,6 +33,11 @@ ranger-cd() {
 
 # readwiki: fuzzy match a vimwiki page and display with markdown highliighted less
 readwiki() { glow $HOME/Dropbox/vimwiki/ }
+
+web2md() { 
+  curl -X GET "https://content-parser.com/markdown?url=$1" > "$2.md"
+  glow -p "$2.md"
+}
 
 
 # This binds Ctrl-O to ranger-cd:
