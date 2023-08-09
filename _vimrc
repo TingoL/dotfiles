@@ -6,7 +6,6 @@
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme one
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
@@ -15,7 +14,6 @@ set hidden                  "allow scrolling between unsaved buffers
 set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
 set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
-set
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set relativenumber
@@ -37,6 +35,7 @@ set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
 set gdefault               " set /g on search default
 set background=dark
+set noshowmode
 set undofile
 set undodir=~/.vim/undodir
 "fzf
@@ -72,7 +71,6 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'Raimondi/delimitMate'
 Plugin 'reedes/vim-pencil'
 Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
@@ -82,18 +80,18 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plugin 'neoclide/coc.nvim'
+Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-
+Plugin 'prisma/vim-prisma'
+Plugin 'navarasu/onedark.nvim'
 
 call vundle#end()
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintaned",
   highlight = {
     enable = true,              -- false will disable the whole extension
-    -- disable = { "c", "rust" },  -- list of language that will be disabled
   },
 }
 
@@ -103,16 +101,21 @@ vim.opt.listchars:append("space:⋅")
 require("indent_blankline").setup {
     space_char_blankline = " ",
     show_current_context = true,
-    show_current_context_start = true,
+    show_current_context_start = false,
 }
 
 require("nvim-autopairs").setup {}
+require('onedark').setup {
+    style = 'darker'
+}
+require('onedark').load()
 EOF
 
 "Coc settings
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
+  \  'coc-angular',
   \  'coc-json'
   \ ]
 
@@ -136,7 +139,7 @@ nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -174,8 +177,7 @@ autocmd!
   autocmd FileType markdown,mkd,md call pencil#init()
   autocmd FileType vimwiki      call pencil#init()
   autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END"
-
+augroup END
 
 au BufNewFile,BufRead *.py
     \ set textwidth=79 |
@@ -258,4 +260,5 @@ nnoremap <leader>gr :Gremove<space>
 nnoremap <C-p> :Files<cr>
 nnoremap <silent> <Leader><Enter> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<cr>
+
 
