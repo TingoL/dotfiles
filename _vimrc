@@ -94,7 +94,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
   },
 }
-
+vim.g.markdown_fenced_languages = {'html', 'js=javascript', 'ts=typescript', 'bash=sh'}
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 
@@ -149,13 +149,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'css', 'js=javascript']
 let g:coc_snippet_next = '<tab>'
-
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "onedark"
+let g:airline_theme = "night_owl"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 " Plugin key-mappings.
