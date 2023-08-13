@@ -6,15 +6,15 @@ fi
 
 cd ~/src/$2
 
-tmux new-session -d
+tmux new-session -d -x "$(tput cols)" -y "$(tput lines)"
 tmux rename-session "work"
 tmux rename-window $2
 tmux send-keys "nvim --listen /tmp/nvimsocket" Enter
-tmux split-window -v -p 10
+tmux split-window -v -p 20
 tmux send-keys "ranger ~/src/$2/src/" Enter
 tmux split-window -h
 tmux select-pane -U
-tmux split-window -h -p 10
+tmux split-window -h -p 20
 tmux send-keys "todo -s" Enter
 tmux new-window -n "logs"
 tmux selectw -t 1

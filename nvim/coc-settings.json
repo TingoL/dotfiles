@@ -1,0 +1,6 @@
+{
+  "snippets.ultisnips.pythonPrompt": false,
+  "[css][markdown][html][json][markdown][javascript][typescript][prisma]": {
+    "coc.preferences.formatOnSave": true
+  }
+}

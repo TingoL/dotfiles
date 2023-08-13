@@ -1,0 +1,1 @@
+/home/tingol/dotfiles/_vimrc
