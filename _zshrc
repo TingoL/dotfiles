@@ -14,7 +14,8 @@ M2_HOME='/opt/apache-maven-3.6.3/bin'
 CARGO_PATH="/home/tingol/.cargo"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$CARGO_PATH/bin:$GOPATH/bin:$HOME/.local/bin:$M2_HOME
+export MAC_PATH="/Users/amelhadzifejzovic"
+export PATH=$PATH:$MAC_PATH/bin:/home/tingol/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl:/home/tingol/.gem/ruby/2.6.0/bin:$CARGO_PATH/bin:$GOPATH/bin:$HOME/.local/bin:$M2_HOME
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -61,7 +62,7 @@ export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export LANG=en_US.UTF-8
-export XDG_CONFIG_HOME=/home/tingol/.config
+export XDG_CONFIG_HOME=$HOME/.config
 export DMENU="dmenu -i -w 1008 -h 16 -y 4 -x 8 -nb #1c2027 -nf #ffffff -sb #1c2027 -sf #99cc99 -fn SourceCodePro-7:medium"
 export PROJECT_HOME=~/src/
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
@@ -94,3 +95,7 @@ bindkey '^Z'          fancy-ctrl-z
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
