@@ -1,24 +1,21 @@
 #!/bin/bash
 
 if [[ "$1" == "new" ]]; then
-  mkdir ~/src/$2
-  touch ~/src/.todo
+  mkdir ~/src/{$2}
 fi
 
 cd ~/src/$2
 
 tmux new-session -d
-tmux rename-session 'work'
+tmux rename-session "work"
 tmux rename-window $2
-if [[ "$1" == "new" ]]; then
-  tmux send-keys vim Enter
-else 
-  tmux send-keys "vim -S $2" Enter
-fi
+tmux send-keys "nvim --listen /tmp/nvimsocket" Enter
 tmux split-window -v -p 10
+tmux send-keys "ranger ~/src/$2/src/" Enter
 tmux split-window -h
 tmux select-pane -U
-tmux split-window -h -p 20
+tmux split-window -h -p 10
 tmux send-keys "todo -s" Enter
+tmux new-window -n "logs"
 tmux selectw -t 1
 tmux -2 attach-session -t work

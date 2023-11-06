@@ -1,4 +1,4 @@
-"  ~/.vimr
+"  ~/.vimrc
 " author  : TingoL
 " amelxmx [at] gmail [dot] com
 "
@@ -6,7 +6,6 @@
 syntax on                   "self explanatory
 filetype plugin on          "loads things based on document type
 filetype plugin indent on   "new smartindent
-colorscheme one
 let mapleader=" "
 let maplocalleader="\\"
 set backupdir=~/.vim/backup " Keep backups in ~/.vim/backup
@@ -15,7 +14,6 @@ set hidden                  "allow scrolling between unsaved buffers
 set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
 set grepformat=%f:%l:%c%m
 let g:tex_flavor = "latex"
-set
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set relativenumber
@@ -37,12 +35,14 @@ set ignorecase             " case-insensitive search
 set smartcase              " uppercase causes case-sensitive search
 set gdefault               " set /g on search default
 set background=dark
+set noshowmode
 set undofile
 set undodir=~/.vim/undodir
 "fzf
 set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
+let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
@@ -71,7 +71,6 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'reedes/vim-pencil'
 Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
@@ -80,37 +79,43 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'thaerkh/vim-workspace'
 Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plugin 'neoclide/coc.nvim'
+Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-
+Plugin 'prisma/vim-prisma'
+Plugin 'navarasu/onedark.nvim'
 
 call vundle#end()
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintaned",
   highlight = {
     enable = true,              -- false will disable the whole extension
-    -- disable = { "c", "rust" },  -- list of language that will be disabled
   },
 }
-
+vim.g.markdown_fenced_languages = {'html', 'js=javascript', 'ts=typescript', 'bash=sh'}
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 
 require("indent_blankline").setup {
     space_char_blankline = " ",
     show_current_context = true,
-    show_current_context_start = true,
+    show_current_context_start = false,
 }
+
+require("nvim-autopairs").setup {}
+require('onedark').setup {
+    style = 'darker'
+}
+require('onedark').load()
 EOF
 
 "Coc settings
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
+  \  'coc-angular',
   \  'coc-json'
   \ ]
 
@@ -121,6 +126,7 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 nnoremap <silent> K :call CocAction('doHover')<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -133,7 +139,7 @@ nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -144,11 +150,10 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-
 let g:user_emmet_leader_key='<C-Z>'
 "airline symbols
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "onedark"
+let g:airline_theme = "night_owl"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 " Plugin key-mappings.
@@ -167,11 +172,10 @@ autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 augroup pencil
 autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType markdown,mkd,md call pencil#init()
   autocmd FileType vimwiki      call pencil#init()
   autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END"
-
+augroup END
 
 au BufNewFile,BufRead *.py
     \ set textwidth=79 |
@@ -190,8 +194,9 @@ autocmd FileType typescript
     \ setlocal softtabstop=2 |
     \ setlocal shiftwidth=2
 
-autocmd BufRead,BufNewFile,BufWrite *.ts set ft=typescript
-autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax hilight, spellcheck
+autocmd BufEnter,BufRead,BufNewFile,BufWrite *.ts set ft=typescript
+autocmd BufEnter,BufRead,BufNewFile,BufWrite *.md set tw=80
+autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax highlight, spellcheck
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -211,15 +216,15 @@ nmap <silent> <leader>s :set spell!<CR> 	" spell check
 
 "workspace
 nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
-let g:workspace_autosave_always = 1
+let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 " paragraph formatting
 map <Leader>P gqap
+nnoremap <Leader>tt :Prettier
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
-nnoremap <leader>f <cmd>CHADopen<cr>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
@@ -237,33 +242,21 @@ nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
 nnoremap k gk
-" Rebuild Ctags
-nnoremap <leader>ct :silent !ctags -R --exclude=@.ctagsignore .<cr>:redraw!<cr>
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 1
 nnoremap <Leader>g :GitGutterToggle<cr>
-nnoremap <C-n> :GitGutterNextHunk<CR>
-nnoremap <C-p> :GitGutterPrevHunk<CR>
-nnoremap <C-u> :GitGutterUndoHunk<CR>
-nnoremap <leader>gd :Git diff<cr>
-nnoremap <leader>gs :Git<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>ga :Git add<cr>
-nnoremap <leader>gb :Git blame<cr>
-nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gb :Git branch<space>
+nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gci :Git commit<cr>
-nnoremap <leader>gm :Gmove<cr>
-nnoremap <leader>gr :Gremove<cr>
+nnoremap <leader>gm :Gmove<space>
+nnoremap <leader>gr :Gremove<space>
 "FZF goodies
 nnoremap <C-p> :Files<cr>
-" fzf colorscheme selector
-nnoremap <silent> <Leader>C :call fzf#run({
-\   'source':
-\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
-\   'sink':    'colo',
-\   'options': '+m',
-\   'left':    30
-\ })<CR>
 nnoremap <silent> <Leader><Enter> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<cr>
+
+

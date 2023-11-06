@@ -14,8 +14,8 @@ tmux send-keys -t "$CHOICE":1.1 'nvim +CHADopen' Enter
 
 tmux split-window -t "$CHOICE:1" -v -p 20
 tmux select-pane -t 1
-tmux split-window -t "$CHOICE:1" -h -p 20
-tmux send-keys -t 2 'hnb' Enter
+# tmux split-window -t "$CHOICE:1" -h -p 20
+# tmux send-keys -t 2 'hnb' Enter
 
 tmux -2 attach-session -t "$CHOICE"
 
