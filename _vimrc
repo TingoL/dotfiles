@@ -1,5 +1,5 @@
 "  ~/.vimrc
-" author  : TingoL
+"
 " amelxmx [at] gmail [dot] com
 "
 
@@ -43,7 +43,7 @@ set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
+let g:vimwiki_list = [{'path':'~/Nextcloud/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
 
@@ -83,8 +83,8 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'prisma/vim-prisma'
 Plugin 'navarasu/onedark.nvim'
+Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
 
@@ -97,13 +97,20 @@ require'nvim-treesitter.configs'.setup {
 vim.g.markdown_fenced_languages = {'html', 'js=javascript', 'ts=typescript', 'bash=sh'}
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.nvim_tree_respect_buf_cwd = 1
 
 require("indent_blankline").setup {
     space_char_blankline = " ",
     show_current_context = true,
     show_current_context_start = false,
 }
-
+require("nvim-tree").setup({
+  view = {
+    width = 40,
+  },
+})
 require("nvim-autopairs").setup {}
 require('onedark').setup {
     style = 'darker'
@@ -116,6 +123,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
   \  'coc-angular',
+  \  'coc-pyright',
   \  'coc-json'
   \ ]
 
@@ -212,32 +220,30 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
 endfor
 
 "mapping ------------------------------------------------------------------------
-nmap <silent> <leader>s :set spell!<CR> 	" spell check
+nmap <silent> <leader>s :set spell!<CR>  " spell check
 
 "workspace
-nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
+nnoremap <leader>S :ToggleWorkspace<CR> " manage sessions
 let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 " paragraph formatting
 map <Leader>P gqap
-nnoremap <Leader>tt :Prettier
+nnoremap <Leader>tt :Prettier<CR>
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
+nnoremap <leader>T :NvimTreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
-"sorting
-vnoremap <Leader>t :sort<CR>
 "indentation
 vnoremap < <gv
 vnoremap > >gv
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
-" Allows writing to files with root priviledges
+" Allows writing to files with root privileges
 cmap w!! w !sudo tee % > /dev/null
-"Goyo
 nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
