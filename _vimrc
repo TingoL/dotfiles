@@ -83,7 +83,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'navarasu/onedark.nvim'
+Plugin 'rebelot/kanagawa.nvim'
 Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
@@ -101,21 +101,22 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_respect_buf_cwd = 1
 
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = false,
-}
+require("ibl").setup({
+  scope = enabled,
+  indent = { char = "▏" },
+})
 require("nvim-tree").setup({
   view = {
-    width = 40,
+    width = 60,
+  },
+  update_focused_file = {
+    enable = true,
+    update_root = true,
   },
 })
-require("nvim-autopairs").setup {}
-require('onedark').setup {
-    style = 'darker'
-}
-require('onedark').load()
+require("nvim-autopairs").setup()
+require("kanagawa").setup()
+vim.cmd("colorscheme kanagawa")
 EOF
 
 "Coc settings
@@ -123,7 +124,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
   \  'coc-angular',
-  \  'coc-pyright',
+  \  'coc-go',
   \  'coc-json'
   \ ]
 
@@ -226,7 +227,7 @@ nmap <silent> <leader>s :set spell!<CR>  " spell check
 nnoremap <leader>S :ToggleWorkspace<CR> " manage sessions
 let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
-
+nnoremap <silent> <Leader>f :Ag .<CR>
 " paragraph formatting
 map <Leader>P gqap
 nnoremap <Leader>tt :Prettier<CR>
@@ -251,10 +252,10 @@ nnoremap k gk
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 1
 nnoremap <Leader>g :GitGutterToggle<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>diff :Gdiff<cr>
+nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>ga :Git add<cr>
+nnoremap <leader>ga :Git add .<cr>
 nnoremap <leader>gb :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gci :Git commit<cr>
