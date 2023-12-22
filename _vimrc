@@ -69,10 +69,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'fatih/vim-go'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'reedes/vim-pencil'
-Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
@@ -83,7 +82,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'rebelot/kanagawa.nvim'
+Plugin 'EdenEast/nightfox.nvim'
 Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
@@ -115,11 +114,18 @@ require("nvim-tree").setup({
   },
 })
 require("nvim-autopairs").setup()
-require("kanagawa").setup()
-vim.cmd("colorscheme kanagawa")
+require("nightfox").setup({
+ options = {
+    styles = {
+      comments = "italic",
+      keywords = "bold",
+      types = "italic,bold",
+    }
+  }
+})
+vim.cmd("colorscheme nightfox")
 EOF
 
-"Coc settings
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
@@ -160,12 +166,12 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 let g:user_emmet_leader_key='<C-Z>'
-"airline symbols
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "night_owl"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-" Plugin key-mappings.
+
 " Undotree
 if has('persistent_undo')
     nnoremap <silent> <Space>u :UndotreeToggle<CR>
@@ -175,23 +181,9 @@ if has('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
+
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
-"Pencil
-let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
-augroup pencil
-autocmd!
-  autocmd FileType markdown,mkd,md call pencil#init()
-  autocmd FileType vimwiki      call pencil#init()
-  autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END
-
-au BufNewFile,BufRead *.py
-    \ set textwidth=79 |
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-    \ set fileformat=unix
 
 au BufNewFile,BufRead,BufWrite *.js
     \ set tabstop=2 |
@@ -205,6 +197,7 @@ autocmd FileType typescript
 
 autocmd BufEnter,BufRead,BufNewFile,BufWrite *.ts set ft=typescript
 autocmd BufEnter,BufRead,BufNewFile,BufWrite *.md set tw=80
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax highlight, spellcheck
 
 " Enable omni completion.
@@ -212,6 +205,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
