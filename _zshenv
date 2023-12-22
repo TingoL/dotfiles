@@ -27,7 +27,15 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-
+export FZF_DEFAULT_OPTS='
+  --color fg:124,bg:16,hl:202,fg+:214,bg+:52,hl+:231
+  --color info:52,prompt:196,spinner:208,pointer:196,marker:208
+'
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+ --color=fg:#cbccc6,bg:#1f2430,hl:#707a8c
+ --color=fg+:#707a8c,bg+:#191e2a,hl+:#ffcc66
+ --color=info:#73d0ff,prompt:#707a8c,pointer:#cbccc6
+ --color=marker:#73d0ff,spinner:#73d0ff,header:#d4bfff'
 #
 # Language
 #
