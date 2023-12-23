@@ -172,7 +172,6 @@ let g:airline_theme = "night_owl"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Undotree
 if has('persistent_undo')
     nnoremap <silent> <Space>u :UndotreeToggle<CR>
     let g:undotree_SetFocusWhenToggle = 1
@@ -259,5 +258,4 @@ nnoremap <leader>gr :Gremove<space>
 nnoremap <C-p> :Files<cr>
 nnoremap <silent> <Leader><Enter> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<cr>
-
 

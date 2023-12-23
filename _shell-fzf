@@ -81,4 +81,6 @@ fzbr() {
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
+zlen -N fzbr
+bindkey '^b' fzbr
 
