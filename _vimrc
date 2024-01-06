@@ -19,7 +19,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 set relativenumber
 set number                 " show line numbers
 set lazyredraw
-set termguicolors
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
 set regexpengine=1         " needed for jsctags
 set clipboard+=unnamed      " yank to X clipboard
@@ -83,6 +82,7 @@ Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'EdenEast/nightfox.nvim'
+Plugin 'rebelot/kanagawa.nvim'
 Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
@@ -119,7 +119,7 @@ require("nightfox").setup({
     styles = {
       comments = "italic",
       keywords = "bold",
-      types = "italic,bold",
+      types = "italic",
     }
   }
 })
@@ -184,17 +184,7 @@ endif
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 
-au BufNewFile,BufRead,BufWrite *.js
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-
-autocmd FileType typescript
-    \ setlocal tabstop=2 |
-    \ setlocal softtabstop=2 |
-    \ setlocal shiftwidth=2
-
-autocmd BufEnter,BufRead,BufNewFile,BufWrite *.ts set ft=typescript
+autocmd BufEnter,BufRead,BufNewFile NvimTree_1 execute "normal $"
 autocmd BufEnter,BufRead,BufNewFile,BufWrite *.md set tw=80
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax highlight, spellcheck
@@ -204,6 +194,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType typescript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
