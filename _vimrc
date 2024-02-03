@@ -1,5 +1,5 @@
 "  ~/.vimrc
-" author  : TingoL
+"
 " amelxmx [at] gmail [dot] com
 "
 
@@ -19,7 +19,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 set relativenumber
 set number                 " show line numbers
 set lazyredraw
-set termguicolors
 set wildmenu               " enhanced tab-completion shows all matching cmds in a popup menu
 set regexpengine=1         " needed for jsctags
 set clipboard+=unnamed      " yank to X clipboard
@@ -43,7 +42,7 @@ set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki',
+let g:vimwiki_list = [{'path':'~/Nextcloud/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
 
@@ -69,10 +68,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'fatih/vim-go'
 Plugin 'mbbill/undotree'
 Plugin 'mattn/emmet-vim'
-Plugin 'reedes/vim-pencil'
-Plugin 'preservim/vim-wordy'
 Plugin 'honza/vim-snippets'
 Plugin 'tComment'
 Plugin 'tpope/vim-fugitive'
@@ -83,8 +81,9 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'windwp/nvim-autopairs'
 Plugin 'lukas-reineke/indent-blankline.nvim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'prisma/vim-prisma'
-Plugin 'navarasu/onedark.nvim'
+Plugin 'EdenEast/nightfox.nvim'
+Plugin 'rebelot/kanagawa.nvim'
+Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
 
@@ -97,25 +96,41 @@ require'nvim-treesitter.configs'.setup {
 vim.g.markdown_fenced_languages = {'html', 'js=javascript', 'ts=typescript', 'bash=sh'}
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.nvim_tree_respect_buf_cwd = 1
 
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = false,
-}
-
-require("nvim-autopairs").setup {}
-require('onedark').setup {
-    style = 'darker'
-}
-require('onedark').load()
+require("ibl").setup({
+  scope = enabled,
+  indent = { char = "▏" },
+})
+require("nvim-tree").setup({
+  view = {
+    width = 60,
+  },
+  update_focused_file = {
+    enable = true,
+    update_root = true,
+  },
+})
+require("nvim-autopairs").setup()
+require("nightfox").setup({
+ options = {
+    styles = {
+      comments = "italic",
+      keywords = "bold",
+      types = "italic",
+    }
+  }
+})
+vim.cmd("colorscheme nightfox")
 EOF
 
-"Coc settings
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \  'coc-snippets',
   \  'coc-angular',
+  \  'coc-go',
   \  'coc-json'
   \ ]
 
@@ -151,13 +166,12 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 let g:user_emmet_leader_key='<C-Z>'
-"airline symbols
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "night_owl"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-" Plugin key-mappings.
-" Undotree
+
 if has('persistent_undo')
     nnoremap <silent> <Space>u :UndotreeToggle<CR>
     let g:undotree_SetFocusWhenToggle = 1
@@ -166,36 +180,13 @@ if has('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
+
 " always jump to the last cursor position
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
-"Pencil
-let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
-augroup pencil
-autocmd!
-  autocmd FileType markdown,mkd,md call pencil#init()
-  autocmd FileType vimwiki      call pencil#init()
-  autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END
 
-au BufNewFile,BufRead *.py
-    \ set textwidth=79 |
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-    \ set fileformat=unix
-
-au BufNewFile,BufRead,BufWrite *.js
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-
-autocmd FileType typescript
-    \ setlocal tabstop=2 |
-    \ setlocal softtabstop=2 |
-    \ setlocal shiftwidth=2
-
-autocmd BufEnter,BufRead,BufNewFile,BufWrite *.ts set ft=typescript
+autocmd BufEnter,BufRead,BufNewFile NvimTree_1 execute "normal $"
 autocmd BufEnter,BufRead,BufNewFile,BufWrite *.md set tw=80
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell     " width, mail syntax highlight, spellcheck
 
 " Enable omni completion.
@@ -203,6 +194,8 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType typescript setlocal omnifunc=javascriptcomplete#CompleteJS
+
 " Extra text objects!
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
     execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
@@ -212,32 +205,30 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
 endfor
 
 "mapping ------------------------------------------------------------------------
-nmap <silent> <leader>s :set spell!<CR> 	" spell check
+nmap <silent> <leader>s :set spell!<CR>  " spell check
 
 "workspace
-nnoremap <leader>S :ToggleWorkspace<CR>		" manage sessions
+nnoremap <leader>S :ToggleWorkspace<CR> " manage sessions
 let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
-
+nnoremap <silent> <Leader>f :Ag .<CR>
 " paragraph formatting
 map <Leader>P gqap
-nnoremap <Leader>tt :Prettier
+nnoremap <Leader>tt :Prettier<CR>
 " F-keys
 nnoremap <Space> <Leader>
 set pastetoggle=<F2>
+nnoremap <leader>T :NvimTreeToggle<CR>
 nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
-"sorting
-vnoremap <Leader>t :sort<CR>
 "indentation
 vnoremap < <gv
 vnoremap > >gv
 vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
-" Allows writing to files with root priviledges
+" Allows writing to files with root privileges
 cmap w!! w !sudo tee % > /dev/null
-"Goyo
 nnoremap <Leader>G :Goyo<CR>
 "up and down on wraps
 nnoremap j gj
@@ -245,10 +236,10 @@ nnoremap k gk
 " Fugitive & GitGutter {{{
 let g:gitgutter_enabled = 1
 nnoremap <Leader>g :GitGutterToggle<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>diff :Gdiff<cr>
+nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>ga :Git add<cr>
+nnoremap <leader>ga :Git add .<cr>
 nnoremap <leader>gb :Git branch<space>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gci :Git commit<cr>
@@ -258,5 +249,4 @@ nnoremap <leader>gr :Gremove<space>
 nnoremap <C-p> :Files<cr>
 nnoremap <silent> <Leader><Enter> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<cr>
-
 
