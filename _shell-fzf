@@ -17,6 +17,7 @@ jj() {
         sed "s:~:$HOME:")\
     && pushd "$dir"
 }
+
 fzf-locate() {
     print -z \'$(locate "*" | fzf -e -i )\'
 
@@ -29,6 +30,12 @@ fzf-locate() {
        exit
      fi
 }
+
+cd-find() {
+  cd $(find . -not -path '*/.*' -type d -print | fzf)
+}
+zle -N cd-find
+bindkey '^f' cd-find
 
 usage() {
 # usage is du+fzf, usage . 2 brings back sizes two directories deep
@@ -48,8 +55,6 @@ bindkey '^r' fh
 
 #search code interactivelly
 agfzf() { ag --nobreak --nonumbers --noheading . | fzf }
-zle -N agfzf
-bindkey '^f' agfzf
 
 # ftags - search ctags
 fztags() {
@@ -73,6 +78,17 @@ fzshow() {
                 {}
 FZF-EOF"
 }
+
+#fss - open vim session
+fss() {
+  local sessions session
+  sessions=$(ls ~/.vim/sessions) &&
+  session=$(echo "$sessions" | fzf) && 
+  nvim -S "~/.vim/sessions/$session"
+}
+
+zle -N fss
+bindkey '^s' fss
 
 # fbr - checkout git branch
 fzbr() {

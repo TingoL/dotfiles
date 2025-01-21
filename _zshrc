@@ -100,4 +100,8 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
 # Load Angular CLI autocompletion.
+
 source <(ng completion script)
+if [[ -s "${ZDOTDIR:-$HOME}/.open-ai" ]]; then
+  source "${ZDOTDIR:-$HOME}/.open-ai"
+fi

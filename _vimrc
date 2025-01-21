@@ -42,7 +42,7 @@ set rtp+=~/.fzf
 let g:loaded_matchparen = 1
 let g:acp_behaviorKeywordLength = 4
 let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [{'path':'~/Nextcloud/vimwiki',
+let g:vimwiki_list = [{'path':'~/Nextcloud/Notes/vimwiki',
                        \ 'syntax': 'markdown', 'ext': '.md',
                        \'template_path': '~/.vim/bundle/vimwiki/autoload/vimwiki/default.tpl'}]
 
@@ -87,7 +87,7 @@ Plugin 'nvim-tree/nvim-tree.lua'
 
 call vundle#end()
 
-lua <<EOF
+lua << EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,              -- false will disable the whole extension
@@ -128,8 +128,8 @@ EOF
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
+  \ 'coc-angular',
   \  'coc-snippets',
-  \  'coc-angular',
   \  'coc-go',
   \  'coc-json'
   \ ]
@@ -223,6 +223,7 @@ nnoremap <F5> :r! date "+\%d-\%m-\%Y \%H:\%M:\%S"<CR>
 "buffers
 nnoremap <C-j> :bn<CR>
 nnoremap <C-k> :bp<CR>
+nnoremap <leader>lsd :ls<cr>:bd<space>
 "indentation
 vnoremap < <gv
 vnoremap > >gv
